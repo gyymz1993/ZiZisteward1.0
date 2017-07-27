@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ymz="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.ymz.baselibrary.widget.NavigationBarView
+        android:id="@+id/id_nativgation_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        ymz:backgrounds="#000000"
+        ymz:leftIcon="@drawable/title_back"
+        ymz:rightColor="@color/white" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:progressDrawable="@drawable/product_progressbg"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
+    </FrameLayout>
+
+</LinearLayout>

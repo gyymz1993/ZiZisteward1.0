@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTheme">
+        <attr name="gifViewStyle" format="reference" />
+    </declare-styleable>
+
+    <!--新刷新-->
+    <declare-styleable name="GifView">
+        <attr name="gif" format="reference" />
+        <attr name="paused" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="TopBarItem">
+        <attr name="backgrounds" format="reference|color" />
+        <attr name="titles" format="string" />
+        <attr name="leftIcon" format="reference" />
+        <attr name="rgihtIcon" format="reference" />
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="leftColor" format="color" />
+        <attr name="rightColor" format="color" />
+        <attr name="leftSize" format="dimension" />
+        <attr name="rightSize" format="dimension" />
+        <attr name="topBarheight" format="integer" />
+    </declare-styleable>
+
+</resources>

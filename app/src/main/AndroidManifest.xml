@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lsjr.zizisteward"
+    tools:overrideLibrary="android.support.v7.appcompat">
+
+
+    <!-- 增加文件存储和访问摄像头的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:name=".MyApplication"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+
+
+        <activity
+            android:name=".activity.home.ui.HomeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".activity.contentprovider.BigBangContentProvider"
+            android:authorities="com.zizi.view"
+            android:exported="false"
+            android:process=":monitor" />
+
+
+        <activity android:name=".activity.detail.ProductDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentFullScreenTheme"
+            />
+        <activity android:name=".activity.group.ui.GroupActivity" />
+        <!--<activity-->
+            <!--android:name=".activity.home.ui.HomeActivity"-->
+            <!--android:label="主页" />-->
+        <activity
+            android:name=".mvp.ui.UploadActivity"
+            android:label="图片上传" />
+        <activity
+            android:name=".activity.classly.ui.ClassifyActivity"
+            android:label="商品分类" />
+
+        <activity
+            android:name=".activity.steward.ui.StewardActivity"
+            android:label="管家界面" />
+
+        <activity
+            android:name=".activity.login.ui.ThirdPartActivity"
+            android:label="第三方登陆" />
+
+        <activity
+            android:name=".activity.product.ui.ProductListActivity"
+            android:label="商品列表" />
+
+        <activity
+            android:name=".activity.product.ui.ProductDetailActivity"
+            android:label="商品详细" />
+
+        <activity
+            android:name=".activity.product.ui.PayWayActivity"
+            android:label="支付方式" />
+
+        <activity android:name=".activity.more.MorePorductActivity"
+            android:screenOrientation="portrait"
+            />
+
+
+        <!--微信登陆   start-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="weixin"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--微信 登陆   end-->
+
+        <!--qq登陆    start-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105677331" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--qq登陆   end-->
+
+
+        <!--新浪微博-->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
+        <!-- 支付宝  支付alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!-- 支付宝alipay sdk end -->
+
+
+        <!--微信支付 start-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="微信支付"
+            android:screenOrientation="portrait" />
+        <!--微信支付 end-->
+
+        <activity
+            android:name="com.yanzhenjie.album.AlbumActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
+
+        <!--阿里热修复-->
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="24542859-1" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="432c05125fb88c5c2fd5c7488bb06110" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDH1pjDdb9S6cAJxrLexPSpMUGMv8h7RYymo20dC+6ajYjXZP8PHmIhtSt7E+GStWfqA1F7PsNVMSgGYypE13a2tLVXZ24EiwY6KDhXgwO/6l4xDojQ+/rN41b2rQGjfOULa+u8TJAbM8dWkZjnI/MvEQl4gatJP5KM+pd4zgiDS0C/yAkSPYOYgmw+davatIOl3WU+mAlCw60YkwY2MKoEyXxbxDBv1lDBQf03ceNbyKr6rahD1cvxiNW/eiBKhj82RqXEjGZtsr260zqRtbv4MHlZXoMHCefKsCQxuNztCUvC3VSKpREN62S49+yNJhjvHT56U4PVqoOn+pjbWxC5AgMBAAECggEARCBOd+P+U3/IrgyFEhjG558ZH6iJ6ixtpKl2Gz7kGuBBVFzj7v2GqsMejZjbf65EPKzg7EkbQkG9yV+pG0rw95xnbeKeyQG0H8NyYbMSZiy567NuxQACIopsLTARrPB5DQm/lbPsNLnULRj5rWK+Fr+SIPjjsdbwWQtc9BwZHti/2qvSXIcwUZAjVbB9YuF/WwzMmJU+ziSaEq4t0wZPx1Afzh9ftWupeKvcK9m3H3PRaBH9rfP3S0bIgXH4LyHzQVk2QCPaX9LED3t5TlgTrH/eCoBSbBWrcNiUxN8wfoG7ZJXBLLTiUVUoBoQUNK2OU2cWHc6r5iobnK+xTpDXuQKBgQD4KwdW5XYneuwGh6UQELuEQoSdzDITo7XUi/YCkH32xxrwUMkuTkGYT8uizM1KJoz6leMloSwT4ZmkK47x0ZFAUrXl1rntxjqCwaha1AkFfLjzfkzdjQsNNREFVp14dj+lkqmypah8n2CV+uNJEnjeebKf17YL7Rx6ZGABv4505wKBgQDOJRt6sKsSOWciHMuT2Bob9WonYeCXsZPQK4lHAgbotZrZVly546r2UFsMzUD+Bu5b5uUSx9xICEGmT84ySXMZwUzItqNZYHv3kraWNDqK7zNLWIJ0Ifjmp9Em0G2rfFS1IE6zE5kcTRcWMyjjdA55cfCeKqlGFBK5pKPk+c/5XwKBgAt8Kk3KNsqi9LNkqa3xqEv5rBuFbLfd9rdMdukteLboBgYjJvxeoMiEwN7a7ZFF8XZTY3zFVb3hzfN8FJR6Z2d7rHFjm502dFTC06DIeVZorEKQkMwcD+vfjdcaaBVAG7f07qeW5RJHaffm8YfbM/7P0QV2vTUWFyBO7uaFz/j3AoGBAIZHwaif4C+U2MttumZpxEgmCqnwpd3qPIDDez6X4WxAr8eW6/vig4DDQywJn6ZZWXbf5qPfMGxzhGATaBt1oNZMBfpQjgMwSFAyb2FUUDYkLmOMGh4P6xREiIciCe5EpOD/VIRt5bR7uugpFx9if/M39ybwXydY+AGZb3E+EO09AoGBALhmdNjVK9i5CdGJNMWOiqDqznuwXWihmmDjzK2tZt7FhmciFQeRlR415qE8kEVcXn/x73OyjxpGPxIldeLuqLH9OCGLq7RS3Hh+hnZru8ZwYiJ+AzUgpu/Yzz4N2WTXUC4MFecU3OXJqQGeVjg7oTuCxOJOFAhwv9Q0TAEj8aze" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="40dip"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/id_tv_city"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dip"
+        android:drawablePadding="5dip"
+        android:drawableRight="@drawable/collect_pack_up"
+        android:gravity="center"
+        android:paddingBottom="2dip"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:paddingTop="2dip"
+        android:scaleType="centerCrop"
+        android:text="武汉"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="6dp"
+        android:layout_toLeftOf="@+id/id_tv_city"
+        android:background="@drawable/search_home_bg"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        tools:ignore="RtlHardcoded">
+
+        <EditText
+            android:textSize="14sp"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="无忧车保养超值套餐"
+            android:maxEms="9"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="2dip"
+            android:layout_marginBottom="2dip"
+            android:src="@drawable/home_erweicode" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorBlack">#000</color>
+    <color name="white">#fff</color>
+    <color name="common_bg">#04000000</color>
+
+    <color name="transparent">#0000</color>
+
+    <color name="yellow">#FFF5FD00</color>
+
+    <color name="bg">#FF727364</color>
+
+    <color name="color_gold_nor">#CBAC6B</color>
+
+    <color name="black">#4f4f4f</color>
+    <color name="gray_light">#707070</color>
+
+    <color name="tab_selected">#212121</color>
+    <color name="tab_normal">#9b9b9b</color>
+
+    <color name="line">#ffd3dde6</color>
+
+    <color name="color_btm_gray">#FFDCDCDC</color>
+
+    <color name="theme">#FAC300</color>
+    <color name="text_color">#707070</color>
+
+    <color name="home_text_color">#717171</color>
+
+    <color name="idselcte">#FFFDDD82</color>
+    <color name="country_name_color">#FFB9A680</color>
+
+    <color name="transparent_00ffffff">#00ffffff</color>
+</resources>

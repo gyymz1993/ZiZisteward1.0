@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ymz="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dip"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.lsjr.zizisteward.coustom.RoundImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="180dip"
+        android:layout_height="160dip"
+        android:scaleType="centerCrop"
+        ymz:type="round" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_photo"
+        android:layout_marginTop="5dp"
+        android:text="@string/album_title" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginTop="2dp"
+        android:text="@string/album_title" />
+
+</RelativeLayout>

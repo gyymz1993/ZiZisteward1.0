@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ZiZiSteward_Second</string>
+
+    <string name="str_test">测试数据</string>
+
+
+    <!-- 刷新 -->
+
+
+    <string name="test_str">“分形艺术”不同于普通的“电脑绘画”， 普通的“电脑绘画”概念是用电脑为工具从事美术创作， 创作者要有很深的美术功底，且作品的创作几乎完全依赖于作者的个人意愿。 而“分形艺术”则是利用分形几何学原理，借助计算机强大的运算能力， 将数学公式反复迭代运算，再结合作者的审美及艺术性的塑造， 从而将抽象神秘的数学公式变成一幅幅精美绝伦的艺术画作。 当然，如果你有着较好的数学和计算机编程功底，那么对于绘制分形图案将大有裨益， 但这些并不是必要的。如果你有一定的美术功底和对色彩与造型方面的基本认识， 那么创作出分形图形并不是难于登天。随着技术的发展，诞生了许多优秀的分形艺术创作软件， 简化了分形艺术的创作过程，从而使得没有良好数学功底的人也能利用软件做出美丽的分形艺术作品。</string>
+
+
+    <string name="float_view_hide">全能分词悬浮窗（隐藏状态）</string>
+    <string name="float_view_to_hide">收起悬浮窗</string>
+    <string name="float_view">展开悬浮窗功能</string>
+    <string name="open_bigbang">关闭分词</string>
+    <string name="close_bigbang">开启分词</string>
+    <string name="notify_copy_title">全局\n复制</string>
+    <string name="notify_srceen_cap">截屏\nOCR</string>
+    <string name="productdetail">滚滚长江东逝水，浪花淘尽英雄 是非成败转头青山依旧在，几度夕阳红 白发渔樵江渚上，惯看秋月春风,一壶浊酒喜相逢， 古今多少事，都付笑谈中。</string>
+</resources>

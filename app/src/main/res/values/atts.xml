@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SettingBarView">
+        <attr name="backgrounds" format="reference|color" />
+        <attr name="titles" format="string" />
+        <attr name="titleMargin" format="dimension" />
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="tTextColor" format="color" />
+        <attr name="leftTextColor" format="reference|color" />
+        <attr name="leftTextSize" format="dimension" />
+        <attr name="leftWidth" format="dimension" />
+        <attr name="leftHeight" format="dimension" />
+        <attr name="leftMargin" format="dimension" />
+        <attr name="leftBackground" format="reference|color" />
+        <attr name="leftText" format="string" />
+        <attr name="rightTextColor" format="reference|color" />
+        <attr name="rightTextSize" format="dimension" />
+        <attr name="rightWidth" format="dimension" />
+        <attr name="rightHeight" format="dimension" />
+        <attr name="rightMargin" format="dimension" />
+        <attr name="rightBackground" format="reference|color" />
+        <attr name="rightText" format="string" />
+        <attr name="buttonMode">
+            <enum name="both" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="settingItem">
+        <attr name="logo_src" format="reference" />
+        <attr name="item_name" format="string" />
+        <attr name="item_off" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ControlItemView">
+        <attr name="logo_srcs" format="reference" />
+        <attr name="device_names" format="string" />
+        <attr name="bg_colors" format="color|reference" />
+        <attr name="default_states" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" format="integer" />
+        <attr name="type">
+            <enum name="round"  value="1"/>
+            <enum name="cicle" value="2"/>
+            </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="AnythingPullLayout">
+        <attr name="refresh_mode" format="enum">
+            <!--普通下拉-->
+            <enum name="pull" value="0" />
+            <!--弹性下拉-->
+            <enum name="flex" value="1" />
+            <!--层级下拉-->
+            <enum name="layer" value="2" />
+            <!--抽屉下拉-->
+            <enum name="dst" value="3" />
+        </attr>
+        <attr name="load_mode" format="enum">
+            <!--普通上拉-->
+            <enum name="pull" value="0" />
+            <!--弹性上拉-->
+            <enum name="flex" value="1" />
+            <!--层级上拉-->
+            <enum name="layer" value="2" />
+            <!--抽屉上拉-->
+            <enum name="dst" value="3" />
+        </attr>
+        <!--阻力，默认1.6F-->
+        <attr name="refresh_resistance" format="float" />
+        <attr name="load_resistance" format="float" />
+        <!--回弹的时长，300ms-->
+        <attr name="refresh_close_during" format="integer" />
+        <attr name="load_close_during" format="integer" />
+        <!--结果停留时长，750ms-->
+        <attr name="refresh_result_during" format="integer" />
+        <attr name="load_result_during" format="integer" />
+        <!--刷新中和加载中视图是否固定-->
+        <attr name="refresh_fixed" format="boolean" />
+        <attr name="load_fixed" format="boolean" />
+        <!--刷新和加载功能开启-->
+        <attr name="refresh_enable" format="boolean" />
+        <attr name="load_enable" format="boolean" />
+    </declare-styleable>
+
+</resources>

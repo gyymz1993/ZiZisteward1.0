@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lay_design_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="180dip"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="70dip"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/id_tv_status_expanded"
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:drawablePadding="10dip"
+        android:drawableTop="@drawable/icon_login_expanded"
+        android:gravity="center"
+        android:text="其他方式登录"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/id_tv_status_collapsed"
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:drawablePadding="10dip"
+        android:drawableTop="@drawable/icon_login_collapsed"
+        android:gravity="center"
+        android:text="其他方式登录"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="15dip"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/id_tv_weichatlg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="70dip"
+            android:drawableTop="@drawable/ioc_log_weichart"
+            android:gravity="center"
+            android:text="微信" />
+
+        <TextView
+            android:id="@+id/id_tv_qqlg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:drawableTop="@drawable/ioc_log_qq"
+            android:gravity="center"
+            android:text="QQ" />
+
+
+        <TextView
+            android:id="@+id/id_tv_weibolg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="70dip"
+            android:drawableTop="@drawable/ioc_log_weibo"
+            android:gravity="center"
+            android:text="微博" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
