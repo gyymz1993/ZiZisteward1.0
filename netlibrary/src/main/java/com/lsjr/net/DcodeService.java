@@ -4,18 +4,31 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.lsjr.param.RequestBodyUtils;
+import com.lsjr.param.RxHttpParams;
+import com.lsjr.param.UploadProgressRequestBody;
 import com.shove.Convert;
 import com.shove.security.Encrypt;
 
+import org.apache.http.params.HttpParams;
+
+import java.io.File;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import rx.Observable;
 
 /**
@@ -27,12 +40,15 @@ public class DcodeService {
 
     @SuppressLint("StaticFieldLeak")
     private static Context mContext;
-    public static void  initialize(Context context){
-        mContext=context;
+    private static String mCurrentTime;
+
+
+    public static void initialize(Context context) {
+        mContext = context;
     }
 
     private static ApiService getApiService() {
-        if (mContext==null){
+        if (mContext == null) {
             throw new NullPointerException("请先初始化 initialize");
         }
         return AppClient.getApiService(mContext);
@@ -40,10 +56,10 @@ public class DcodeService {
 
     /* get网络请求入口*/
     public static Observable<String> getServiceData(Map map) {
-        if (TextUtils.isEmpty(BaseUrl.bastUrl)){
+        if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
             throw new NullPointerException("请设置BaseUrl");
         }
-        //UrlUtils.spliceGetUrl(BaseUrl.bastUrl, map);
+        UrlUtils.spliceGetUrl(BaseUrl.bastUrl, map);
         String baseUrl = encryptUrl(false, BaseUrl.bastUrl, BaseUrl.URLKEY, map);
         return getApiService().getData(baseUrl);
     }
@@ -51,7 +67,7 @@ public class DcodeService {
 
     /* get网络请求入口*/
     public static Observable<String> getCacheServiceData(Map map) {
-        if (TextUtils.isEmpty(BaseUrl.bastUrl)){
+        if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
             throw new NullPointerException("请设置BaseUrl");
         }
         //UrlUtils.spliceGetUrl(BaseUrl.bastUrl, map);
@@ -59,10 +75,21 @@ public class DcodeService {
         return getApiService().getData(baseUrl);
     }
 
+    /* get网络请求入口*/
+    public static Observable<String> getServiceTimeOut(Map map) {
+        if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
+            throw new NullPointerException("请设置BaseUrl");
+        }
+        saveString(mContext, new Date().toString());
+        UrlUtils.spliceGetUrl(BaseUrl.bastUrl, map);
+        String baseUrl = encryptUrl(true, BaseUrl.bastUrl, BaseUrl.URLKEY, map);
+        return getApiService().getData(baseUrl);
+    }
+
 
     /* post网络请求入口*/
     public static Observable<String> postServiceData(Map map) {
-        if (TextUtils.isEmpty(BaseUrl.bastUrl)){
+        if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
             throw new NullPointerException("请设置BaseUrl");
         }
         //UrlUtils.encodesParameters(BaseUrl.bastUrl, map);
@@ -70,12 +97,120 @@ public class DcodeService {
         return getApiService().postData(baseUrl);
     }
 
-
-    /*没有加密*/
-    public static Observable<String> getBody(String url, Map map) {
-        return getApiService().getBody(url, map);
+    /* post网络请求入口*/
+    public static Observable<String> postServiceData(String baseUrl,Map map) {
+        if (TextUtils.isEmpty(baseUrl)) {
+            throw new NullPointerException("请设置BaseUrl");
+        }
+        String url=UrlUtils.encodesParameters(baseUrl, map);
+        //Log.e("UrlUtils----post>","没有加密的URL  post:"+baseUrl+url);
+        return getApiService().postData(url);
     }
 
+
+    /*多图片上传*/
+    public static Observable<String> uploadFilesWithParts(String baseUrl,Map<String, String> parameters, List<File> fileList) {
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);//表单类型;
+        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+            String _key = entry.getKey();
+            String _value = entry.getValue();
+            builder.addFormDataPart(_key, _value);
+            Log.e("postFile_key---------->",_key+"-----------:L"+_value);
+        }
+        String url=UrlUtils.encodesParameters(baseUrl, parameters);
+        for (int i = 0; i < fileList.size(); i++) {
+            RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), fileList.get(i));
+            builder.addFormDataPart("file1", fileList.get(i).getName(), imageBody);//"shareImg"+i 后台接收图片流的参数名
+        }
+        List<MultipartBody.Part> parts = builder.build().parts();
+        return getApiService().uploadFiles(baseUrl,parts);
+    }
+
+    /*多图片上传*/
+    public static Observable<ResponseBody> uploadFilesWithBodys(String url,RxHttpParams params){
+        if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
+            throw new NullPointerException("请设置BaseUrl");
+        }
+        Map<String, RequestBody> mBodyMap = new HashMap<>();
+        //拼接参数键值对
+        for (Map.Entry<String, String> mapEntry : params.urlParamsMap.entrySet()) {
+            RequestBody body = RequestBody.create(MediaType.parse("text/plain"), mapEntry.getValue());
+            mBodyMap.put(mapEntry.getKey(), body);
+        }
+        //拼接文件
+        for (Map.Entry<String, List<RxHttpParams.FileWrapper>> entry : params.fileParamsMap.entrySet()) {
+            List<RxHttpParams.FileWrapper> fileValues = entry.getValue();
+            for (RxHttpParams.FileWrapper fileWrapper : fileValues) {
+                RequestBody requestBody = getRequestBody(fileWrapper);
+                UploadProgressRequestBody uploadProgressRequestBody = new UploadProgressRequestBody(requestBody, fileWrapper.responseCallBack);
+                mBodyMap.put(entry.getKey(), uploadProgressRequestBody);
+            }
+        }
+        return getApiService().uploadFiles(url, mBodyMap);
+    }
+
+
+    /*
+    *  带上传进度
+    *
+    * */
+    public static Observable<String> uploadFilesWithParts(String url,RxHttpParams params) {
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        //拼接参数键值对
+        for (Map.Entry<String, String> mapEntry : params.urlParamsMap.entrySet()) {
+            parts.add(MultipartBody.Part.createFormData(mapEntry.getKey(), mapEntry.getValue()));
+        }
+        //拼接文件
+        for (Map.Entry<String, List<RxHttpParams.FileWrapper>> entry : params.fileParamsMap.entrySet()) {
+            List<RxHttpParams.FileWrapper> fileValues = entry.getValue();
+            for (RxHttpParams.FileWrapper fileWrapper : fileValues) {
+                MultipartBody.Part part = addFile(entry.getKey(), fileWrapper);
+                parts.add(part);
+            }
+        }
+        return getApiService().uploadFiles(url,parts);
+    }
+
+
+    /*
+  *  带上传进度
+  *
+  * */
+    public static Observable<ResponseBody> downloadFile(String url) {
+        return getApiService().downloadFile(url);
+    }
+
+
+    //文件方式
+    private static MultipartBody.Part addFile(String key, RxHttpParams.FileWrapper fileWrapper) {
+        //MediaType.parse("application/octet-stream", file)
+        RequestBody requestBody = getRequestBody(fileWrapper);
+      //  Utils.checkNotNull(requestBody, "requestBody==null fileWrapper.file must is File/InputStream/byte[]");
+        //包装RequestBody，在其内部实现上传进度监听
+        if (fileWrapper.responseCallBack != null) {
+            UploadProgressRequestBody uploadProgressRequestBody = new UploadProgressRequestBody(requestBody, fileWrapper.responseCallBack);
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, fileWrapper.fileName, uploadProgressRequestBody);
+            return part;
+        } else {
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, fileWrapper.fileName, requestBody);
+            return part;
+        }
+    }
+
+
+    private static RequestBody getRequestBody(RxHttpParams.FileWrapper fileWrapper) {
+        RequestBody requestBody = null;
+        if (fileWrapper.file instanceof File) {
+            requestBody = RequestBody.create(fileWrapper.contentType, (File) fileWrapper.file);
+        } else if (fileWrapper.file instanceof InputStream) {
+            //requestBody = RequestBodyUtils.create(RequestBodyUtils.MEDIA_TYPE_MARKDOWN, (InputStream) fileWrapper.file);
+            requestBody = RequestBodyUtils.create(fileWrapper.contentType, (InputStream) fileWrapper.file);
+        } else if (fileWrapper.file instanceof byte[]) {
+            requestBody = RequestBody.create(fileWrapper.contentType, (byte[]) fileWrapper.file);
+        }
+        return requestBody;
+    }
 
     /**
      * Url加密处理
@@ -96,28 +231,26 @@ public class DcodeService {
             throw new RuntimeException("在使用 buildUrl 方法构建通用 REST 接口 Url 时，必须提供一个用于摘要签名用的 key (俗称 MD5 加盐)");
         }
 
-        if (mContext==null){
+        if (mContext == null) {
             throw new NullPointerException("请先初始化 initialize");
         }
 
         if (isCache) {
             //当前时间
-            //L_.e("data 当前时间 :" + new Date().toString());
-            if (TextUtils.isEmpty(getString(mContext,"data"))) {
-                saveString(mContext,"data", new Date().toString());
+            //Log.e("data 当前时间 :" , new Date().toString());
+            if (TextUtils.isEmpty(getString(mContext))) {
+                saveString(mContext, new Date().toString());
             }
-            //L_.e("data 缓存时间:" + new Date(SpUtils.getInstance().getString("data")).toString());
-            if (DateUtils.betweenTime(new Date(), new Date(getString(mContext,"data")))) {
-                saveString(mContext,"data", new Date().toString());
-                //L_.e("SpUtils  过期后重设置:" +new Date().toString());
-                parameters.put("_t", Convert.dateToStr(new Date(getString(mContext,"data")), "yyyy-MM-dd HH:mm:ss", "1970-01-01 00:00:00"));
-            } else {
-                //L_.e("SpUtils  缓存请求:" +new Date(SpUtils.getInstance().getString("data")).toString());
-                parameters.put("_t", Convert.dateToStr(new Date(getString(mContext,"data")), "yyyy-MM-dd HH:mm:ss", "1970-01-01 00:00:00"));
+            //Log.e("data 缓存时间:" ,new Date(getString(mContext)).toString());
+            if (DateUtils.twoDateDistance(new Date(), new Date(getString(mContext)))) {
+                mCurrentTime = new Date().toString();
+                saveString(mContext, mCurrentTime);
+                //Log.e("SpUtils  过期后重设置:" ,mCurrentTime);
             }
-
+           // Log.e("SpUtils  缓存请求:" ,new Date(getString(mContext)).toString());
+            parameters.put("_t", Convert.dateToStr(new Date(getString(mContext)), "yyyy-MM-dd HH:mm:ss", "1970-01-01 00:00:00"));
         } else {
-            parameters.put("_t", Convert.dateToStr(new Date(), "yyyy-MM-dd HH:mm:ss", "1970-01-01 00:00:00"));
+            parameters.put("_t", Convert.dateToStr(new Date(getString(mContext)), "yyyy-MM-dd HH:mm:ss", "1970-01-01 00:00:00"));
         }
 
         //new Date("Wed Jul 26 12:10:26 GMT+08:00 2017")
@@ -152,15 +285,17 @@ public class DcodeService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         return urlBase;
     }
 
 
-    public static void saveString(Context context, String key, String value){
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
+
+    private static void saveString(Context context, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("data", value).commit();
     }
 
-    public static String getString(Context context, String key){
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null);
+    private static String getString(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString("data", null);
     }
 }

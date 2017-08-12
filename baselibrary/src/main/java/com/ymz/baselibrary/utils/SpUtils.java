@@ -122,4 +122,43 @@ public class SpUtils {
     public static int getInt(String key, int defaultValue) {
         return sharedPreferences.getInt(key, defaultValue);
     }
+
+
+    /* get and put long value */
+    public void saveLong(String key, long value) {
+        sharedPreferences.edit().putLong(key, value).commit();
+
+    }
+
+    public long getLong(String key, long defValue) {
+        return sharedPreferences.getLong(key, defValue);
+    }
+
+
+    /* get and put int value */
+    public void setIntValue(String key, int value) {
+        sharedPreferences.edit().putInt(key, value).commit();
+    }
+
+    public int getIntValue(String key, int defValue) {
+        return sharedPreferences.getInt(key, defValue);
+    }
+
+
+    /**
+     * 存储long型数据
+     * @param context
+     * @param key
+     * @param value
+     */
+    public static void putLong(Context context,String key,long value){
+        sharedPreferences.edit().putLong(key, value).commit();//去定义一个常量
+    }
+    public static Long getLong(Context context,String key,long defValue){
+        return sharedPreferences.getLong(key, defValue);
+    }
+    public static Long getLong(Context context,String key){
+        return getLong(context, key, 1l);
+    }
+
 }

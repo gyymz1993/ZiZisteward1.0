@@ -2,7 +2,7 @@ package com.lsjr.zizisteward.activity.product.presenter;
 
 import android.webkit.JavascriptInterface;
 
-import com.lsjr.base.SubscriberCallBack;
+import com.lsjr.zizisteward.http.callback.SubscriberCallBack;
 import com.lsjr.net.DcodeService;
 import com.lsjr.zizisteward.activity.product.view.IProductDetailView;
 import com.ymz.baselibrary.mvp.BasePresenter;

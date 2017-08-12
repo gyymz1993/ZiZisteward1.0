@@ -3,11 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZiZisteward1.0.iml" filepath="$PROJECT_DIR$/ZiZisteward1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapterlibrary/adapterlibrary.iml" filepath="$PROJECT_DIR$/adapterlibrary/adapterlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/audiolibrary/audiolibrary.iml" filepath="$PROJECT_DIR$/audiolibrary/audiolibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/netlibrary/netlibrary.iml" filepath="$PROJECT_DIR$/netlibrary/netlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/refreshlibrary/refreshlibrary.iml" filepath="$PROJECT_DIR$/refreshlibrary/refreshlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tablirbry/tablirbry.iml" filepath="$PROJECT_DIR$/tablirbry/tablirbry.iml" />
       <module fileurl="file://$PROJECT_DIR$/uilibrary/uilibrary.iml" filepath="$PROJECT_DIR$/uilibrary/uilibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zizichat/zizichat.iml" filepath="$PROJECT_DIR$/zizichat/zizichat.iml" />
     </modules>
   </component>
 </project>

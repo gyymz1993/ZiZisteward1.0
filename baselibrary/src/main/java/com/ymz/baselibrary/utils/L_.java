@@ -91,6 +91,14 @@ public class L_ {
         log(ERROR, null, msg);
     }
 
+    /**
+     * 以级别为 e 的形式输出Throwable
+     */
+    public static void e(Throwable tr) {
+        log(ERROR, "", tr);
+    }
+
+
     public static void e(String tag, String msg) {
         log(ERROR, tag, msg);
     }

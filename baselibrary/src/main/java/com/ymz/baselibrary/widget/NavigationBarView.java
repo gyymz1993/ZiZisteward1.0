@@ -99,40 +99,45 @@ public class NavigationBarView extends RelativeLayout {
         return (T) mView.findViewById(id);
     }
 
-    public void setTitleText(String text) {
+    public NavigationBarView setTitleText(String text) {
         TextView textView = viewFindById(R.id.title_tv);
         if (textView != null && text != null) {
             textView.setText(text);
         }
+        return this;
     }
 
-    public void setTitleTextColor(int color) {
+    public NavigationBarView setTitleTextColor(int color) {
         TextView textView = viewFindById(R.id.title_tv);
         if (textView != null && color != 0) {
             textView.setTextColor(color);
         }
+        return this;
     }
 
 
-    public void setTorBarTHeight(int height) {
+    public NavigationBarView setTorBarTHeight(int height) {
         RelativeLayout relativeLayout = viewFindById(R.id.title_bar);
         ViewGroup.LayoutParams layoutParams = relativeLayout.getLayoutParams();
         layoutParams.width= UIUtils.WHD()[0];
         layoutParams.height=height;
+        return this;
     }
 
-    public void setLeftText(CharSequence text) {
+    public NavigationBarView setLeftText(CharSequence text) {
         TextView textView = viewFindById(R.id.tv_left);
         if (textView != null && text != null) {
             textView.setText(text);
         }
+        return this;
     }
 
-    public void setRightText(CharSequence text) {
+    public NavigationBarView setRightText(CharSequence text) {
         TextView textView = viewFindById(R.id.tv_right);
         if (textView != null && text != null) {
             textView.setText(text);
         }
+        return this;
     }
 
     public void setBackgroundColor(int color) {
@@ -142,40 +147,53 @@ public class NavigationBarView extends RelativeLayout {
         }
     }
 
-    public void setLeftTextColor(int color) {
+    public NavigationBarView setTopBarBackgroundColor(int color) {
+        View view = viewFindById(R.id.title_bar);
+        if (view != null && color != 0) {
+            view.setBackgroundColor(color);
+        }
+        return this;
+    }
+
+    public NavigationBarView setLeftTextColor(int color) {
         TextView view = viewFindById(R.id.tv_left);
         if (view != null && color != 0) {
             view.setTextColor(color);
         }
+        return this;
     }
 
-    public void setRightTextColor(int color) {
+    public NavigationBarView setRightTextColor(int color) {
         TextView view = viewFindById(R.id.tv_right);
         if (view != null && color != 0) {
             view.setTextColor(color);
         }
+        return this;
     }
 
-    public void setLetfIocnOnClickListener(View.OnClickListener listener) {
+    public NavigationBarView setLetfIocnOnClickListener(View.OnClickListener listener) {
         View view = viewFindById(R.id.iv_left);
         if (view != null) {
             view.setOnClickListener(listener);
         }
+        return this;
     }
 
 
-    public void setRightIocnOnClickListener(View.OnClickListener listener) {
+    public NavigationBarView setRightIocnOnClickListener(View.OnClickListener listener) {
         View view = viewFindById(R.id.iv_right);
         if (view != null) {
             view.setOnClickListener(listener);
         }
+        return this;
     }
 
-    public void setRightTextOnClickListener(View.OnClickListener listener) {
+    public NavigationBarView setRightTextOnClickListener(View.OnClickListener listener) {
         View view = viewFindById(R.id.tv_left);
         if (view != null) {
             view.setOnClickListener(listener);
         }
+        return this;
     }
 
     /**
@@ -183,11 +201,12 @@ public class NavigationBarView extends RelativeLayout {
      *
      * @param resourceId
      */
-    public void setleftImageResource(Drawable resourceId) {
+    public NavigationBarView setleftImageResource(Drawable resourceId) {
         ImageView imageView = viewFindById(R.id.iv_left);
         if (imageView != null) {
             imageView.setImageDrawable(resourceId);
         }
+        return this;
     }
 
     /**
@@ -195,11 +214,17 @@ public class NavigationBarView extends RelativeLayout {
      *
      * @param resourceId
      */
-    public void setRightImageResource(Drawable resourceId) {
+    public NavigationBarView setRightImageResource(Drawable resourceId) {
         ImageView imageView = viewFindById(R.id.iv_right);
         if (imageView != null) {
             imageView.setImageDrawable(resourceId);
         }
+        return this;
     }
+
+    public ImageView getRightImageView() {
+        return viewFindById(R.id.iv_right);
+    }
+
 
 }

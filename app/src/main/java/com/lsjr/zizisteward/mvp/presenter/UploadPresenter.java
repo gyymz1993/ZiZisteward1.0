@@ -1,7 +1,7 @@
 package com.lsjr.zizisteward.mvp.presenter;
 
-import com.lsjr.base.SubscriberCallBack;
-import com.lsjr.net.UploadService;
+import com.lsjr.net.DcodeService;
+import com.lsjr.zizisteward.http.callback.SubscriberCallBack;
 import com.lsjr.zizisteward.mvp.view.IUploadView;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
@@ -16,23 +16,23 @@ public class UploadPresenter extends BasePresenter<IUploadView> {
         super(mvpView);
     }
 
-    public void onUploadImage(Map<String,String> map,List <File> fileList){
-        addSubscription(UploadService.uploadImage(map,fileList), new SubscriberCallBack() {
+    public void onUploadImage(String url,Map<String,String> map,List <File> fileList){
+        addSubscription(DcodeService.uploadFilesWithParts(url,map,fileList), new SubscriberCallBack() {
             @Override
             protected void onError(Exception e) {
-                L_.e("uploadFiles onError");
+                L_.e("onError");
                 mvpView.onUploadSucceed(false);
             }
 
             @Override
             protected void onFailure(String response) {
-                L_.e("uploadFiles");
+                L_.e("onFailure"+response);
                 mvpView.onUploadSucceed(false);
             }
 
             @Override
             protected void onSuccess(String response) {
-                L_.e("uploadFiles"+response);
+                L_.e("onSuccess"+response);
                 mvpView.onUploadSucceed(true);
             }
 

@@ -1,5 +1,7 @@
 package com.lsjr.zizisteward.activity.detail;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
@@ -8,17 +10,20 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.lsjr.base.MvpActivity;
 import com.lsjr.base.SwipeBackActivity;
 import com.lsjr.zizisteward.R;
 import com.lsjr.zizisteward.contrl.MenuController;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.T_;
 import com.ymz.baselibrary.utils.UIUtils;
+import com.ys.uilibrary.BackgroundView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
+import static android.view.View.VISIBLE;
 import static com.lsjr.zizisteward.R.id.circle_menu_button_4;
 
 /**
@@ -26,7 +31,7 @@ import static com.lsjr.zizisteward.R.id.circle_menu_button_4;
  * 创建时间：2017/7/14 15:37
  */
 
-public class ProductDetailsActivity extends SwipeBackActivity implements View.OnClickListener {
+public class ProductDetailsActivity extends MvpActivity implements View.OnClickListener {
 
     @BindView(R.id.id_ig_dt_icon)
     ImageView idIgDtIcon;
@@ -46,10 +51,34 @@ public class ProductDetailsActivity extends SwipeBackActivity implements View.On
         return R.layout.activity_product_detials;
     }
 
+    BackgroundView background;
+    private void createBackground() {
+        if (background == null) {
+            background = new BackgroundView(this);
+        }
+    }
+
+    /*半透明背景*/
+    private void dimBackground() {
+        createBackground();
+        UIUtils.setVisibility(VISIBLE, background);
+        //Log.e("duration",duration+);
+        // TODO
+        background.dim(0, new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+            }
+        });
+
+    }
 
     @Override
     protected void afterCreate(Bundle bundle) {
         setTitleText("商品详情");
+        createBackground();
+        dimBackground();
         //getToolBarView().setTitleTextColor(UIUtils.getColor("#21212"));
         idIgDtIcon.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
         idIgDtIcon.getLayoutParams().height = UIUtils.WHD()[0] * 2 / 3;

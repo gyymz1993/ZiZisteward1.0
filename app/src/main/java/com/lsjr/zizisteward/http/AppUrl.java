@@ -22,4 +22,11 @@ public interface AppUrl {
             "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
     String GET_REQUEST_USER_INFO =
             "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID";
+
+    public static final String Qr_code = Http + "/app/qrcodeisgenerated";
+    public static final String UPLOAD_IMAGE = Http + "/app/uploadUserPhoto";
+    public static final String uploadGroupPhoto = Http + "/app/uploadGroupPhoto";
+    public static final String uploadFriendCircle = Http + "/app/uploadFriendCircle";
+    public static final String adduploadGroupPhoto = Http + "/app/adduploadGroupPhoto";
+    public static final String Up_friend_cicle = Http + "/app/uploadbackgroundPicture";
 }

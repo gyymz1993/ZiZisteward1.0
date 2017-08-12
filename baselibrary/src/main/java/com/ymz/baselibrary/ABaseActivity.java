@@ -3,10 +3,14 @@ package com.ymz.baselibrary;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,11 +18,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.ymz.baselibrary.utils.ActivityUtils;
 import com.ymz.baselibrary.utils.UIUtils;
 import com.ymz.baselibrary.view.PermissionListener;
 import com.ymz.baselibrary.view.ProgressDialogUtils;
 import com.ymz.baselibrary.widget.NavigationBarView;
 import com.ymz.baselibrary.widget.NetworkStateView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -48,7 +56,7 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
-        // ActivityUtils.addActivity(this);
+        ActivityUtils.addActivity(this);
         initDialog();
         afterCreate(savedInstanceState);
         // 初始化界面
@@ -106,27 +114,31 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         container.addView(childView, 0);
     }
 
-    public void setToolbarHight(int height){
+    public NavigationBarView setToolbarHight(int height){
         toolbar.setTorBarTHeight(height);
+        return toolbar;
     }
 
-    public void setToolbarColor(int color){
+    public NavigationBarView setToolbarColor(int color){
         toolbar.setBackgroundColor(color);
+        return toolbar;
     }
 
     public NavigationBarView getToolBarView(){
         return toolbar;
     }
 
-    public void setHideTitleView(){
+    public NavigationBarView setHideTitleView(){
         toolbar.setVisibility(View.GONE);
+        return toolbar;
     }
 
-    public void setTitleText(String title) {
+    public NavigationBarView setTitleText(String title) {
         toolbar.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(title)) {
             toolbar.setTitleText(title);
         }
+        return toolbar;
     }
 
 
@@ -140,13 +152,14 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         return true;
     }
 
-    protected void setTopLeftButton(int iconResId, View.OnClickListener onTopBarLeftListener) {
+    protected NavigationBarView setTopLeftButton(int iconResId, View.OnClickListener onTopBarLeftListener) {
         toolbar.setleftImageResource(UIUtils.getDrawable(iconResId));
         toolbar.setLetfIocnOnClickListener(onTopBarLeftListener);
+        return toolbar;
     }
 
     /*默认 是返回键*/
-    protected void setTopLeftButton(int iconResId) {
+    protected NavigationBarView setTopLeftButton(int iconResId) {
         toolbar.setleftImageResource(UIUtils.getDrawable(iconResId));
         toolbar.setLetfIocnOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,16 +167,20 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
                 finish();
             }
         });
+        return toolbar;
     }
 
 
-    protected void setTopRightButton(int iconResId, View.OnClickListener onTopBarRightListener) {
+    protected NavigationBarView setTopRightButton(int iconResId, View.OnClickListener onTopBarRightListener) {
+        toolbar.getRightImageView().setVisibility(View.VISIBLE);
         toolbar.setRightImageResource(UIUtils.getDrawable(iconResId));
         toolbar.setRightTextOnClickListener(onTopBarRightListener);
+        return toolbar;
     }
 
-    protected void setTopRightButton(View.OnClickListener onTopBarRightListener) {
+    protected NavigationBarView setTopRightButton(View.OnClickListener onTopBarRightListener) {
         toolbar.setRightIocnOnClickListener(onTopBarRightListener);
+        return toolbar;
     }
 
 
@@ -291,20 +308,68 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         progressDialog.dismissProgressDialog();
     }
 
+
     /**
      * 申请权限
-     *
      * @param permissions 需要申请的权限(数组)
-     * @param listener    权限回调接口
+     * @param listener 权限回调接口
      */
     public static void requestPermissions(String[] permissions, PermissionListener listener) {
+        Activity activity = ActivityUtils.getTopActivity();
+        if (null == activity) {
+            return;
+        }
 
+        mPermissionListener = listener;
+        List<String> permissionList = new ArrayList<>();
+        for (String permission : permissions) {
+            //权限没有授权
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(permission);
+            }
+        }
+
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(activity, permissionList.toArray(new String[permissionList.size()]), CODE_REQUEST_PERMISSION);
+        } else {
+            mPermissionListener.onGranted();
+        }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CODE_REQUEST_PERMISSION:
+                if (grantResults.length > 0) {
+                    List<String> deniedPermissions = new ArrayList<>();
+                    for (int i = 0; i < grantResults.length; i++) {
+                        int result = grantResults[i];
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            String permission = permissions[i];
+                            deniedPermissions.add(permission);
+                        }
+                    }
+
+                    if (deniedPermissions.isEmpty()) {
+                        mPermissionListener.onGranted();
+                    } else {
+                        mPermissionListener.onDenied(deniedPermissions);
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        ActivityUtils.removeActivity(this);
     }
 
     public void openActivity(Class<?> pClass, Bundle bundle) {
@@ -326,6 +391,28 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         loginIntent.putExtra("", c);
         startActivity(loginIntent);
         finish();
+    }
+
+    public void jumpToActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    public void jumpToActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
+    public void jumpToActivityAndClearTask(Class activity) {
+        Intent intent = new Intent(this, activity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public void jumpToActivityAndClearTop(Class activity) {
+        Intent intent = new Intent(this, activity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 

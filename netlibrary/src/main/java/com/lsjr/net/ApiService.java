@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -12,6 +13,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -33,11 +35,21 @@ public interface ApiService {
     @POST("{url}")
     Observable<ResponseBody> postBody(@Path("url") String url, @Body Object object);
 
+
+    @Multipart
+    @POST()
+    Observable<ResponseBody> uploadFiles(@Url() String url, @PartMap() Map<String, RequestBody> maps);
+
     /**
      * 多文件多参数上传
      **/
     @Multipart
-    @POST("uploadSight")
-    Observable<String> uploadFiles(@Part List<MultipartBody.Part> partList);
+    @POST()
+    Observable<String> uploadFiles(@Url String url, @Part() List<MultipartBody.Part> parts);
+
+
+    @Streaming
+    @GET
+    Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
 }

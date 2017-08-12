@@ -1,11 +1,13 @@
 package com.lsjr.zizisteward;
 
 import android.app.Application;
+import android.content.res.Configuration;
+import android.graphics.Point;
+import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lsjr.net.BaseUrl;
 import com.lsjr.net.DcodeService;
-import com.lsjr.net.UploadService;
 import com.lsjr.zizisteward.activity.contentprovider.Global;
 import com.lsjr.zizisteward.http.AppUrl;
 import com.taobao.sophix.PatchStatus;
@@ -13,10 +15,8 @@ import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.tencent.tauth.Tencent;
 import com.ymz.baselibrary.BaseApplication;
 import com.ymz.baselibrary.utils.L_;
-
 
 import cn.sharesdk.framework.ShareSDK;
 
@@ -45,17 +45,18 @@ public class MyApplication extends Application {
 
 
     public static IWXAPI wxApi;
-    public static Tencent mTencent;
+    //public static Tencent mTencent;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        resetDensity();
         Global.init(this);
         BaseApplication.instance().initialize(this);
 
         BaseUrl.setBastUrl(AppUrl.HOST);
         DcodeService.initialize(this);
-        UploadService.initialize(this);
+        //UploadService.initialize(this);
         //LoaderFactory.initLoaderFactory(this);
         Fresco.initialize(this);
 
@@ -64,16 +65,26 @@ public class MyApplication extends Application {
         wxApi = WXAPIFactory.createWXAPI(this, WX_APP_ID, true);
         wxApi.registerApp(WX_APP_ID);
 
-        mTencent = Tencent.createInstance(QQ_APP_ID, this.getApplicationContext());
+       // mTencent = Tencent.createInstance(QQ_APP_ID, this.getApplicationContext());
 
         /*微博*/
         ShareSDK.initSDK(this);
         //aliSophixManager();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        resetDensity();
+    }
+    public final static float DESIGN_WIDTH = 750; //绘制页面时参照的设计图宽度
+    public void resetDensity(){
+        Point size = new Point();
+        ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getSize(size);
+        getResources().getDisplayMetrics().xdpi = size.x/DESIGN_WIDTH*72f;
+    }
 
     String appVersion = "1.1.0";
-
     public void aliSophixManager() {
         // initialize最好放在attachBaseContext最前面
         SophixManager.getInstance().setContext(this)

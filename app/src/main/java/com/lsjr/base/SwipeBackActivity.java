@@ -15,7 +15,6 @@ import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.widget.SwipeBackLayout;
 
 /**
- * Created by PandaQ on 2017/3/20.
  * 所有侧滑返回的activity的父类
  */
 

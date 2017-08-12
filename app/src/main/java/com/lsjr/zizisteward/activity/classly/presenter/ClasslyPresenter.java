@@ -1,6 +1,6 @@
 package com.lsjr.zizisteward.activity.classly.presenter;
 
-import com.lsjr.base.SubscriberCallBack;
+import com.lsjr.zizisteward.http.callback.SubscriberCallBack;
 import com.lsjr.net.DcodeService;
 import com.lsjr.zizisteward.activity.classly.view.IClasslyView;
 import com.ymz.baselibrary.mvp.BasePresenter;

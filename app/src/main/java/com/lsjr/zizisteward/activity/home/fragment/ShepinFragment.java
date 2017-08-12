@@ -24,9 +24,9 @@ import com.lsjr.zizisteward.R;
 import com.lsjr.zizisteward.activity.detail.ProductDetailsActivity;
 import com.lsjr.zizisteward.activity.home.presenter.ShepinPresenter;
 import com.lsjr.zizisteward.activity.home.view.ShepinView;
-import com.lsjr.zizisteward.activity.more.MorePorductActivity;
-import com.lsjr.zizisteward.coustom.RoundImageView;
 import com.lsjr.zizisteward.http.AppUrl;
+import com.lsjr.zizisteward.mvp.ui.UploadActivity;
+import com.lsjr.zizisteward.utils.RoundImageView;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.UIUtils;
 import com.youth.banner.Banner;
@@ -115,7 +115,9 @@ public class ShepinFragment extends BaseRefreshFragment implements ShepinView {
         rvMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(MorePorductActivity.class);
+                openActivity(UploadActivity.class);
+                //Intent intent = new Intent(getActivity(), MorePorductActivity.class);
+                //startActivity(intent);
             }
         });
         banner.setOnBannerListener(new OnBannerListener() {

@@ -22,6 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.ymz.baselibrary.BaseApplication;
@@ -262,6 +265,176 @@ public class UIUtils {
 	public static Drawable getDrawable(int resTd) {
 		return getResources().getDrawable(resTd);
 	}
+
+
+
+	public static void setVisibility(int visibility, View... views) {
+		for (View view : views) if (view != null) view.setVisibility(visibility);
+	}
+
+	public static void setDrawable(ImageView image, int id, Drawable drawable) {
+		if (image == null) return;
+		if (id == 0) {
+			if (drawable != null) image.setImageDrawable(drawable);
+		} else image.setImageResource(id);
+	}
+
+	public static void setText(TextView textView, int id, String text) {
+		if (textView == null) return;
+		if (id == 0) {
+			if (text != null && !text.equals(textView.getText())) textView.setText(text);
+		} else {
+			CharSequence oldText = textView.getContext().getResources().getText(id);
+			if (!oldText.equals(textView.getText())) textView.setText(id);
+		}
+	}
+
+	public static void setTextColor(TextView textView, int id, int color) {
+		if (textView == null) return;
+		if (id == 0) {
+			textView.setTextColor(color);
+		} else textView.setTextColor(getColor(id));
+	}
+
+	public static Drawable getDrawable(View view, int id) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			return view.getResources().getDrawable(id, null);
+		} else {
+			//noinspection deprecation
+			return view.getResources().getDrawable(id);
+		}
+	}
+
+	public static Toast mToast;
+
+	public static void showToast(String msg) {
+		showToast(msg, Toast.LENGTH_SHORT);
+	}
+
+	public static void showToast(String msg, int duration) {
+		if (mToast == null) {
+			mToast = Toast.makeText(getContext(), "", duration);
+		}
+		mToast.setText(msg);
+		mToast.show();
+	}
+
+	/**
+	 * 用于在线程中执行弹土司操作
+	 */
+	public static void showToastSafely(final String msg) {
+		UIUtils.getMainThreadHandler().post(new Runnable() {
+
+			@Override
+			public void run() {
+				if (mToast == null) {
+					mToast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
+				}
+				mToast.setText(msg);
+				mToast.show();
+			}
+		});
+	}
+
+
+
+	/**
+	 * 得到resources对象
+	 *
+	 * @return
+	 */
+	public static Resources getResource() {
+		return getContext().getResources();
+	}
+
+
+
+	/**
+	 * 得到string.xml中的字符串，带点位符
+	 *
+	 * @return
+	 */
+	public static String getString(int id, Object... formatArgs) {
+		return getResource().getString(id, formatArgs);
+	}
+
+	/**
+	 * 得到string.xml中和字符串数组
+	 *
+	 * @param resId
+	 * @return
+	 */
+	public static String[] getStringArr(int resId) {
+		return getResource().getStringArray(resId);
+	}
+
+
+
+	/**
+	 * 得到应用程序的包名
+	 *
+	 * @return
+	 */
+	public static String getPackageName() {
+		return getContext().getPackageName();
+	}
+
+	/**
+	 * 得到主线程Handler
+	 *
+	 * @return
+	 */
+	public static Handler getMainThreadHandler() {
+		return BaseApplication.getMainThreadHandler();
+	}
+
+
+	/**
+	 * 安全的执行一个任务
+	 *
+	 * @param task
+	 */
+	public static void postTaskSafely(Runnable task) {
+		int curThreadId = android.os.Process.myTid();
+		// 如果当前线程是主线程
+		if (curThreadId == getMainThreadId()) {
+			task.run();
+		} else {
+			// 如果当前线程不是主线程
+			getMainThreadHandler().post(task);
+		}
+	}
+
+	/**
+	 * 延迟执行任务
+	 *
+	 * @param task
+	 * @param delayMillis
+	 */
+	public static void postTaskDelay(Runnable task, int delayMillis) {
+		getMainThreadHandler().postDelayed(task, delayMillis);
+	}
+
+	/**
+	 * 移除任务
+	 */
+	public static void removeTask(Runnable task) {
+		getMainThreadHandler().removeCallbacks(task);
+	}
+
+
+
+
+
+	public static int getNavBarHeight(Context context) {
+		Resources resources = context.getResources();
+		int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			return resources.getDimensionPixelSize(resourceId);
+		}
+		return 0;
+	}
+
 
 }
 

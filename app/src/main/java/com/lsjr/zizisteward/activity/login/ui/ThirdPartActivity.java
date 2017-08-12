@@ -129,7 +129,7 @@ public class ThirdPartActivity extends MvpActivity implements IThirdPartView {
         idTvQQlg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPresenter().qqlogin(ThirdPartActivity.this);
+               // createPresenter().qqlogin(ThirdPartActivity.this);
             }
         });
 

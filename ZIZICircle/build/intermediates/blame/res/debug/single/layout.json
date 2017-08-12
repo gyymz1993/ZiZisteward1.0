@@ -1,0 +1,630 @@
+[
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_progress_recyclerview.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\7b24d468ed1fe1e52e4078b7aa8f0678c6cef7f3\\output\\res\\layout\\layout_progress_recyclerview.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_editor_timeline_slider.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_editor_timeline_slider.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_text_edit_overlay.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_text_edit_overlay.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_beautify_skin.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_beautify_skin.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_editor_asset_addons.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_editor_asset_addons.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_layout_overlay_font_unlock.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_layout_overlay_font_unlock.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_editor_diyoverlay_category.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_editor_diyoverlay_category.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_render_progress.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_render_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_layout_overlay_font_loading.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_layout_overlay_font_loading.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\ab_qupai_qupai_import_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\ab_qupai_qupai_import_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_photo.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_photo.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_video_live.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_video_live.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_editor_asset_short.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_editor_asset_short.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_imagepager.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\activity_imagepager.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_trim_video_thumbnail.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_trim_video_thumbnail.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\quit_confirm_dialog.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\quit_confirm_dialog.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_upload.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\layout_upload.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_edittext_overlay.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_edittext_overlay.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_video_gallery.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_video_gallery.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_video_editor.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_video_editor.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_video_dubbing.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_video_dubbing.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_recyclerview_verticalscroll.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\7b24d468ed1fe1e52e4078b7aa8f0678c6cef7f3\\output\\res\\layout\\layout_recyclerview_verticalscroll.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_center_top.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_center_top.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_editor_asset_more_long.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_editor_asset_more_long.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_video_draft.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_video_draft.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\viewstub_urlbody.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\viewstub_urlbody.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_diyeffect_content_merge.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_diyeffect_content_merge.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\view_more_progress.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\view_more_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\coach_mark_qupai_diy_scale.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\coach_mark_qupai_diy_scale.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\guide_tip_qupai_dialog.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\guide_tip_qupai_dialog.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_overlay_manage_right.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_overlay_manage_right.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\dlg_qupai_recorder_render_progress.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\dlg_qupai_recorder_render_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_recorder_center_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_recorder_center_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\import_video_texture_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\import_video_texture_view.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_edit_overlay.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_edit_overlay.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_editor_asset_null_short.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_editor_asset_null_short.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_layout_overlay_unlock.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_layout_overlay_unlock.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_gallery_dir.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_gallery_dir.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_timeline_middle.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_timeline_middle.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\viewstub_imgbody.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\viewstub_imgbody.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_font_effect.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_font_effect.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_textcolor.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_textcolor.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\coach_mark_qupai_trim_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\coach_mark_qupai_trim_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\guide_timeline_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\guide_timeline_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\guide_overlay_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\guide_overlay_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_overlay_more.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_overlay_more.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_progress.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\7b24d468ed1fe1e52e4078b7aa8f0678c6cef7f3\\output\\res\\layout\\layout_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_import_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_import_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_recorder_center_top.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_recorder_center_top.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_common_alert_dialog_progress.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_common_alert_dialog_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\dlg_qupai_diy_show.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\dlg_qupai_diy_show.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_audio_mixer_slider.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_audio_mixer_slider.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\import_photo_texture_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\import_photo_texture_view.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_play.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_play.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_magic_text.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\layout_magic_text.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_diyeffect_content_merge.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_diyeffect_content_merge.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_guide_switch.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_guide_switch.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_common_typing_filter.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_common_typing_filter.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_gallery_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_gallery_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_timeline_right.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_timeline_right.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_text_edit_overlay_guide.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_text_edit_overlay_guide.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_main_titlebar.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\layout_main_titlebar.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_editor_diyoverlay_category_more.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_editor_diyoverlay_category_more.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_drafts_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_drafts_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_import.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_import.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_recyclerview_horizontalscroll.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\7b24d468ed1fe1e52e4078b7aa8f0678c6cef7f3\\output\\res\\layout\\layout_recyclerview_horizontalscroll.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_editor_asset_null_long.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_editor_asset_null_long.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_common_progress_dialog.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_common_progress_dialog.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\coach_mark_qupai_trim_center.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\coach_mark_qupai_trim_center.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_photo_editor.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_photo_editor.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_common_overlay_manager_fragment.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_common_overlay_manager_fragment.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\ab_qupai_video_edit.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\ab_qupai_video_edit.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\ab_qupai_draft_chooser.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\ab_qupai_draft_chooser.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_pager_image.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\item_pager_image.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_diyeffect.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_diyeffect.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\coach_mark_qupai_recorder.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\coach_mark_qupai_recorder.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_editor_asset_long.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_editor_asset_long.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_video_trim.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_video_trim.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_comment.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\dialog_comment.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_layout_overlay_font_download.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_layout_overlay_font_download.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_edit_overlay_guide.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_edit_overlay_guide.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_tab_new.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_tab_new.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_row_text_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_row_text_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\social_sns_popupwindow.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\social_sns_popupwindow.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_diyeffect_chooser.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_diyeffect_chooser.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\toast_qupai_import_duration_limit.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\toast_qupai_import_duration_limit.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_comment.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\item_comment.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_video_recorder.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_video_recorder.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\toast_qupai_mv_locked.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\toast_qupai_mv_locked.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_video.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_editview.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\layout_editview.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_guide_switch_close.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_guide_switch_close.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_qupai_gallery.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_qupai_gallery.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\tab_widget_qupai_drafts.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\tab_widget_qupai_drafts.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_gallery_button.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_gallery_button.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_layout_overlay_example.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_layout_overlay_example.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_guide_switch_again.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_guide_switch_again.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_textonly_overlay.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_textonly_overlay.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_more_progress.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\7b24d468ed1fe1e52e4078b7aa8f0678c6cef7f3\\output\\res\\layout\\layout_more_progress.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\ab_qupai_trim_chooser.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\ab_qupai_trim_chooser.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_tab_overlay.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_tab_overlay.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\head_circle.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\head_circle.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_project_explorer.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_project_explorer.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_circle_item.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\adapter_circle_item.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_row_text_bottom_1.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_row_text_bottom_1.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_image_crop.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_image_crop.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\activity_qupai_video_file.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\activity_qupai_video_file.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_qupai_video_recorder_webview.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\fragment_qupai_video_recorder_webview.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\viewstub_videobody.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\viewstub_videobody.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_timeline_left.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_timeline_left.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_center_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_center_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\item_header_qupai_editor_asset_more_short.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\item_header_qupai_editor_asset_more_short.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_tip_qupai_diy_batch.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\balloon_tip_qupai_diy_batch.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\qupai_common_simple_list_item_1.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\layout\\qupai_common_simple_list_item_1.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\layout_video.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\layout\\layout_video.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    }
+]

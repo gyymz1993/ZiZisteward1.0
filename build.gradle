@@ -11,13 +11,20 @@ buildscript {
 
         classpath 'com.novoda:bintray-release:0.5.0'
 
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+
     }
 }
-
+//url "https://dl.bintray.com/gyymz1993/maven/"
 allprojects {
     repositories {
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven {
+            url "https://jitpack.io"
+            //url "https://dl.bintray.com/gyymz1993/maven/"
+           // maven { url "https://jitpack.io" }
+           // url 'https://dl.bintray.com/cjt/maven'
+        }
     }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')

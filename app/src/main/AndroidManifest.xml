@@ -4,10 +4,19 @@
     package="com.lsjr.zizisteward"
     tools:overrideLibrary="android.support.v7.appcompat">
 
-
+    <!-- 极光推送的一些权限 -->
+    <uses-permission
+        android:name=".permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.lsjr.zizisteward.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- 增加文件存储和访问摄像头的权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -18,8 +27,6 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -31,23 +38,21 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".MyApplication"
         android:fullBackupContent="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_new_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_new_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
-
         <activity
             android:name=".activity.home.ui.HomeActivity"
-            android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,93 +66,28 @@
             android:exported="false"
             android:process=":monitor" />
 
-
         <activity android:name=".activity.detail.ProductDetailsActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/TranslucentFullScreenTheme"
             />
         <activity android:name=".activity.group.ui.GroupActivity" />
-        <!--<activity-->
-            <!--android:name=".activity.home.ui.HomeActivity"-->
-            <!--android:label="主页" />-->
-        <activity
-            android:name=".mvp.ui.UploadActivity"
-            android:label="图片上传" />
-        <activity
-            android:name=".activity.classly.ui.ClassifyActivity"
-            android:label="商品分类" />
-
-        <activity
-            android:name=".activity.steward.ui.StewardActivity"
-            android:label="管家界面" />
-
-        <activity
-            android:name=".activity.login.ui.ThirdPartActivity"
-            android:label="第三方登陆" />
-
-        <activity
-            android:name=".activity.product.ui.ProductListActivity"
-            android:label="商品列表" />
-
-        <activity
-            android:name=".activity.product.ui.ProductDetailActivity"
-            android:label="商品详细" />
-
-        <activity
-            android:name=".activity.product.ui.PayWayActivity"
-            android:label="支付方式" />
-
-        <activity android:name=".activity.more.MorePorductActivity"
-            android:screenOrientation="portrait"
-            />
 
 
         <!--微信登陆   start-->
         <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="true"
-            android:label="weixin"
-            android:launchMode="singleTop"
+            android:name=".activity.lcq.NoteLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.lcq.SettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!--微信 登陆   end-->
-
-        <!--qq登陆    start-->
+            android:theme="@style/TranslucentFullScreenTheme" />
         <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent1105677331" />
-            </intent-filter>
-        </activity>
-
+            android:name=".activity.lcq.NoteLoginPromptBox"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--qq登陆   end-->
-
-
-        <!--新浪微博-->
-        <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:name=".activity.lcq.XieYiActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 支付宝  支付alipay sdk begin -->
         <activity
@@ -163,16 +103,6 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝alipay sdk end -->
-
-
-        <!--微信支付 start-->
-        <activity
-            android:name=".wxapi.WXPayEntryActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="true"
-            android:label="微信支付"
-            android:screenOrientation="portrait" />
-        <!--微信支付 end-->
 
         <activity
             android:name="com.yanzhenjie.album.AlbumActivity"
@@ -190,6 +120,171 @@
         <meta-data
             android:name="com.taobao.android.hotfix.RSASECRET"
             android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDH1pjDdb9S6cAJxrLexPSpMUGMv8h7RYymo20dC+6ajYjXZP8PHmIhtSt7E+GStWfqA1F7PsNVMSgGYypE13a2tLVXZ24EiwY6KDhXgwO/6l4xDojQ+/rN41b2rQGjfOULa+u8TJAbM8dWkZjnI/MvEQl4gatJP5KM+pd4zgiDS0C/yAkSPYOYgmw+davatIOl3WU+mAlCw60YkwY2MKoEyXxbxDBv1lDBQf03ceNbyKr6rahD1cvxiNW/eiBKhj82RqXEjGZtsr260zqRtbv4MHlZXoMHCefKsCQxuNztCUvC3VSKpREN62S49+yNJhjvHT56U4PVqoOn+pjbWxC5AgMBAAECggEARCBOd+P+U3/IrgyFEhjG558ZH6iJ6ixtpKl2Gz7kGuBBVFzj7v2GqsMejZjbf65EPKzg7EkbQkG9yV+pG0rw95xnbeKeyQG0H8NyYbMSZiy567NuxQACIopsLTARrPB5DQm/lbPsNLnULRj5rWK+Fr+SIPjjsdbwWQtc9BwZHti/2qvSXIcwUZAjVbB9YuF/WwzMmJU+ziSaEq4t0wZPx1Afzh9ftWupeKvcK9m3H3PRaBH9rfP3S0bIgXH4LyHzQVk2QCPaX9LED3t5TlgTrH/eCoBSbBWrcNiUxN8wfoG7ZJXBLLTiUVUoBoQUNK2OU2cWHc6r5iobnK+xTpDXuQKBgQD4KwdW5XYneuwGh6UQELuEQoSdzDITo7XUi/YCkH32xxrwUMkuTkGYT8uizM1KJoz6leMloSwT4ZmkK47x0ZFAUrXl1rntxjqCwaha1AkFfLjzfkzdjQsNNREFVp14dj+lkqmypah8n2CV+uNJEnjeebKf17YL7Rx6ZGABv4505wKBgQDOJRt6sKsSOWciHMuT2Bob9WonYeCXsZPQK4lHAgbotZrZVly546r2UFsMzUD+Bu5b5uUSx9xICEGmT84ySXMZwUzItqNZYHv3kraWNDqK7zNLWIJ0Ifjmp9Em0G2rfFS1IE6zE5kcTRcWMyjjdA55cfCeKqlGFBK5pKPk+c/5XwKBgAt8Kk3KNsqi9LNkqa3xqEv5rBuFbLfd9rdMdukteLboBgYjJvxeoMiEwN7a7ZFF8XZTY3zFVb3hzfN8FJR6Z2d7rHFjm502dFTC06DIeVZorEKQkMwcD+vfjdcaaBVAG7f07qeW5RJHaffm8YfbM/7P0QV2vTUWFyBO7uaFz/j3AoGBAIZHwaif4C+U2MttumZpxEgmCqnwpd3qPIDDez6X4WxAr8eW6/vig4DDQywJn6ZZWXbf5qPfMGxzhGATaBt1oNZMBfpQjgMwSFAyb2FUUDYkLmOMGh4P6xREiIciCe5EpOD/VIRt5bR7uugpFx9if/M39ybwXydY+AGZb3E+EO09AoGBALhmdNjVK9i5CdGJNMWOiqDqznuwXWihmmDjzK2tZt7FhmciFQeRlR415qE8kEVcXn/x73OyjxpGPxIldeLuqLH9OCGLq7RS3Hh+hnZru8ZwYiJ+AzUgpu/Yzz4N2WTXUC4MFecU3OXJqQGeVjg7oTuCxOJOFAhwv9Q0TAEj8aze" />
+
+
+        <!--分享平台-->
+        <!--新浪微博-->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!--
+            	Adapter表示一个继承自cn.sharesdk.framework.authorize.AuthorizeAdapter的类，
+            	这个类可以监听到页面的生命周期，也可以获取授权页面的各种UI控件。
+            	开发者可以通过继承AuthorizeAdapter，重写其方法，并获取各种UI来自定义这个页面的行为。
+            <meta-data android:name="Adapter" android:value="cn.sharesdk.demo.MyAdapter" />
+            -->
+            <!-- 新浪微博分享 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!--
+            	Dropbox的SSO功能需要在此处添加一个对ACTION_VIEW事件的过滤器，其中的scheme是
+            	“db-”前缀再开发者应用的加上appKey。如果此过滤器不设置，则不能完成SSO功能授权
+            -->
+            <intent-filter>
+                <data android:scheme="db-7janx53ilz11gbs" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!--
+            	如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，须要在此处添加一个对ACTION_VIEW
+            	事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。如果此过滤器不设置，
+            	则分享结束以后不能得到正确的回调
+            -->
+            <intent-filter>
+                <data android:scheme="tencent1105677331" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="com.lsjr.zizisteward.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 极光 -->
+        <!-- Rich push 核心功能 since 2.0.6 -->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="false"
+            android:theme="@style/MyDialogStyle" />
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.lsjr.zizisteward" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false"/>
+        <!-- Required SDK 核心功能 -->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+
+                <category android:name="com.lsjr.zizisteward" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+                <category android:name="com.lsjr.zizisteward" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name="com.lsjr.zizisteward.activity.receiver.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="com.lsjr.zizisteward" />
+            </intent-filter>
+        </receiver>
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="66a63e3698b3c8b499b2a995" /> <!-- </>值来自开发者平台取得的AppKey -->
+        <!-- 推送 -->
+
 
     </application>
 

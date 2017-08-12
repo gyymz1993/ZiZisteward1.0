@@ -39,7 +39,6 @@ public  class BaseApplication {
             initSputils();
             initLeakCanary();
             initImageLoader();
-
         }
     }
 

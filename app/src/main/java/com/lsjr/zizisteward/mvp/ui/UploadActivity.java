@@ -15,9 +15,9 @@ import com.lsjr.zizisteward.iinterface.FreshImaCallBack;
 import com.lsjr.zizisteward.mvp.presenter.UploadPresenter;
 import com.lsjr.zizisteward.mvp.ui.adapter.ImgGridAdapter;
 import com.lsjr.zizisteward.mvp.view.IUploadView;
+import com.lsjr.zizisteward.utils.EncryptUtils;
 import com.yanzhenjie.album.Album;
 import com.ymz.baselibrary.utils.L_;
-
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,18 +34,18 @@ public class UploadActivity extends MvpActivity<UploadPresenter> implements Fres
 
     private static final int REQUEST_CODE_GALLERY = 100;  //打开相册
     private static final int REQUEST_CODE_PREVIEW = 101; //图片预览
-
+    private final static int maxImageSize = 5;
     private GridView gvImage;
     private ImgGridAdapter adapter;
     private ArrayList<String> igList = new ArrayList<>();
-    private final static int maxImageSize = 5;
+
     LinearLayout llSend;
     List<File> fileList = new ArrayList<>();
 
 
     @Override
     protected void initData() {
-        setTitleText("图片选择器");
+       // setTitleText("图片选择器");
     }
 
     @Override
@@ -81,15 +81,18 @@ public class UploadActivity extends MvpActivity<UploadPresenter> implements Fres
         }
 
         Map<String,String> map=new HashMap<>();
-        map.put("user_id", "77");//定义参数key常量类，即参数名
+        map.put("user_id", EncryptUtils.addSign(Integer.valueOf("77"), "u"));//定义参数key常量类，即参数名
         map.put("content", "content");
         map.put("customTag", "customTag");
         map.put("sightType", "豪车品鉴师");
         map.put("type", "1");
         map.put("imgNumber", "1");//ParamKey.TOKEN 自定义参数key常量类，即参数名
-        createPresenter().onUploadImage(map,fileList);
+        createPresenter().onUploadImage("",map,fileList);
 
     }
+
+
+
 
 
     /**

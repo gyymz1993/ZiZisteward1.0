@@ -1,18 +1,11 @@
 package com.lsjr.zizisteward.activity.login.presenter;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.lsjr.zizisteward.activity.login.view.IThirdPartView;
-import com.tencent.connect.auth.QQToken;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.UiError;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.T_;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -21,7 +14,6 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 
-import static com.lsjr.zizisteward.MyApplication.mTencent;
 import static com.lsjr.zizisteward.MyApplication.wxApi;
 
 /**
@@ -80,54 +72,54 @@ public class ThirdPartPresenter extends BasePresenter<IThirdPartView> {
     /**
      * 实现QQ第三方登录
      */
-    public void qqlogin(Activity activity) {
-        mTencent.login(activity, "all", new IUiListener() {
-            @Override
-            public void onComplete(Object response) {
-                T_.showToastReal("授权成功");
-                JSONObject obj = (JSONObject) response;
-                try {
-                    String openID = obj.getString("openid");
-                    String accessToken = obj.getString("access_token");
-                    String expires = obj.getString("expires_in");
-                    mTencent.setOpenId(openID);
-                    mTencent.setAccessToken(accessToken, expires);
-                    QQToken qqToken = mTencent.getQQToken();
-//                    mUserInfo = new UserInfo(getApplicationContext(),qqToken);
-//                    mUserInfo.getUserInfo(new IUiListener() {
-//                        @Override
-//                        public void onComplete(Object response) {
-//                            Log.e(TAG,"登录成功"+response.toString());
-//                        }
+//    public void qqlogin(Activity activity) {
+//        mTencent.login(activity, "all", new IUiListener() {
+//            @Override
+//            public void onComplete(Object response) {
+//                T_.showToastReal("授权成功");
+//                JSONObject obj = (JSONObject) response;
+//                try {
+//                    String openID = obj.getString("openid");
+//                    String accessToken = obj.getString("access_token");
+//                    String expires = obj.getString("expires_in");
+//                    mTencent.setOpenId(openID);
+//                    mTencent.setAccessToken(accessToken, expires);
+//                    QQToken qqToken = mTencent.getQQToken();
+////                    mUserInfo = new UserInfo(getApplicationContext(),qqToken);
+////                    mUserInfo.getUserInfo(new IUiListener() {
+////                        @Override
+////                        public void onComplete(Object response) {
+////                            Log.e(TAG,"登录成功"+response.toString());
+////                        }
+////
+////                        @Override
+////                        public void onError(UiError uiError) {
+////                            Log.e(TAG,"登录失败"+uiError.toString());
+////                        }
+////
+////                        @Override
+////                        public void onCancel() {
+////                            Log.e(TAG,"登录取消");
+////
+////                        }
+////                    });
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 //
-//                        @Override
-//                        public void onError(UiError uiError) {
-//                            Log.e(TAG,"登录失败"+uiError.toString());
-//                        }
+//            @Override
+//            public void onError(UiError uiError) {
+//                T_.showToastReal("授权失败 ");
+//            }
 //
-//                        @Override
-//                        public void onCancel() {
-//                            Log.e(TAG,"登录取消");
+//            @Override
+//            public void onCancel() {
+//                T_.showToastReal("授权取消 ");
+//            }
+//        });
 //
-//                        }
-//                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onError(UiError uiError) {
-                T_.showToastReal("授权失败 ");
-            }
-
-            @Override
-            public void onCancel() {
-                T_.showToastReal("授权取消 ");
-            }
-        });
-
-    }
+//    }
 
 
 }

@@ -13,10 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lsjr.zizisteward.R;
 import com.lsjr.zizisteward.activity.classly.adapter.SpacesItemDecoration;
-import com.lsjr.zizisteward.coustom.RoundImageView;
-import com.lsjr.zizisteward.coustom.myrecycleview.MyRecycleView;
 import com.lsjr.zizisteward.coustom.myrecycleview.WrapRecyclerView;
 import com.lsjr.zizisteward.http.AppUrl;
+import com.lsjr.zizisteward.utils.RoundImageView;
 import com.ymz.baselibrary.utils.UIUtils;
 
 

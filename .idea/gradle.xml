@@ -8,11 +8,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/adapterlibrary" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/audiolibrary" />
             <option value="$PROJECT_DIR$/baselibrary" />
             <option value="$PROJECT_DIR$/netlibrary" />
             <option value="$PROJECT_DIR$/refreshlibrary" />
+            <option value="$PROJECT_DIR$/tablirbry" />
             <option value="$PROJECT_DIR$/uilibrary" />
+            <option value="$PROJECT_DIR$/zizichat" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

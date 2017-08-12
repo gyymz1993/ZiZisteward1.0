@@ -1,1 +1,2 @@
-include ':app', ':uilibrary', ':refreshlibrary', ':baselibrary', ':netlibrary'
+include ':app', ':uilibrary', ':refreshlibrary', ':baselibrary', ':netlibrary', ':tablirbry', ':zizichat', ':adapterlibrary', ':audiolibrary'
+//':ZIZICircle', ':ChatUi', ':qupai',':zizichat', ':tablirbry'

@@ -72,13 +72,4 @@
         android:background="@color/yellow"
         android:visibility="gone" />
 
-    <com.ys.uilibrary.CouponLinearLayout
-        android:id="@+id/id_coup_layout"
-        android:layout_width="match_parent"
-        android:layout_height="6dip"
-        android:orientation="vertical"
-        android:background="@color/common_bg"
-        app:cv_semicircle_color="@color/white"
-        app:cv_semicircle_gap="3dip"
-        app:cv_semicircle_radius="3dip" />
 </LinearLayout>

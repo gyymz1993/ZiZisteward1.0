@@ -88,9 +88,9 @@ public class MorePorductActivity extends BaseRefreshActivity {
         }
         @Override
         public void onBindViewHolder(BaseRecyclerHolder viewHolder, int position, boolean b) {
-            CouponLinearLayout linearLayout =  viewHolder.getView(R.id.id_coup_layout);
-            linearLayout.setSemicircleTop(true);
-            linearLayout.setSemicircleBottom(true);
+//            CouponLinearLayout linearLayout =  viewHolder.getView(R.id.id_coup_layout);
+//            linearLayout.setSemicircleTop(true);
+//            linearLayout.setSemicircleBottom(true);
         }
 
 

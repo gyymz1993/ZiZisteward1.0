@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
-import com.lsjr.base.SubscriberCallBack;
+import com.lsjr.zizisteward.http.callback.SubscriberCallBack;
 import com.lsjr.net.DcodeService;
 import com.lsjr.zizisteward.activity.product.view.IPayWayListView;
 import com.ymz.baselibrary.mvp.BasePresenter;

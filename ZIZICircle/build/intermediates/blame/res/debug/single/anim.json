@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\pop_enter_anim.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\anim\\pop_enter_anim.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\translate_qupai_down.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\anim\\translate_qupai_down.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\translate_qupai_up.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\anim\\translate_qupai_up.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\pop_exit_anim.xml",
+        "source": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\src\\main\\res\\anim\\pop_exit_anim.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\activity_close_qupai_exit.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\anim\\activity_close_qupai_exit.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\qupai_diy_overlay_progress_rotate.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\a2b2fa1f2976189bb44a4793c219ffa29b149c49\\output\\res\\anim\\qupai_diy_overlay_progress_rotate.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\2457c177b579d1a8c2ba5bf909c0bebfdc92b389\\output\\res\\anim\\abc_slide_out_bottom.xml"
+    }
+]

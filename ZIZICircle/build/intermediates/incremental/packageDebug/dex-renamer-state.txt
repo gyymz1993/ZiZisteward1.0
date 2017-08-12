@@ -1,0 +1,7 @@
+#Thu Aug 03 11:44:16 CST 2017
+base.0=D\:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_6e508c5b6d24efc15fb38b2df8564ba49db761db
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=D\:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_fc3e2dec357c9db0506ac4f9b696b176a68714d6\\classes.dex
+base.1=D\:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_fc3e2dec357c9db0506ac4f9b696b176a68714d6
+file.0=D\:\\Porject\\ZiZisteward1.0\\ZIZICircle\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_6e508c5b6d24efc15fb38b2df8564ba49db761db\\classes.dex

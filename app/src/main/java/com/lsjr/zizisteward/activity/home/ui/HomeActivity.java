@@ -1,5 +1,6 @@
 package com.lsjr.zizisteward.activity.home.ui;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,6 +22,8 @@ import com.lsjr.zizisteward.activity.scope.ui.ScopeFragmentZizi;
 import com.lsjr.zizisteward.bean.AddressBookBean;
 import com.lsjr.zizisteward.coustom.NoScrollViewPager;
 import com.ymz.baselibrary.utils.L_;
+import com.ymz.baselibrary.utils.T_;
+import com.ymz.baselibrary.view.PermissionListener;
 import com.ymz.baselibrary.widget.NavigationBarView;
 import com.ys.uilibrary.tab.BottomTabView;
 
@@ -172,6 +175,19 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements IHomeVie
         scopeFrg = new ScopeFragmentZizi();
         groupFrg = new MeFragmentZizi();
         meFrg = new MeFragmentZizi();
+        requestPermissions(new String[]{ Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE }, new PermissionListener() {
+            @Override
+            public void onGranted() {
+                T_.showToastReal("申请权限成功");
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermissions) {
+                T_.showToastReal("申请权限失败");
+            }
+        });
+
     }
 
 

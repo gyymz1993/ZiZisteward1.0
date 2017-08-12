@@ -34,11 +34,11 @@ class AppClient {
 
     private static Retrofit retrofit() {
         if (mRetrofit == null) {
-            Gson gson = new GsonBuilder()
-                    .setDateFormat(DateUtils.DB_DATA_FORMAT)
-                    .create();//使用 gson coverter，统一日期请求格式
+            Gson gson = new GsonBuilder().setDateFormat(DateUtils.DB_DATA_FORMAT).create();
+            //使用 gson coverter，统一日期请求格式
             String mBaseUrl = "https://app.zizi.com.cn/app/";
-            if (BaseUrl.getBastUrl()==null){
+          //  mBaseUrl="http://192.168.100.10:8081/";
+            if (BaseUrl.getBastUrl() == null) {
                 throw new NullPointerException("请设置BaseUrl");
             }
             mRetrofit = new Retrofit.Builder()
@@ -46,7 +46,6 @@ class AppClient {
                     .client(getOkHttpClient())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     //自定义解析增加加密方式`
-                    //.addConverterFactory(jsonConverterFactory)
                     //一定要在gsonConverter前面,否则gson会拦截所有的解析方式
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -57,11 +56,15 @@ class AppClient {
     }
 
 
-    /*请求路径打印*/
+    /*
+    *请求路径打印
+    */
+     private static final int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间
     private static OkHttpClient getOkHttpClient() {
         //定制OkHttp
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-        httpClientBuilder.connectTimeout(10, TimeUnit.SECONDS)
+        //httpClientBuilder.connectTimeout(10, TimeUnit.SECONDS)
+        httpClientBuilder.connectTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS);
         httpClientBuilder.addInterceptor(new LoggingInterceptor());
@@ -74,41 +77,34 @@ class AppClient {
     }
 
 
-    /**
-     */
     private static class NetworkInterceptor implements Interceptor {
         @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         @Override
         public Response intercept(Chain chain) throws IOException {
             //通过 CacheControl 控制缓存数据
             CacheControl.Builder cacheBuilder = new CacheControl.Builder();
-            cacheBuilder.maxAge(0, TimeUnit.SECONDS);//这个是控制缓存的最大生命时间
-            cacheBuilder.maxStale(365, TimeUnit.DAYS);//这个是控制缓存的过时时间
+            cacheBuilder.maxAge(0, TimeUnit.MINUTES);//这个是控制缓存的最大生命时间
+            cacheBuilder.maxStale(30, TimeUnit.MINUTES);//这个是控制缓存的过时时间
             CacheControl cacheControl = cacheBuilder.build();
             //设置拦截器
             Request request = chain.request();
             Request.Builder builder = request.newBuilder();
             //header配置
             //builder.addHeader("Content-Type", "application/json");
+            Response originalResponse = chain.proceed(request);
             if (!NetUtils.isConnected(mContext)) {
                 builder.cacheControl(cacheControl);
-                //T_.showToastReal("没有网络");
             }
-            Response originalResponse = chain.proceed(request);
+            Response.Builder responsibility = originalResponse.newBuilder();
+            responsibility.removeHeader("Pragma");
             if (NetUtils.isConnected(mContext)) {
-                int maxAge = 60 * 60;//read from cache
-                return originalResponse.newBuilder()
-                        .removeHeader("Pragma")
-                        .header("Cache-Control", "public ,max-age=" + maxAge)
-                        .build();
+                int maxAge = 0;//read from cache
+                responsibility.header("Cache-Control", "public ,max-age=" + maxAge);
             } else {
-                int maxStale = 60 * 60 * 24 * 28;//tolerate 4-weeks stale
-                return originalResponse.newBuilder()
-                        .removeHeader("Prama")
-                        .header("Cache-Control", "poublic, only-if-cached, max-stale=" + maxStale)
-                        .build();
+                int maxStale = 60 * 30;
+                responsibility.header("Cache-Control", "poublic, only-if-cached, max-stale=" + maxStale);
             }
-
+            return responsibility.build();
         }
     }
 
@@ -125,7 +121,7 @@ class AppClient {
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();//收到响应的时间
             ResponseBody responseBody = response.peekBody(1024 * 1024);
-            Log.e("AppClient",String.format("接收响应: [%s] %n返回json:【%s】 %.1fms%n%s",
+            Log.e("AppClient", String.format("接收响应: [%s] %n返回json:【%s】 %.1fms%n%s",
                     response.request().url(),
                     responseBody.string(),
                     (t2 - t1) / 1e6d,
@@ -136,7 +132,7 @@ class AppClient {
     }
 
     static ApiService getApiService(Context context) {
-        mContext=context;
+        mContext = context;
         return retrofit().create(ApiService.class);
     }
 

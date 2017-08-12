@@ -1,1 +1,3 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.lsjr.net" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.lsjr.net" >
+    <uses-sdk android:minSdkVersion="9" />
+</manifest>

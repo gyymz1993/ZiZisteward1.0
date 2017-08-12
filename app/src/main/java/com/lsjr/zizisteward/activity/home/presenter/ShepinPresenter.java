@@ -1,11 +1,11 @@
 package com.lsjr.zizisteward.activity.home.presenter;
 
-import com.lsjr.base.SubscriberCallBack;
-import com.lsjr.net.DcodeService;
+import com.lsjr.callback.HttpSubscriber;
 import com.lsjr.zizisteward.activity.home.view.ShepinView;
 import com.lsjr.zizisteward.http.HttpUtils;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
+import com.ymz.baselibrary.utils.T_;
 
 import java.util.Map;
 
@@ -19,54 +19,27 @@ public class ShepinPresenter extends BasePresenter<ShepinView> {
         super(mvpView);
     }
 
-    public void loadDataforNet1(Map map){
-        addSubscription(DcodeService.getServiceData(map), new SubscriberCallBack() {
 
+    public void loadDataforNet(Map map) {
+        HttpUtils.getInstance().loadDataForCache(map, new HttpSubscriber() {
             @Override
-            protected void onSuccess(String response) {
-                L_.e("getHomePager"+response);
-                mvpView.onLoadDataSucceed(response);
-            }
-
-
-            @Override
-            protected void onError(Exception e) {
-                L_.e("getHomePager Exception  无网络页面");
+            protected void onXError(String exception) {
+                L_.e("getHomePager   无网络页面" + exception);
+                T_.showToastReal(exception);
                 mvpView.noData();
             }
 
             @Override
             protected void onFailure(String response) {
-                L_.e("getHomePager   无网络页面"+response);
+                L_.e("getHomePager   无网络页面" + response);
+                T_.showToastReal(response);
                 mvpView.noData();
             }
-
-        });
-    }
-
-
-    public void loadDataforNet(Map map){
-        HttpUtils.getInstance().loadDataForCache(map, new SubscriberCallBack() {
 
             @Override
             protected void onSuccess(String response) {
-                //L_.e("getHomePager"+response);
                 mvpView.onLoadDataSucceed(response);
             }
-
-
-            @Override
-            protected void onError(Exception e) {
-               // L_.e("getHomePager Exception  无网络页面");
-                mvpView.noData();
-            }
-
-            @Override
-            protected void onFailure(String response) {
-               // L_.e("getHomePager   无网络页面"+response);
-                mvpView.noData();
-            }
-
         });
     }
 }

@@ -2,6 +2,9 @@ package com.ymz.baselibrary.mvp;
 
 import com.ymz.baselibrary.inter.Presenter;
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -17,11 +20,18 @@ import rx.subscriptions.CompositeSubscription;
 public class BasePresenter<V> implements Presenter<V> {
 
     private CompositeSubscription mCompositeSubscription;
-    public V mvpView;
+    protected V mvpView;
+    protected Reference<V> mViewRef;
+
 
     @Override
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
+        mViewRef = new WeakReference<>(mvpView);
+    }
+
+    public boolean isViewAttached() {
+        return mViewRef != null && mViewRef.get() != null;
     }
 
     public BasePresenter(V mvpView)
@@ -33,6 +43,10 @@ public class BasePresenter<V> implements Presenter<V> {
     @Override
     public void detachView() {
         this.mvpView = null;
+        if (mViewRef != null) {
+            mViewRef.clear();
+            mViewRef = null;
+        }
         onUnsubscribe();
     }
 
@@ -51,6 +65,10 @@ public class BasePresenter<V> implements Presenter<V> {
         if (mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
             mCompositeSubscription.unsubscribe();
         }
+    }
+
+    public V getView() {
+        return mViewRef != null ? mViewRef.get() : null;
     }
 
 }
