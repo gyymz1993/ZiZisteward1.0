@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewStub;
 
 import com.lsjr.zizi.R;
-import com.lsjr.zizi.mvp.chat.bean.PublicMessage;
+import com.lsjr.zizi.chat.bean.PublicMessage;
 import com.lsjr.zizi.mvp.circledemo.widgets.CircleVideoView;
 
 /**

@@ -3,11 +3,11 @@ package com.lsjr.zizi.mvp.home.session;
 import android.net.Uri;
 
 import com.lsjr.zizi.bean.LocationData;
-import com.lsjr.zizi.mvp.chat.dao.ChatMessageDao;
-import com.lsjr.zizi.mvp.chat.db.ChatMessage;
-import com.lsjr.zizi.mvp.chat.xmpp.ListenerManager;
-import com.lsjr.zizi.mvp.chat.xmpp.ReceiptManager;
-import com.lsjr.zizi.mvp.chat.xmpp.listener.ChatMessageListener;
+import com.lsjr.zizi.chat.dao.ChatMessageDao;
+import com.lsjr.zizi.chat.db.ChatMessage;
+import com.lsjr.zizi.chat.xmpp.ListenerManager;
+import com.lsjr.zizi.chat.xmpp.ReceiptManager;
+import com.lsjr.zizi.chat.xmpp.listener.ChatMessageListener;
 import com.lsjr.zizi.mvp.home.photo.view.ISessionAtView;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;

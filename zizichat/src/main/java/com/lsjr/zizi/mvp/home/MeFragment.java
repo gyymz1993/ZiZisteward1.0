@@ -9,10 +9,17 @@ import android.widget.TextView;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpFragment;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.helper.AvatarHelper;
+import com.lsjr.zizi.mvp.circledemo.MyApplication;
 import com.lsjr.zizi.mvp.home.photo.SingleImagePreviewActivity;
+import com.ymz.baselibrary.AppCache;
 import com.ymz.baselibrary.mvp.BasePresenter;
+import com.ymz.baselibrary.utils.CacheUtils;
+import com.ymz.baselibrary.utils.GetFileSizeUtil;
+import com.ymz.baselibrary.utils.T_;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -45,6 +52,10 @@ public class MeFragment extends MvpFragment {
     @Override
     protected void initView() {
         mIvQRCordCard.setVisibility(View.GONE);
+
+        long cacheSize = GetFileSizeUtil.getFileSize(new File(AppCache.getInstance().mAppDir));
+        T_.showToastReal("缓存大小"+	GetFileSizeUtil.formatFileSize(cacheSize)+"M");
+
         String loginUserId = ConfigApplication.instance().mLoginUser.getUserId();
         AvatarHelper.getInstance().displayAvatar(loginUserId, mAvatarImg, true);
         mTvName.setText(ConfigApplication.instance().mLoginUser.getNickName());

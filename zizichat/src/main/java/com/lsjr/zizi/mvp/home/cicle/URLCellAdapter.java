@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lsjr.zizi.R;
-import com.lsjr.zizi.mvp.chat.bean.PublicMessage;
+import com.lsjr.zizi.chat.bean.PublicMessage;
 
 /**
  * 创建人：$ gyymz1993

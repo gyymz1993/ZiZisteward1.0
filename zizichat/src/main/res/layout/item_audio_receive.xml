@@ -85,6 +85,7 @@
                     android:id="@+id/tvDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/gray3"
                     android:text="6''"/>
 
                 <ProgressBar

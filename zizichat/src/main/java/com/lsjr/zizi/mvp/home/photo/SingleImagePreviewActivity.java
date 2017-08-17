@@ -13,7 +13,7 @@ import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.loader.ImageLoader;
-import com.lsjr.zizi.mvp.chat.utils.Scheme;
+import com.lsjr.zizi.chat.utils.Scheme;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
 

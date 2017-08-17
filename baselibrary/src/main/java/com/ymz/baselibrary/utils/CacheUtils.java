@@ -102,7 +102,7 @@ public class CacheUtils {
      */
     public static CacheUtils getInstance(String cacheName, final long maxSize, final int maxCount) {
         if (isSpace(cacheName)) cacheName = "cacheUtils";
-        File file = new File(AppCache.getInstance().getCacheSaveDir(), cacheName);
+        File file = new File(AppCache.getInstance().mFilesDir, cacheName);
         return getInstance(file, maxSize, maxCount);
     }
 

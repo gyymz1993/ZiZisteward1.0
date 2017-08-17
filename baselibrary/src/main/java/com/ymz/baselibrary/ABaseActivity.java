@@ -174,7 +174,7 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
     protected NavigationBarView setTopRightButton(int iconResId, View.OnClickListener onTopBarRightListener) {
         toolbar.getRightImageView().setVisibility(View.VISIBLE);
         toolbar.setRightImageResource(UIUtils.getDrawable(iconResId));
-        toolbar.setRightTextOnClickListener(onTopBarRightListener);
+        toolbar.setRightIocnOnClickListener(onTopBarRightListener);
         return toolbar;
     }
 

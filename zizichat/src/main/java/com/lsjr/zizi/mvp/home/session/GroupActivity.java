@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,13 +19,14 @@ import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.bean.MucRoom;
-import com.lsjr.zizi.mvp.chat.bean.ResultCode;
-import com.lsjr.zizi.mvp.chat.broad.MucgroupUpdateUtil;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.bean.MucRoom;
+import com.lsjr.zizi.chat.bean.ResultCode;
+import com.lsjr.zizi.chat.broad.MucgroupUpdateUtil;
 import com.lsjr.zizi.util.TimeUtils;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
+import com.ymz.baselibrary.utils.T_;
 import com.ymz.baselibrary.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -59,6 +61,12 @@ public class GroupActivity extends MvpActivity {
         return R.layout.fragment_contacte;
     }
 
+
+    @Override
+    protected void initView() {
+        showProgressDialogWithText("加载中");
+    }
+
     @Override
     protected void afterCreate(Bundle savedInstanceState) {
        registerReceiver(mUpdateReceiver,
@@ -72,6 +80,8 @@ public class GroupActivity extends MvpActivity {
         setTopLeftButton(R.drawable.ic_back).
                 setTitleTextColor(UIUtils.getColor(R.color.white)).
                 setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
+        setTopRightButton(R.drawable.actionbar_add_icon, v ->
+                T_.showToastReal("新建群聊"));
         mMucRooms = new ArrayList<>();
         mAdapter = new MucRoomAdapter(this,mMucRooms,R.layout.item_group);
         idRvGroup.setLayoutManager(new LinearLayoutManager(this) {
@@ -92,11 +102,12 @@ public class GroupActivity extends MvpActivity {
         HttpUtils.getInstance().postServiceData(AppConfig.ROOM_LIST, params, new ChatArrayCallBack<MucRoom>(MucRoom.class) {
             @Override
             protected void onXError(String exception) {
-
+                dismissProgressDialog();
             }
 
             @Override
             protected void onSuccess(ArrayResult result) {
+                dismissProgressDialog();
                 boolean success = ResultCode.defaultParser(result, true);
                 if (success) {
                     L_.e(result.getData().toString());

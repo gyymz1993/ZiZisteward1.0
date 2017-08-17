@@ -1,5 +1,6 @@
 package com.lsjr.zizi.mvp.home;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -25,26 +26,28 @@ import com.lsjr.utils.NetUtils;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.mvp.adapter.HomeAadapter;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.Constants;
-import com.lsjr.zizi.mvp.chat.LoginStatusActivity;
-import com.lsjr.zizi.mvp.chat.broad.CardcastUiUpdateUtil;
-import com.lsjr.zizi.mvp.chat.broad.MsgBroadcast;
-import com.lsjr.zizi.mvp.chat.dao.FriendDao;
-import com.lsjr.zizi.mvp.chat.dao.UserDao;
-import com.lsjr.zizi.mvp.chat.db.NewFriendMessage;
-import com.lsjr.zizi.mvp.chat.db.User;
-import com.lsjr.zizi.mvp.chat.helper.LoginHelper;
-import com.lsjr.zizi.mvp.chat.xmpp.CoreService;
-import com.lsjr.zizi.mvp.chat.xmpp.ListenerManager;
-import com.lsjr.zizi.mvp.chat.xmpp.listener.AuthStateListener;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.Constants;
+import com.lsjr.zizi.chat.LoginStatusActivity;
+import com.lsjr.zizi.chat.broad.CardcastUiUpdateUtil;
+import com.lsjr.zizi.chat.broad.MsgBroadcast;
+import com.lsjr.zizi.chat.dao.FriendDao;
+import com.lsjr.zizi.chat.dao.UserDao;
+import com.lsjr.zizi.chat.db.NewFriendMessage;
+import com.lsjr.zizi.chat.db.User;
+import com.lsjr.zizi.chat.helper.LoginHelper;
+import com.lsjr.zizi.chat.xmpp.CoreService;
+import com.lsjr.zizi.chat.xmpp.ListenerManager;
+import com.lsjr.zizi.chat.xmpp.listener.AuthStateListener;
 import com.lsjr.zizi.mvp.contrl.FragmentController;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.SpUtils;
 import com.ymz.baselibrary.utils.T_;
 import com.ymz.baselibrary.utils.UIUtils;
+import com.ymz.baselibrary.view.PermissionListener;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,14 +76,34 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
 
     @Override
     protected void initView() {
-        super.initView();
+        //initPermissions();
         setTitleText("消息列表");
         getToolBarView().getLeftimageView().setVisibility(View.GONE);
         getToolBarView().setTitleTextColor(UIUtils.getColor(R.color.white));
         getToolBarView().setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
         setupTabStrips();
         setupViewpager();
+
     }
+
+    private void initPermissions() {
+        requestPermissions(new String[]{
+                Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
+                ,  Manifest.permission.MODIFY_AUDIO_SETTINGS
+        }, new PermissionListener() {
+            @Override
+            public void onGranted() {
+               T_.showToastReal("授权");
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermissions) {
+            }
+        });
+    }
+
+
 
 
     @Override

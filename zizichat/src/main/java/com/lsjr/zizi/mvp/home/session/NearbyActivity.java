@@ -22,10 +22,10 @@ import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.bean.ResultCode;
-import com.lsjr.zizi.mvp.chat.db.User;
-import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.bean.ResultCode;
+import com.lsjr.zizi.chat.db.User;
+import com.lsjr.zizi.chat.helper.AvatarHelper;
 import com.tencent.mapsdk.raster.model.LatLng;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.UIUtils;
@@ -64,6 +64,11 @@ public class NearbyActivity extends MvpActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_contacte;
+    }
+
+    @Override
+    protected void initView() {
+        showProgressDialogWithText("加载中");
     }
 
     @Override
@@ -162,11 +167,12 @@ public class NearbyActivity extends MvpActivity {
         HttpUtils.getInstance().postServiceData(AppConfig.NEARBY_USER, params, new ChatArrayCallBack<User>(User.class) {
             @Override
             protected void onXError(String exception) {
-
+                dismissProgressDialog();
             }
 
             @Override
             protected void onSuccess(ArrayResult<User> result) {
+                dismissProgressDialog();
                 boolean success = ResultCode.defaultParser(result, true);
                 if (success) {
                     mPageIndex++;

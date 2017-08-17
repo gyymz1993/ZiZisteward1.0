@@ -32,15 +32,15 @@ import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.AppConst;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.loader.ImageLoader;
-import com.lsjr.zizi.mvp.chat.dao.ChatMessageDao;
-import com.lsjr.zizi.mvp.chat.db.ChatMessage;
-import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
-import com.lsjr.zizi.mvp.chat.utils.DisplayUtil;
-import com.lsjr.zizi.mvp.chat.utils.HtmlUtils;
-import com.lsjr.zizi.mvp.chat.utils.SmileyParser;
-import com.lsjr.zizi.mvp.chat.utils.StringUtils;
-import com.lsjr.zizi.mvp.chat.xmpp.XmppMessage;
-import com.lsjr.zizi.mvp.chat.xmpp.listener.ChatMessageListener;
+import com.lsjr.zizi.chat.dao.ChatMessageDao;
+import com.lsjr.zizi.chat.db.ChatMessage;
+import com.lsjr.zizi.chat.helper.AvatarHelper;
+import com.lsjr.zizi.chat.utils.DisplayUtil;
+import com.lsjr.zizi.chat.utils.HtmlUtils;
+import com.lsjr.zizi.chat.utils.SmileyParser;
+import com.lsjr.zizi.chat.utils.StringUtils;
+import com.lsjr.zizi.chat.xmpp.XmppMessage;
+import com.lsjr.zizi.chat.xmpp.listener.ChatMessageListener;
 import com.lsjr.zizi.mvp.home.photo.SingleImagePreviewActivity;
 import com.lsjr.zizi.util.FileOpenUtils;
 import com.lsjr.zizi.util.TimeUtils;
@@ -448,20 +448,18 @@ public class ChatContentAdapter extends LQRAdapterForRecyclerView<ChatMessage> {
                 break;
             case XmppMessage.TYPE_VOICE:
                 VoiceMessage voiceMessage = (VoiceMessage) messageContent;
+                int voiceTime;
                 if (voiceMessage != null) {
-                    int increment = (UIUtils.WHD()[0] / 2 / AppConst.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND * voiceMessage.getDuration());
-                    RelativeLayout rlAudio = helper.setText(R.id.tvDuration, voiceMessage.getDuration() + "''").getView(R.id.rlAudio);
-                    ViewGroup.LayoutParams params = rlAudio.getLayoutParams();
-                    params.width = UIUtils.dip2px(65) + UIUtils.dip2px(increment);
-                    rlAudio.setLayoutParams(params);
+                    voiceTime=voiceMessage.getDuration();
                 } else {
-                    //int increment = DisplayUtil.getVoiceViewWidth(mContext, message.getTimeLen());
-                    int increment = (UIUtils.WHD()[0] / 2 / AppConst.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND * message.getTimeLen());
-                    RelativeLayout rlAudio = helper.setText(R.id.tvDuration, message.getTimeLen() + "s" + "''").getView(R.id.rlAudio);
-                    ViewGroup.LayoutParams params = rlAudio.getLayoutParams();
-                    params.width = UIUtils.dip2px(65) + UIUtils.dip2px(increment);
-                    rlAudio.setLayoutParams(params);
+                    voiceTime=message.getTimeLen();
                 }
+                int increment = (UIUtils.WHD()[0] / 2 / AppConst.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND * voiceTime);
+                RelativeLayout  rlAudio = helper.setText(R.id.tvDuration, voiceTime+ "s" + "''").
+                        setTextColor(R.id.tvDuration,R.color.gray3).getView(R.id.rlAudio);
+                ViewGroup.LayoutParams params = rlAudio.getLayoutParams();
+                params.width = UIUtils.dip2px(65) + UIUtils.dip2px(increment);
+                rlAudio.setLayoutParams(params);
                 break;
             case XmppMessage.TYPE_LOCATION:
                 LocationMessage locationMessage = (LocationMessage) messageContent;
@@ -469,7 +467,6 @@ public class ChatContentAdapter extends LQRAdapterForRecyclerView<ChatMessage> {
                     ImageView ivLocation = helper.getView(R.id.ivLocation);
                    // Glide.with(mContext).load(locationMessage.getImgUri()).placeholder(R.mipmap.default_location).centerCrop().into(ivLocation);
                     ImageLoader.getInstance().showImage(locationMessage.getImgUri(),ivLocation,R.mipmap.default_location,R.mipmap.default_location);
-
                 }
                 helper.setText(R.id.tvTitle, content);
                 break;

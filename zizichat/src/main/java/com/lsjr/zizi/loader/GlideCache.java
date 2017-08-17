@@ -20,7 +20,7 @@ public class GlideCache implements GlideModule{
         /*设置格式*/
         glideBuilder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);
         //设置目录
-        String storageDir= AppCache.getInstance().getCacheSaveDir();
+        String storageDir= AppCache.getInstance().getmFilesDir().getAbsolutePath();
         int cacheSize=100*1000*1000;
         glideBuilder.setDiskCache(new DiskLruCacheFactory(storageDir,cacheSize));
     }

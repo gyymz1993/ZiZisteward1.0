@@ -1,7 +1,5 @@
 package com.lsjr.zizi.mvp.home.cicle;
 
-import android.opengl.Visibility;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lsjr.zizi.R;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.bean.PublicMessage;
-import com.lsjr.zizi.mvp.chat.dao.FriendDao;
-import com.lsjr.zizi.mvp.chat.db.Friend;
-import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.bean.PublicMessage;
+import com.lsjr.zizi.chat.helper.AvatarHelper;
 import com.lsjr.zizi.mvp.circledemo.bean.ActionItem;
-import com.lsjr.zizi.mvp.circledemo.bean.CircleItem;
-import com.lsjr.zizi.mvp.circledemo.bean.CommentConfig;
-import com.lsjr.zizi.mvp.circledemo.utils.DatasUtil;
-import com.lsjr.zizi.mvp.circledemo.utils.UrlUtils;
 import com.lsjr.zizi.mvp.circledemo.widgets.CommentListView;
 import com.lsjr.zizi.mvp.circledemo.widgets.ExpandTextView;
 import com.lsjr.zizi.mvp.circledemo.widgets.PraiseListView;

@@ -1,7 +1,6 @@
 package com.lsjr.zizi;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -15,19 +14,13 @@ import com.lqr.imagepicker.view.CropImageView;
 import com.lsjr.callback.HttpSubscriber;
 import com.lsjr.zizi.base.BaseApp;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.helper.SQLiteHelper;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.lsjr.zizi.chat.ConfigApplication;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.ymz.baselibrary.AppCache;
 import com.ymz.baselibrary.BaseApplication;
 import com.ymz.baselibrary.utils.T_;
 
-import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;

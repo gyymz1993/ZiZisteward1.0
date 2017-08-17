@@ -11,14 +11,13 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.lsjr.callback.HttpSubscriber;
-import com.lsjr.net.BaseUrl;
 import com.lsjr.param.ProgressResponseCallBack;
 import com.lsjr.param.RxHttpParams;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
+import com.lsjr.zizi.chat.ConfigApplication;
 import com.yanzhenjie.album.Album;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.T_;
@@ -28,8 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.MediaType;
 
 
 /**

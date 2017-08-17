@@ -50,23 +50,24 @@ import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.bean.LocationData;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
-import com.lsjr.zizi.mvp.chat.Constants;
-import com.lsjr.zizi.mvp.chat.bean.PublicMessage;
-import com.lsjr.zizi.mvp.chat.bean.ResultCode;
-import com.lsjr.zizi.mvp.chat.broad.MsgBroadcast;
-import com.lsjr.zizi.mvp.chat.dao.FriendDao;
-import com.lsjr.zizi.mvp.chat.db.ChatMessage;
-import com.lsjr.zizi.mvp.chat.db.Friend;
-import com.lsjr.zizi.mvp.chat.utils.FileUtils;
-import com.lsjr.zizi.mvp.chat.xmpp.CoreService;
-import com.lsjr.zizi.mvp.chat.xmpp.ListenerManager;
-import com.lsjr.zizi.mvp.chat.xmpp.listener.ChatMessageListener;
+import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.chat.Constants;
+import com.lsjr.zizi.chat.bean.PublicMessage;
+import com.lsjr.zizi.chat.bean.ResultCode;
+import com.lsjr.zizi.chat.broad.MsgBroadcast;
+import com.lsjr.zizi.chat.dao.FriendDao;
+import com.lsjr.zizi.chat.db.ChatMessage;
+import com.lsjr.zizi.chat.db.Friend;
+import com.lsjr.zizi.chat.utils.FileUtils;
+import com.lsjr.zizi.chat.xmpp.CoreService;
+import com.lsjr.zizi.chat.xmpp.ListenerManager;
+import com.lsjr.zizi.chat.xmpp.listener.ChatMessageListener;
 import com.lsjr.zizi.mvp.home.photo.ImageGridActivity;
 import com.lsjr.zizi.mvp.home.photo.MyLocationActivity;
 import com.lsjr.zizi.mvp.home.photo.TakePhotoActivity;
 import com.lsjr.zizi.mvp.home.photo.view.ISessionAtView;
 import com.lsjr.zizi.util.ImageUtils;
+import com.nostra13.universalimageloader.utils.L;
 import com.ymz.baselibrary.AppCache;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.T_;
@@ -80,6 +81,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
 import static android.view.MotionEvent.ACTION_UP;
@@ -141,9 +143,14 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
     public static final String FRIEND = "friend";
     private List<ChatMessage> chatMessageList=new ArrayList<>();
     private MessageUtils messageUtils;
+
+    private PopupWindow mRecordWindow;
+    private View windowView;
     public void initAudioRecord() {
         requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, new PermissionListener() {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
+                ,  Manifest.permission.MODIFY_AUDIO_SETTINGS
+        }, new PermissionListener() {
             @Override
             public void onGranted() {
                 initAudioRecordManager();
@@ -175,6 +182,9 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
     }
 
 
+    /**
+     * 离线消息
+     */
     private void downOnlineMsg() {
         L_.e(mFriend.toString());
         HashMap<String, String> params = new HashMap<String, String>();
@@ -217,21 +227,13 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
                 setTitleTextColor(UIUtils.getColor(R.color.white)).
                 setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
 
-        //messageUtils=new MessageUtils(chatMessageList);
-        //ChatMsg.getInStance().init();
-       // messageUtils.setmFriend(mFriend);
-        L_.e("mFriend.getUserId():"+mFriend.getUserId());
-
         mvpPresenter.setAdapter();
         mvpPresenter.loadDatas(true);
         ListenerManager.getInstance().addChatMessageListener(this);
-
-
         bindService(CoreService.getIntent(), mConnection, BIND_AUTO_CREATE);
         IntentFilter filter = new IntentFilter(Constants.CHAT_MESSAGE_DELETE_ACTION);
         registerReceiver(broadcastReceiver, filter);
     }
-
 
 
     ServiceConnection mConnection = new ServiceConnection() {
@@ -241,8 +243,6 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            //mService  = ;
-            //L_.e(":"+mService);
             messageUtils.setmService(((CoreService.CoreServiceBinder) service).getService());
         }
     };
@@ -362,16 +362,8 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
         });
         mBtnSend.setOnClickListener(v -> mvpPresenter.sendTextMsg());
-        mBtnAudio.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //your code....
-                v.performClick(); //call View#performClick like so
-                return false;
-            }
-
-        });
         mBtnAudio.setOnTouchListener((v, event) -> {
+            L_.e(""+event.getAction());
             switch (event.getAction()) {
                 case ACTION_DOWN:
                     AudioRecordManager.getInstance(ChatActivity.this).startRecord();
@@ -384,13 +376,12 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
                     }
                     break;
                 case ACTION_UP:
-
+                case ACTION_CANCEL:
                     AudioRecordManager.getInstance(ChatActivity.this).stopRecord();
                     AudioRecordManager.getInstance(ChatActivity.this).destroyRecord();
-
                     break;
-
             }
+
             return false;
         });
 
@@ -447,15 +438,14 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
             private TextView mTimerTV;
             private TextView mStateTV;
             private ImageView mStateIV;
-            private PopupWindow mRecordWindow;
 
             @Override
             public void initTipView() {
-                View view = View.inflate(ChatActivity.this, R.layout.popup_audio_wi_vo, null);
-                mStateIV = (ImageView) view.findViewById(R.id.rc_audio_state_image);
-                mStateTV = (TextView) view.findViewById(R.id.rc_audio_state_text);
-                mTimerTV = (TextView) view.findViewById(R.id.rc_audio_timer);
-                mRecordWindow = new PopupWindow(view, -1, -1);
+                windowView = View.inflate(ChatActivity.this, R.layout.popup_audio_wi_vo, null);
+                mStateIV = (ImageView) windowView.findViewById(R.id.rc_audio_state_image);
+                mStateTV = (TextView) windowView.findViewById(R.id.rc_audio_state_text);
+                mTimerTV = (TextView) windowView.findViewById(R.id.rc_audio_timer);
+                mRecordWindow = new PopupWindow(windowView, -1, -1);
                 mRecordWindow.showAtLocation(mLlRoot, 17, 0, 0);
                 mRecordWindow.setFocusable(true);
                 mRecordWindow.setOutsideTouchable(false);
@@ -464,7 +454,7 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void setTimeoutTipView(int counter) {
-                if (this.mRecordWindow != null) {
+                if (mRecordWindow != null) {
                     this.mStateIV.setVisibility(View.GONE);
                     this.mStateTV.setVisibility(View.VISIBLE);
                     this.mStateTV.setText(R.string.voice_rec);
@@ -476,7 +466,7 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void setRecordingTipView() {
-                if (this.mRecordWindow != null) {
+                if (mRecordWindow != null) {
                     this.mStateIV.setVisibility(View.VISIBLE);
                     this.mStateIV.setImageResource(R.mipmap.ic_volume_1);
                     this.mStateTV.setVisibility(View.VISIBLE);
@@ -488,7 +478,7 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void setAudioShortTipView() {
-                if (this.mRecordWindow != null) {
+                if (mRecordWindow != null) {
                     mStateIV.setImageResource(R.mipmap.ic_volume_wraning);
                     mStateTV.setText(R.string.voice_short);
                 }
@@ -496,7 +486,7 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void setCancelTipView() {
-                if (this.mRecordWindow != null) {
+                if (mRecordWindow != null) {
                     this.mTimerTV.setVisibility(View.GONE);
                     this.mStateIV.setVisibility(View.VISIBLE);
                     this.mStateIV.setImageResource(R.mipmap.ic_volume_cancel);
@@ -508,9 +498,9 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void destroyTipView() {
-                if (this.mRecordWindow != null) {
-                    this.mRecordWindow.dismiss();
-                    this.mRecordWindow = null;
+                if (mRecordWindow != null) {
+                    mRecordWindow.dismiss();
+                    mRecordWindow = null;
                     this.mStateIV = null;
                     this.mStateTV = null;
                     this.mTimerTV = null;
@@ -524,6 +514,7 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
 
             @Override
             public void onFinish(Uri audioPath, int duration) {
+                if(mvpPresenter==null)return;
                 mvpPresenter.sendVoice(audioPath, duration);
             }
 
@@ -680,6 +671,8 @@ public class ChatActivity extends MvpActivity<ChatAtPresenter> implements ISessi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mRecordWindow=null;
+        windowView=null;
         ListenerManager.getInstance().removeChatMessageListener(this);
         AudioRecordManager.getInstance(this).stopRecord();
         AudioRecordManager.getInstance(this).destroyRecord();

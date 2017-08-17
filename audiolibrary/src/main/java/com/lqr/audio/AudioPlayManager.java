@@ -72,19 +72,11 @@ public class AudioPlayManager implements SensorEventListener {
                     this.setScreenOn();
                 } else {
                     this.setScreenOff();
-                    if (Build.VERSION.SDK_INT >= 11) {
-                        if (this._audioManager.getMode() == 3) {
-                            return;
-                        }
-
-                        this._audioManager.setMode(3);
-                    } else {
-                        if (this._audioManager.getMode() == 2) {
-                            return;
-                        }
-
-                        this._audioManager.setMode(2);
+                    if (this._audioManager.getMode() == 3) {
+                        return;
                     }
+
+                    this._audioManager.setMode(3);
 
                     this._audioManager.setSpeakerphoneOn(false);
                     this.replay();
@@ -275,17 +267,13 @@ public class AudioPlayManager implements SensorEventListener {
 
     @TargetApi(8)
     private void muteAudioFocus(AudioManager audioManager, boolean bMute) {
-        if (Build.VERSION.SDK_INT < 8) {
-            Log.d(TAG, "muteAudioFocus Android 2.1 and below can not stop music");
+        if (bMute) {
+            audioManager.requestAudioFocus(this.afChangeListener, 3, 2);
         } else {
-            if (bMute) {
-                audioManager.requestAudioFocus(this.afChangeListener, 3, 2);
-            } else {
-                audioManager.abandonAudioFocus(this.afChangeListener);
-                this.afChangeListener = null;
-            }
-
+            audioManager.abandonAudioFocus(this.afChangeListener);
+            this.afChangeListener = null;
         }
+
     }
 
     static class SingletonHolder {

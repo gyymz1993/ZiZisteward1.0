@@ -52,6 +52,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -76,7 +77,7 @@
         </meta-data>
 
 
-        <activity android:name=".mvp.chat.LoginActivity">
+        <activity android:name=".chat.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -106,7 +107,7 @@
             android:name=".mvp.home.photo.MyLocationActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".mvp.chat.DataDownloadActivity"/>
+        <activity android:name=".chat.DataDownloadActivity"/>
         <activity android:name=".mvp.home.session.ChatActivity"/>
         <activity android:name=".mvp.upload.UploadActivity"/>
         <activity android:name=".mvp.home.session.GroupActivity"/>
@@ -116,7 +117,7 @@
             />
         <activity android:name=".mvp.home.session.BasicInfoActivity"/>
         <activity android:name=".mvp.circledemo.activity.MainActivity"/>
-        <activity android:name=".mvp.chat.LoginStatusActivity"
+        <activity android:name=".chat.LoginStatusActivity"
             android:theme="@style/IMTheme.DialogStyle"
             />
 
@@ -128,7 +129,7 @@
             android:exported="true" />
 
         <!-- CoreService -->
-        <service android:name=".mvp.chat.xmpp.CoreService"/>
+        <service android:name=".chat.xmpp.CoreService"/>
         <!-- 百度Location -->
         <!-- push结束 -->
 
