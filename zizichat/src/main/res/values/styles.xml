@@ -101,4 +101,75 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+
+    <!--选项条目样式-->
+    <style name="OptionItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">102px</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <declare-styleable name="OptionItemView">
+        <attr name="title" format="string"/>
+        <attr name="title_size" format="dimension"/>
+        <attr name="title_color" format="color"/>
+        <attr name="left_src" format="reference|color"/>
+        <attr name="left_text" format="string"/>
+        <attr name="left_text_size" format="dimension"/>
+        <attr name="left_image_margin_left" format="dimension"/>
+        <attr name="left_text_margin_left" format="dimension"/>
+        <attr name="left_image_margin_right" format="dimension"/>
+        <attr name="left_text_color" format="color"/>
+        <attr name="right_src" format="reference|color"/>
+        <attr name="right_text" format="string"/>
+        <attr name="right_text_size" format="dimension"/>
+        <attr name="right_image_margin_left" format="dimension"/>
+        <attr name="right_image_margin_right" format="dimension"/>
+        <attr name="right_text_margin_right" format="dimension"/>
+        <attr name="right_text_color" format="color"/>
+        <attr name="splite_mode" format="boolean"/>
+    </declare-styleable>
+
+
+
+    <style name="comment_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <!-- 显示对话框时当前的屏幕是否变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="progress_style" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+
+    <style name="social_pop_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+
+
+    <!-- Dialog Style -->
+    <style name="IMTheme.DialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

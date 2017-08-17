@@ -1,4 +1,4 @@
-package com.lsjr.zizi.mvp.image.view;
+package com.lsjr.zizi.mvp.home.photo.view;
 
 
 import android.widget.EditText;

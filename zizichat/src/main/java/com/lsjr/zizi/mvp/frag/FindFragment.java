@@ -1,12 +1,9 @@
 package com.lsjr.zizi.mvp.frag;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.lsjr.zizi.R;
-import com.lsjr.zizi.mvp.upload.UploadActivity;
+import com.lsjr.zizi.mvp.circledemo.activity.MainActivity;
 import com.ymz.baselibrary.mvp.BaseMvpFragment;
 import com.ymz.baselibrary.mvp.BasePresenter;
 
@@ -49,6 +46,6 @@ public class FindFragment extends BaseMvpFragment {
 
     @Override
     protected void lazyLoad() {
-        openActivity(UploadActivity.class);
+        openActivity(MainActivity.class);
     }
 }

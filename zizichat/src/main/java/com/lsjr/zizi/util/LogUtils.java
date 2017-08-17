@@ -5,12 +5,12 @@ import android.util.Log;
 
 
 import com.lsjr.zizi.AppConst;
+import com.ymz.baselibrary.utils.FileUtils;
 
 import java.util.List;
 
 
 /**
- * @创建者 CSDN_LQR
  * @描述 日志级别是LEVEL_ALL显示所有信息, 包括System.out.println信息
  * 日志级别是LEVEL_OFF关闭所有信息,包括System.out.println信息
  */
@@ -18,7 +18,7 @@ public class LogUtils {
     /**
      * 日志输出时的TAG
      */
-    private static String mTag = AppConst.TAG;
+    private static String mTag = "AppConst.TAG";
     /**
      * 日志输出级别NONE
      */

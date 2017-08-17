@@ -17,7 +17,8 @@ import android.widget.TextView;
 
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpFragment;
-import com.lsjr.zizi.mvp.session.ChatActivity;
+import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
+import com.lsjr.zizi.mvp.home.session.ChatActivity;
 import com.lsjr.zizi.mvp.chat.ConfigApplication;
 import com.lsjr.zizi.mvp.chat.bean.BaseSortModel;
 import com.lsjr.zizi.mvp.chat.broad.MsgBroadcast;
@@ -32,6 +33,7 @@ import com.lsjr.zizi.util.PinyinUtils;
 import com.lsjr.zizi.view.ClearEditText;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
+import com.ymz.baselibrary.utils.T_;
 import com.ys.uilibrary.base.BaseRecyclerAdapter;
 import com.ys.uilibrary.base.BaseRecyclerHolder;
 
@@ -68,6 +70,8 @@ public class MessageFragment extends MvpFragment {
         super.lazyLoad();
         loadData();
     }
+
+
 
     @Override
     protected void initView() {
@@ -109,10 +113,36 @@ public class MessageFragment extends MvpFragment {
         });
         mAdapter.setOnItemSelectListener(new OnItemSelectListener<BaseSortModel< Friend >>() {
             @Override
-            public void onItemSelect(BaseSortModel < Friend >  o) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                intent.putExtra(ChatActivity.FRIEND, o.getBean());
-                startActivity(intent);
+            public void onItemSelect(BaseSortModel < Friend >  friendBaseSortModel) {
+                Friend friend=friendBaseSortModel.getBean();
+                /*将消息设置为0*/
+                if (friend.getUnReadNum() > 0) {
+                    MsgBroadcast.broadcastMsgNumUpdate(getActivity(), false, friend.getUnReadNum());
+                    friend.setUnReadNum(0);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+                if (friend.getRoomFlag() == 0) {
+                    if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {// 新朋友消息
+                        T_.showToastReal("新朋友列表");
+                        //startActivity(new Intent(getActivity(), NewFriendActivity.class));
+                    } else {
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        intent.putExtra(ChatActivity.FRIEND,friend);
+                        startActivity(intent);
+                    }
+                } else {
+                    T_.showToastReal("群聊");
+//                    Intent intent = new Intent(getActivity(), MucChatActivity.class);
+//                    intent.putExtra(AppConstant.EXTRA_USER_ID, friend.getUserId());
+//                    intent.putExtra(AppConstant.EXTRA_NICK_NAME, friend.getNickName());
+//                    intent.putExtra(AppConstant.EXTRA_IS_GROUP_CHAT, true);
+//                    startActivity(intent);
+                }
+
+
+
+
             }
         });
 
@@ -251,20 +281,22 @@ public class MessageFragment extends MvpFragment {
                 } else if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {// 新朋友的头像
                     avatar_img.setImageResource(R.drawable.im_new_friends);
                 } else {// 其他
-                    //AvatarHelper.getInstance().displayAvatar(friend.getUserId(), avatar_img, true);
+                    AvatarHelper.getInstance().displayAvatar(friend.getUserId(), avatar_img, true);
                 }
             }
 
             nick_name_tv.setText(friend.getShowName());
             time_tv.setText(TimeUtils.getFriendlyTimeDesc(getActivity(), friend.getTimeSend()));
-
             CharSequence content ;
             if (friend.getType() == XmppMessage.TYPE_TEXT) {
                 String s = StringUtils.replaceSpecialChar(friend.getContent());
                 content = HtmlUtils.transform200SpanString(s.replaceAll("\n", "\r\n"), true);
-            } else {
+            } else if (friend.getType()==XmppMessage.TYPE_CARD){
+                content = "个人名片";
+            }else {
                 content = friend.getContent();
             }
+            L_.e(content.toString());
             content_tv.setText(content);
             if (friend.getUnReadNum() > 0) {
                 String numStr = friend.getUnReadNum() >= 99 ? "99+" : friend.getUnReadNum() + "";

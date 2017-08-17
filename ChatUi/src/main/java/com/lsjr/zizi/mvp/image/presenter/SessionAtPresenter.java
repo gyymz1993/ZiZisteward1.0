@@ -1,4 +1,4 @@
-package com.lsjr.zizi.mvp.image.presenter;
+package com.lsjr.zizi.mvp.home.photo.presenter;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -15,7 +15,7 @@ import com.lsjr.zizi.base.BaseFragmentPresenter;
 import com.lsjr.zizi.bean.LocationData;
 import com.lsjr.zizi.bean.RPConstant;
 import com.lsjr.zizi.bean.RedPacketMessage;
-import com.lsjr.zizi.mvp.image.view.ISessionAtView;
+import com.lsjr.zizi.mvp.home.photo.view.ISessionAtView;
 import com.lsjr.zizi.mvp.SessionAdapter;
 import com.lsjr.zizi.util.FileOpenUtils;
 import com.lsjr.zizi.util.LogUtils;

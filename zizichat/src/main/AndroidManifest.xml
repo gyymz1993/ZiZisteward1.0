@@ -84,31 +84,41 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".mvp.HomeActivity"
+        <activity android:name=".mvp.home.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateUnspecified|adjustNothing"
             />
 
         <activity
-            android:name=".mvp.image.ImageGridActivity"
+            android:name=".mvp.home.photo.ImageGridActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullWindowTheme"
             >
         </activity>
 
         <activity
-            android:name=".mvp.image.TakePhotoActivity"
+            android:name=".mvp.home.photo.TakePhotoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullWindowTheme"/>
 
         <activity
-            android:name=".mvp.image.MyLocationActivity"
+            android:name=".mvp.home.photo.MyLocationActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".mvp.chat.DataDownloadActivity"/>
-        <activity android:name=".mvp.session.ChatActivity"/>
+        <activity android:name=".mvp.home.session.ChatActivity"/>
         <activity android:name=".mvp.upload.UploadActivity"/>
+        <activity android:name=".mvp.home.session.GroupActivity"/>
+        <activity android:name=".mvp.home.session.NearbyActivity"/>
+        <activity android:name=".mvp.home.photo.SingleImagePreviewActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".mvp.home.session.BasicInfoActivity"/>
+        <activity android:name=".mvp.circledemo.activity.MainActivity"/>
+        <activity android:name=".mvp.chat.LoginStatusActivity"
+            android:theme="@style/IMTheme.DialogStyle"
+            />
 
 
 
@@ -121,6 +131,10 @@
         <service android:name=".mvp.chat.xmpp.CoreService"/>
         <!-- 百度Location -->
         <!-- push结束 -->
+
+
+        <meta-data android:name="com.lsjr.zizi.loader.GlideCache"
+            android:value="GlideCache"/>
 
     </application>
 

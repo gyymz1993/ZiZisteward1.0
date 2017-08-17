@@ -34,11 +34,11 @@ import com.lsjr.zizi.PermissionListener;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.BaseFragmentActivity;
 import com.lsjr.zizi.bean.LocationData;
-import com.lsjr.zizi.mvp.image.ImageGridActivity;
-import com.lsjr.zizi.mvp.image.MyLocationActivity;
-import com.lsjr.zizi.mvp.image.TakePhotoActivity;
-import com.lsjr.zizi.mvp.image.presenter.SessionAtPresenter;
-import com.lsjr.zizi.mvp.image.view.ISessionAtView;
+import com.lsjr.zizi.mvp.home.photo.ImageGridActivity;
+import com.lsjr.zizi.mvp.home.photo.MyLocationActivity;
+import com.lsjr.zizi.mvp.home.photo.TakePhotoActivity;
+import com.lsjr.zizi.mvp.home.photo.presenter.SessionAtPresenter;
+import com.lsjr.zizi.mvp.home.photo.view.ISessionAtView;
 import com.lsjr.zizi.util.ImageUtils;
 import com.lsjr.zizi.util.UIUtils;
 import com.nostra13.universalimageloader.utils.L;
@@ -52,7 +52,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import io.rong.imlib.model.Conversation;
 
-import static com.lsjr.zizi.mvp.image.ImageGridActivity.REQUEST_PERMISSION_STORAGE;
+import static com.lsjr.zizi.mvp.home.photo.ImageGridActivity.REQUEST_PERMISSION_STORAGE;
 
 
 /**

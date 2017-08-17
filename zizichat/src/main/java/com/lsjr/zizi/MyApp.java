@@ -1,6 +1,7 @@
 package com.lsjr.zizi;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -16,10 +17,17 @@ import com.lsjr.zizi.base.BaseApp;
 import com.lsjr.zizi.http.HttpUtils;
 import com.lsjr.zizi.mvp.chat.ConfigApplication;
 import com.lsjr.zizi.mvp.chat.helper.SQLiteHelper;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.ymz.baselibrary.AppCache;
 import com.ymz.baselibrary.BaseApplication;
 import com.ymz.baselibrary.utils.T_;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -66,7 +74,13 @@ public class MyApp extends BaseApp {
         //初始化表情控件
         LQREmotionKit.init(this, (context, path, imageView) -> Glide.with(context).load(path).centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView));
         initImagePicker();
+
         test();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+           .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .threadPriority(Thread.NORM_PRIORITY - 2).threadPoolSize(4).build();
+        // Initialize ImageLoader with configuration.
+        com.nostra13.universalimageloader.core.ImageLoader.getInstance().init(config);
     }
 
 

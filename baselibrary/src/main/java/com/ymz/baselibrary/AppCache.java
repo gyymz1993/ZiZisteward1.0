@@ -3,6 +3,7 @@ package com.ymz.baselibrary;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 
 import com.ymz.baselibrary.utils.FileUtils;
 
@@ -26,6 +27,8 @@ public class AppCache {
     static String PHOTO_SAVE_DIR;
     //头像保存位置
     static String HEADER_SAVE_DIR;
+    //Glide
+    static String CACHE_SAVE_DIR;
     static AppCache appCache;
 
     private AppCache() {
@@ -51,6 +54,8 @@ public class AppCache {
         PHOTO_SAVE_DIR = FileUtils.getDir("photo");
         //头像保存位置
         HEADER_SAVE_DIR = FileUtils.getDir("header");
+
+        CACHE_SAVE_DIR = FileUtils.getDir("cache");
         if (AUDIO_SAVE_DIR==null){
             return false;
         }
@@ -71,6 +76,29 @@ public class AppCache {
     }
 
 
+    public  String getFildSaveDir() {
+        return FILD_SAVE_DIR;
+    }
+
+    public  String getAudioSaveDir() {
+        return AUDIO_SAVE_DIR;
+    }
+
+    public  String getVideoSaveDir() {
+        return VIDEO_SAVE_DIR;
+    }
+
+    public  String getPhotoSaveDir() {
+        return PHOTO_SAVE_DIR;
+    }
+
+    public  String getHeaderSaveDir() {
+        return HEADER_SAVE_DIR;
+    }
+
+    public  String getCacheSaveDir() {
+        return CACHE_SAVE_DIR;
+    }
 
     public File getmAppDir() {
         return new File(mAppDir);
@@ -105,6 +133,17 @@ public class AppCache {
 
     public File getmVideosDir() {
         return new File(mVideosDir);
+    }
+
+    public String fileNameGenerator(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
+        int lastIndex = url.lastIndexOf("/");
+        if (lastIndex == -1) {
+            return url;
+        }
+        return url.substring(lastIndex, url.length());
     }
 
     public File getmFilesDir() {

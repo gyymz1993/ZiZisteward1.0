@@ -1,4 +1,4 @@
-package com.lsjr.zizi.mvp.image;
+package com.lsjr.zizi.mvp.home.photo;
 
 import android.Manifest;
 import android.content.Intent;

@@ -13,8 +13,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -43,6 +45,16 @@ public class HttpUtils {
         }
         this.mCompositeSubscription.add(observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber));
     }
+
+
+    private void loadDataForNet1(Observable observable, Subscriber subscriber) {
+        if (this.mCompositeSubscription == null) {
+            this.mCompositeSubscription = new CompositeSubscription();
+        }
+
+        this.mCompositeSubscription.add(observable.subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe(subscriber));
+    }
+
 
     public void postServiceData(String baseUrl,final Map map, final ChatObjectCallBack httpSubscriber) {
         loadDataForNet(DcodeService.postServiceData(baseUrl,map), httpSubscriber);
@@ -78,16 +90,17 @@ public class HttpUtils {
     }
 
 
+
     public void downloadFile(String baseUrl,final DownloadSubscriber httpSubscriber) {
-        loadDataForNet(DcodeService.downloadFile(baseUrl), httpSubscriber);
+        loadDataForNet1(DcodeService.downloadFile(baseUrl), httpSubscriber);
     }
 
 
-    public void loadDataForNet(final Map map, final HttpSubscriber httpSubscriber) {
+    public void ziziLoadDataForNet(final Map map, final HttpSubscriber httpSubscriber) {
         loadDataForNet(DcodeService.getServiceData(map), httpSubscriber);
     }
 
-    public void loadDataForCache(final Map map, final HttpSubscriber httpSubscriber) {
+    public void ziziLoadDataForCache(final Map map, final HttpSubscriber httpSubscriber) {
         loadDataForNet(DcodeService.getCacheServiceData(map), httpSubscriber);
     }
 

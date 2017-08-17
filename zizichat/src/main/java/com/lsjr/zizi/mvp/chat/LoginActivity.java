@@ -101,6 +101,8 @@ public class LoginActivity extends MvpActivity implements View.OnClickListener {
 		//double longitude = MyApplication.getInstance().getBdLocationHelper().getLongitude();
 		params.put("latitude", String.valueOf(100));
 		params.put("longitude", String.valueOf(100));
+		ConfigApplication.instance().setmLatitude(100);
+		ConfigApplication.instance().setmLongitude(100);
 //		if (latitude != 0)
 //			params.put("latitude", String.valueOf(latitude));
 //		if (longitude != 0)

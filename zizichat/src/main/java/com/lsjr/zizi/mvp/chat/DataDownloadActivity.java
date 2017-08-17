@@ -7,14 +7,13 @@ import android.os.Handler;
 
 import com.lsjr.bean.ArrayResult;
 import com.lsjr.bean.ObjectResult;
-import com.lsjr.bean.Result;
 import com.lsjr.callback.ChatArrayCallBack;
 import com.lsjr.callback.ChatObjectCallBack;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.HomeActivity;
+import com.lsjr.zizi.mvp.home.HomeActivity;
 import com.lsjr.zizi.mvp.chat.bean.AttentionUser;
 import com.lsjr.zizi.mvp.chat.bean.MucRoom;
 import com.lsjr.zizi.mvp.chat.bean.ResultCode;
@@ -25,7 +24,6 @@ import com.lsjr.zizi.mvp.chat.db.CircleMessage;
 import com.lsjr.zizi.mvp.chat.db.MyPhoto;
 import com.lsjr.zizi.mvp.chat.db.User;
 import com.lsjr.zizi.mvp.chat.helper.UserSp;
-import com.lsjr.zizi.mvp.chat.inter.OnCompleteListener;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.view.PermissionListener;
@@ -107,7 +105,10 @@ public class DataDownloadActivity extends MvpActivity {
 			room_download_status = STATUS_NO_RESULT;// 初始化下载状态
 			downloadRoom();
 		}
+
 	}
+
+
 
 	private void endDownload() {
 		// 只有有一个下载没返回，那么就继续等待
@@ -125,7 +126,8 @@ public class DataDownloadActivity extends MvpActivity {
 		} else {// 所有数据加载完毕,跳转回用户操作界面
 			dismissProgressDialog();
 			showContentView();
-			openActivity(HomeActivity.class);
+			//openActivity(HomeActivity.class);
+			jumpToActivityAndClearTask(HomeActivity.class);
 		}
 	}
 
@@ -158,8 +160,7 @@ public class DataDownloadActivity extends MvpActivity {
 					circle_msg_download_status = STATUS_FAILED;// 失败
 					endDownload();
 				}
-
-				endDownload();
+				//endDownload();
 			}
 		});
 	}

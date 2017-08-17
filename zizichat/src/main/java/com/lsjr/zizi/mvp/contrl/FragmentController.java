@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 
 import com.lsjr.zizi.mvp.frag.FindFragment;
 import com.lsjr.zizi.mvp.home.ContactsFragment;
+import com.lsjr.zizi.mvp.home.FriendCircleFragment;
+import com.lsjr.zizi.mvp.home.MeFragment;
 import com.lsjr.zizi.mvp.home.MessageFragment;
 
 import java.util.ArrayList;
@@ -19,8 +21,9 @@ public class FragmentController {
     private ArrayList<Fragment> fragments;
     private static FragmentController controller;
     private MessageFragment mAddressListFragment;
-    private FindFragment mMessageFragment;
-    private FindFragment mTopicFragment;
+    //private FindFragment mMessageFragment;
+    private FriendCircleFragment mMessageFragment;
+    private MeFragment meFragment;
     private ContactsFragment contactsFragment;
 
     public static FragmentController getInstance() {
@@ -46,18 +49,19 @@ public class FragmentController {
             mAddressListFragment = new MessageFragment();
         }
         if (mMessageFragment == null) {
-            mMessageFragment = new FindFragment();
+            mMessageFragment = new FriendCircleFragment();
         }
-        if (mTopicFragment == null) {
-            mTopicFragment = new FindFragment();
+        if (meFragment == null) {
+            meFragment = new MeFragment();
         }
         if (contactsFragment == null) {
             contactsFragment = new ContactsFragment();
         }
         fragments.add(mAddressListFragment);
-        fragments.add(mMessageFragment);
-        fragments.add(mTopicFragment);
         fragments.add(contactsFragment);
+        fragments.add(mMessageFragment);
+        fragments.add(meFragment);
+
 
 
     }

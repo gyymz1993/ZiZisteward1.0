@@ -19,7 +19,7 @@ import com.lsjr.zizi.bean.GroupNotificationMessageData;
 import com.lsjr.zizi.bean.JsonMananger;
 import com.lsjr.zizi.bean.RedPacketMessage;
 import com.lsjr.zizi.bean.UserInfo;
-import com.lsjr.zizi.mvp.image.presenter.SessionAtPresenter;
+import com.lsjr.zizi.mvp.home.photo.presenter.SessionAtPresenter;
 import com.lsjr.zizi.util.MediaFileUtils;
 import com.lsjr.zizi.util.TimeUtils;
 import com.lsjr.zizi.util.UIUtils;

@@ -1,33 +1,42 @@
 package com.lsjr.zizi.mvp.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.andview.adapter.ABaseRefreshAdapter;
+import com.andview.adapter.BaseRecyclerHolder;
+import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpFragment;
 import com.lsjr.zizi.mvp.chat.ConfigApplication;
 import com.lsjr.zizi.mvp.chat.bean.BaseSortModel;
 import com.lsjr.zizi.mvp.chat.dao.FriendDao;
 import com.lsjr.zizi.mvp.chat.db.Friend;
+import com.lsjr.zizi.mvp.chat.helper.AvatarHelper;
 import com.lsjr.zizi.mvp.chat.utils.BaseComparator;
 import com.lsjr.zizi.mvp.chat.utils.PingYinUtil;
 import com.lsjr.zizi.mvp.chat.utils.Pinyin4jUtil;
+import com.lsjr.zizi.mvp.home.session.BasicInfoActivity;
+import com.lsjr.zizi.mvp.home.session.GroupActivity;
+import com.lsjr.zizi.mvp.home.session.NearbyActivity;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.UIUtils;
-import com.ys.uilibrary.base.BaseRecyclerAdapter;
-import com.ys.uilibrary.base.BaseRecyclerHolder;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+
 
 /**
  * 创建人：$ gyymz1993
@@ -53,24 +62,37 @@ public class ContactsFragment extends MvpFragment {
         return R.layout.fragment_contacte;
     }
 
+
     @Override
     protected void initView() {
+        mLoginUserId = ConfigApplication.instance().mLoginUser.getUserId();
         mSortFriends = new ArrayList<>();
         mBaseComparator = new BaseComparator<>();
         friendSortAdapter=new FriendSortAdapter(getActivity(),mSortFriends,R.layout.item_contacts);
+        initRecycleView();
+    }
+
+    @Override
+    protected void afterCreate(Bundle savedInstanceState) {
+        loadData();
+    }
+
+    public void initRecycleView() {
+       //friendSortAdapter.setCustomLoadMoreView(new XRefreshViewFooter(getActivity()));
+        //idContacts.setHasFixedSize(true);
         idContacts.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
                 return true;
             }
         });
+        friendSortAdapter.setHeaderView(getHeadView(), idContacts);
         idContacts.setAdapter(friendSortAdapter);
+
     }
 
-    @Override
-    protected void initData() {
 
-        mLoginUserId = ConfigApplication.instance().mLoginUser.getUserId();
+    public void update() {
         loadData();
     }
 
@@ -97,12 +119,13 @@ public class ContactsFragment extends MvpFragment {
                     Collections.sort(mSortFriends, mBaseComparator);
                 }
                 friendSortAdapter.notifyDataSetChanged();
+               // friendSortAdapter.setListData(mSortFriends);
             }, delayTime);
         }).start();
     }
 
 
-    private final void setSortCondition(BaseSortModel<Friend> mode) {
+    private  void setSortCondition(BaseSortModel<Friend> mode) {
         Friend friend = mode.getBean();
         if (friend == null) {
             return;
@@ -123,12 +146,28 @@ public class ContactsFragment extends MvpFragment {
     }
 
 
-    @Override
-    protected void afterCreate(Bundle savedInstanceState) {
 
+    public View getHeadView() {
+       View headView = UIUtils.inflate(R.layout.header_rv_contacts) ;
+        AutoLinearLayout llGroup= (AutoLinearLayout) headView.findViewById(R.id.llGroup);
+        AutoLinearLayout llNearFriend= (AutoLinearLayout) headView.findViewById(R.id.llNearFriend);
+
+        llGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(GroupActivity.class);
+            }
+        });
+        llNearFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(NearbyActivity.class);
+            }
+        });
+        return headView;
     }
 
-    public class FriendSortAdapter extends BaseRecyclerAdapter<BaseSortModel<Friend>>{
+    public class FriendSortAdapter extends ABaseRefreshAdapter<BaseSortModel<Friend>> {
 
         public FriendSortAdapter(Context context, List<BaseSortModel<Friend>> datas, int itemLayoutId) {
             super(context, datas, itemLayoutId);
@@ -137,6 +176,8 @@ public class ContactsFragment extends MvpFragment {
 
         @Override
         protected void convert(BaseRecyclerHolder holder, BaseSortModel<Friend> item, int position) {
+
+            RelativeLayout id_root_ry = holder.getView(R.id.id_root_ry);
             TextView catagoryTitleTv = holder.getView(R.id.catagory_title);
             ImageView avatar_img = holder.getView(R.id.avatar_img);
             TextView nick_name_tv = holder.getView(R.id.nick_name_tv);
@@ -145,12 +186,12 @@ public class ContactsFragment extends MvpFragment {
             // 根据position获取分类的首字母的Char ascii值
             int section = getSectionForPosition(position);
             // 如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
-            if (position == getPositionForSection(section)) {
-                catagoryTitleTv.setVisibility(View.VISIBLE);
-                catagoryTitleTv.setText(mSortFriends.get(position).getFirstLetter());
-            } else {
-                catagoryTitleTv.setVisibility(View.GONE);
-            }
+//            if (position == getPositionForSection(section)) {
+//                catagoryTitleTv.setVisibility(View.VISIBLE);
+//                catagoryTitleTv.setText(mSortFriends.get(position).getFirstLetter());
+//            } else {
+//                catagoryTitleTv.setVisibility(View.GONE);
+//            }
 
             // 设置头像
             final Friend friend = mSortFriends.get(position).getBean();
@@ -160,13 +201,13 @@ public class ContactsFragment extends MvpFragment {
                 } else if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {// 新朋友的头像
                     avatar_img.setImageResource(R.drawable.im_new_friends);
                 } else {// 其他
-                   // AvatarHelper.getInstance().displayAvatar(friend.getUserId(), avatar_img, true);
+                    AvatarHelper.getInstance().displayAvatar(friend.getUserId(), avatar_img, true);
                 }
             } else {// 这是1个房间
                 if (TextUtils.isEmpty(friend.getRoomCreateUserId())) {
                     avatar_img.setImageResource(R.drawable.avatar_normal);
                 } else {
-                   // AvatarHelper.getInstance().displayAvatar(friend.getRoomCreateUserId(), avatar_img, true);// 目前在备注名放房间的创建者Id
+                    AvatarHelper.getInstance().displayAvatar(friend.getRoomCreateUserId(), avatar_img, true);// 目前在备注名放房间的创建者Id
                 }
             }
 
@@ -178,6 +219,15 @@ public class ContactsFragment extends MvpFragment {
             nick_name_tv.setText(name);
             // 个性签名
             des_tv.setText(friend.getDescription());
+            id_root_ry.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), BasicInfoActivity.class);
+                    intent.putExtra(AppConfig.EXTRA_USER_ID, friend.getUserId());
+                    startActivity(intent);
+                }
+            });
+
         }
 
         /**

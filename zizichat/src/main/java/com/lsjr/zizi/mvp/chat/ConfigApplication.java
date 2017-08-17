@@ -35,6 +35,9 @@ public class ConfigApplication {
     public boolean mUserStatusChecked = false;
     public User mLoginUser = new User();// 当前登陆的用户
 
+    private double mLongitude;
+    private double mLatitude;
+
     public String getmAccessToken() {
         return mAccessToken;
     }
@@ -45,6 +48,22 @@ public class ConfigApplication {
 
     private ConfigApplication(){
 
+    }
+
+    public double getmLongitude() {
+        return mLongitude;
+    }
+
+    public void setmLongitude(double mLongitude) {
+        this.mLongitude = mLongitude;
+    }
+
+    public double getmLatitude() {
+        return mLatitude;
+    }
+
+    public void setmLatitude(double mLatitude) {
+        this.mLatitude = mLatitude;
     }
 
     public static ConfigApplication instance(){
@@ -67,6 +86,15 @@ public class ConfigApplication {
         SQLiteHelper.copyDatabaseFile(application);
     }
 
+
+    /********************* 百度地图定位服务 ************************/
+//    private BdLocationHelper mBdLocationHelper;
+//    public BdLocationHelper getBdLocationHelper() {
+//        if (mBdLocationHelper == null) {
+//            mBdLocationHelper = new BdLocationHelper(this);
+//        }
+//        return mBdLocationHelper;
+//    }
 
 
     /**

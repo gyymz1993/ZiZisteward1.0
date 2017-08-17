@@ -2,8 +2,6 @@ package com.lsjr.zizi.down;
 
 import android.os.Handler;
 
-import com.lsjr.zizi.AppConfig;
-import com.lsjr.zizi.mvp.chat.ConfigApplication;
 import com.ymz.baselibrary.AppCache;
 
 import java.io.File;
@@ -17,7 +15,8 @@ import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.lsjr.zizi.down.FailReason.FailType.*;
+import static com.lsjr.zizi.down.FailReason.FailType.IO_ERROR;
+import static com.lsjr.zizi.down.FailReason.FailType.UNKNOWN;
 
 
 final class DownloadTask implements Runnable {
@@ -52,7 +51,7 @@ final class DownloadTask implements Runnable {
 		File file = null;
 		try {
 			checkTaskNotActual();
-			file = Downloader.getInstance().getFile(uri);
+			file = new File(AppCache.getInstance().voicePath(AppCache.getInstance().fileNameGenerator(uri)));
 			if (!file.exists()) {
 				file = tryDownloadFile();
 			}

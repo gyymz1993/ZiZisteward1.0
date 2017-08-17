@@ -89,11 +89,14 @@
 
             <RelativeLayout
                 android:id="@+id/chat_content_layout"
-                android:layout_width="275dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
 
+
                 <!--显示图片类型-->
+
+                <!-- 图片 -->
                 <com.lsjr.zizi.view.BubbleImageView
                     android:id="@+id/chat_file_pic"
                     android:layout_width="wrap_content"
@@ -103,14 +106,14 @@
                     android:minHeight="80dp"
                     android:minWidth="80dp"
                     android:scaleType="fitCenter"
-                    android:visibility="gone"
                     app:bubble_angle="10dp"
+                    android:visibility="gone"
                     app:bubble_arrowHeight="10dp"
-                    app:bubble_arrowLocation="left"
+                    app:bubble_arrowLocation="right"
                     app:bubble_arrowOffset="-5dp"
                     app:bubble_arrowTop="20dp"
-                    app:bubble_arrowWidth="8dp" />
-
+                    app:bubble_arrowWidth="8dp"
+                    />
 
                 <!--显示未知类型-->
                 <RelativeLayout
@@ -124,9 +127,7 @@
                     android:focusable="true"
                     android:gravity="center">
 
-
                     <!-- 所有Item该布局的子布局不能超过210dp -->
-
                     <ImageView
                         android:id="@+id/chat_to_file"
                         android:layout_width="wrap_content"

@@ -264,10 +264,10 @@ public class CoreService extends Service {
 			// if(mXMucChatManager.getMucNickName(roomJid))
 			mXMucChatManager.reset();
 		}
-//		mConnectionManager.presenceOnline();
+		//mConnectionManager.presenceOnline();
 		/* 获取离线消息 */
 		L_.e("roamer", "获取离线消息去了");
-//		mConnectionManager.handOfflineMessage();
+		//mConnectionManager.handOfflineMessage();
 	}
 
 	// private void addProvider() {

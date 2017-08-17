@@ -1,4 +1,4 @@
-package com.lsjr.zizi.mvp.image;
+package com.lsjr.zizi.mvp.home.photo;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -17,8 +17,8 @@ import com.lqr.recyclerview.LQRRecyclerView;
 
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.BaseActivity;
-import com.lsjr.zizi.mvp.image.presenter.MyLocationAtPresenter;
-import com.lsjr.zizi.mvp.image.view.IMyLocationAtView;
+import com.lsjr.zizi.mvp.home.photo.presenter.MyLocationAtPresenter;
+import com.lsjr.zizi.mvp.home.photo.view.IMyLocationAtView;
 import com.lsjr.zizi.util.LogUtils;
 import com.lsjr.zizi.util.UIUtils;
 import com.tencent.lbssearch.TencentSearch;

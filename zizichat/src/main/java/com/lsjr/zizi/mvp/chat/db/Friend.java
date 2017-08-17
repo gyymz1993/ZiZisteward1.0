@@ -19,6 +19,8 @@ public class Friend implements Serializable {
 	public static final String ID_INTERVIEW_MESSAGE = "10004";// 面试中心ID（用于职位、初试、面试的推送）
 	public static final String ID_MUC_ROOM = "10005";// 群聊管理ID（群聊房间的推送）
 
+	public static final String ONLIN_MSG = "10000018";
+
 	public static final String NICKNAME_SYSTEM_MESSAGE = "系统消息";// 系统消息ID
 	public static final String NICKNAME_NEW_FRIEND_MESSAGE = "新朋友消息";// 新朋友消息
 	public static final String NICKNAME_BLOG_MESSAGE = "商务圈消息";// 商务圈消息ID

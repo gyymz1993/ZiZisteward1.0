@@ -9,10 +9,10 @@ import android.util.Log;
 import com.lsjr.param.RequestBodyUtils;
 import com.lsjr.param.RxHttpParams;
 import com.lsjr.param.UploadProgressRequestBody;
+import com.lsjr.utils.DateUtils;
+import com.lsjr.utils.UrlUtils;
 import com.shove.Convert;
 import com.shove.security.Encrypt;
-
-import org.apache.http.params.HttpParams;
 
 import java.io.File;
 import java.io.InputStream;

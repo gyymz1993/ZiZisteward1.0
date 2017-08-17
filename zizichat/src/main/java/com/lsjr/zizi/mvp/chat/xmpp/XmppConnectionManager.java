@@ -13,6 +13,7 @@ import android.util.Log;
 
 
 import com.lsjr.zizi.AppConfig;
+import com.ymz.baselibrary.utils.L_;
 
 import org.apache.harmony.javax.security.sasl.SaslException;
 import org.jivesoftware.smack.AbstractConnectionListener;
@@ -388,26 +389,26 @@ public class XmppConnectionManager {
 
 
 	public void handOfflineMessage() {
-					Log.d("roamer","这里是去获取离线消息handofflineMessage");
+		L_.e("roamer","这里是去获取离线消息handofflineMessage");
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 
-					Log.d("roamer","开始解析离线消息");
+					L_.e("roamer","开始解析离线消息");
 					OfflineMessageManager manager = new OfflineMessageManager(mConnection);
 					manager.getMessages();
 					manager.deleteMessages();
 					presenceOnline();// 取得离线消息后，发送在线消息状态
 				} catch (NoResponseException e) {
-					Log.d("roamer", "NoResponseException");
+					L_.e("roamer", "NoResponseException");
 					e.printStackTrace();
 				} catch (XMPPErrorException e) {
-					Log.d("roamer", "XMPPErrorException");
-					Log.d("roamer","XMPPErrorException:[["+e.toString()+"]]");
+					L_.e("roamer", "XMPPErrorException");
+					L_.e("roamer","XMPPErrorException:[["+e.toString()+"]]");
 					e.printStackTrace();
 				} catch (NotConnectedException e) {
-					Log.d("roamer","NotConnectedException");
+					L_.e("roamer","NotConnectedException");
 					e.printStackTrace();
 				}
 			}

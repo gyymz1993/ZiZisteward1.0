@@ -18,7 +18,7 @@ import april.yun.ISlidingTabStrip;
 public class HomeAadapter  extends FragmentPagerAdapter implements ISlidingTabStrip.IconTabProvider {
 
     private int [] mSelectors;
-    private String[] titles=new String[]{"消息","话题","发现","通讯录"};
+    private String[] titles=new String[]{"消息","通讯录","发现","话题"};
     public HomeAadapter(FragmentManager fm,int [] selectors) {
         super(fm);
         this.mSelectors=selectors;
@@ -36,20 +36,10 @@ public class HomeAadapter  extends FragmentPagerAdapter implements ISlidingTabSt
 
 
     @Override public Fragment getItem(int position) {
-        if (selectFragPosition!=null){
-            selectFragPosition.onSelect(position);
-        }
         return FragmentController.getInstance().getFragment(position);
     }
 
-    public void setSelectFragPosition(SelectFragPosition selectFragPosition) {
-        this.selectFragPosition = selectFragPosition;
-    }
 
-    SelectFragPosition selectFragPosition;
-    public interface SelectFragPosition{
-        void onSelect(int position);
-    }
 
     @Override public int[] getPageIconResIds(int position) {
         return null;

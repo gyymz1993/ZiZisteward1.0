@@ -17,6 +17,7 @@ import android.os.SystemClock;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.ymz.baselibrary.utils.FileUtils;
 import com.ymz.baselibrary.utils.UIUtils;
 
 import java.io.BufferedInputStream;

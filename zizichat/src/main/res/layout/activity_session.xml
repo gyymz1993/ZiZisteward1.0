@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        <com.andview.autofresh.BGARefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+        </com.andview.autofresh.BGARefreshLayout>
 
         <View
             style="@style/Line"

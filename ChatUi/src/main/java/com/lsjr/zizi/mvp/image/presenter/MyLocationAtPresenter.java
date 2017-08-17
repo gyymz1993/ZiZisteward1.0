@@ -1,4 +1,4 @@
-package com.lsjr.zizi.mvp.image.presenter;
+package com.lsjr.zizi.mvp.home.photo.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.BaseActivity;
 import com.lsjr.zizi.base.BasePresenter;
 import com.lsjr.zizi.bean.LocationData;
-import com.lsjr.zizi.mvp.image.view.IMyLocationAtView;
+import com.lsjr.zizi.mvp.home.photo.view.IMyLocationAtView;
 import com.tencent.lbssearch.object.result.Geo2AddressResultObject;
 
 import java.util.ArrayList;

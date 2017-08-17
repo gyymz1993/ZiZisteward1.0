@@ -1,1 +1,3 @@
-<manifest package="com.ymz.baselibrary" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ymz.baselibrary" >
+<uses-sdk android:minSdkVersion="9" />
+</manifest>

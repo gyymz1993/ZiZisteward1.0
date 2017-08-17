@@ -13,9 +13,8 @@ import com.lsjr.bean.ObjectResult;
 import com.lsjr.bean.Result;
 import com.lsjr.callback.ChatObjectCallBack;
 import com.lsjr.zizi.AppConfig;
-import com.lsjr.zizi.MainActivity;
 import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.mvp.HomeActivity;
+import com.lsjr.zizi.mvp.home.HomeActivity;
 import com.lsjr.zizi.mvp.chat.ConfigApplication;
 
 import com.lsjr.zizi.mvp.chat.bean.LoginAuto;

@@ -67,6 +67,7 @@ public abstract class DownloadSubscriber<ResponseBody extends okhttp3.ResponseBo
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();
         HttpLog.e("DownSubscriber:>>>> onError:" + e.getMessage());
     }
 
@@ -76,7 +77,7 @@ public abstract class DownloadSubscriber<ResponseBody extends okhttp3.ResponseBo
     }
 
     private void writeResponseBodyToDisk(String path, String name, Context context, ResponseBody body) {
-        HttpLog.e("contentType:>>>>" + body.contentType().toString());
+        //HttpLog.e("contentType:>>>>" + body.contentType().toString());
         if (!TextUtils.isEmpty(name)) {//text/html; charset=utf-8
             String type;
             if (!name.contains(".")) {
