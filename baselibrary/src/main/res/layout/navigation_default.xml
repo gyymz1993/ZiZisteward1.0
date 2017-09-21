@@ -1,62 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/title_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00ccdd">
+        android:orientation="vertical">
 
-
-        <ImageView
-            android:padding="5dp"
-            android:id="@+id/iv_left"
-            android:layout_width="30dip"
-            android:layout_height="30dip"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="6dip"
-             />
-
-        <TextView
-            android:id="@+id/tv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dip"
-            android:gravity="center_vertical"
-            android:textColor="#fff" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:background="@color/white">
 
-        <ImageView
-            android:padding="6dp"
-            android:id="@+id/iv_right"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
-            android:layout_width="29dip"
-            android:layout_height="29dip"
-            android:layout_alignParentRight="true" />
 
-        <TextView
-            android:id="@+id/tv_right"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dip"
-            android:gravity="center_vertical"
-            android:padding="3dp"
-            android:textColor="#fff" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dip"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:padding="3dp"
+                android:textColor="#FF212121" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#FF212121"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/tv_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dip"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:textColor="#FF212121"
+                 />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#EBEBEB" />
+    </LinearLayout>
 </LinearLayout>

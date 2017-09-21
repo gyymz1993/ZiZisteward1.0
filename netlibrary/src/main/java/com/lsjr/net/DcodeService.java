@@ -128,6 +128,24 @@ public class DcodeService {
     }
 
     /*多图片上传*/
+    public static Observable<String> uploadFilesWithParts(String baseUrl,Map<String, String> parameters,File file) {
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);//表单类型;
+        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+            String _key = entry.getKey();
+            String _value = entry.getValue();
+            builder.addFormDataPart(_key, _value);
+            Log.e("postFile_key---------->",_key+"-----------:L"+_value);
+        }
+        String url=UrlUtils.encodesParameters(baseUrl, parameters);
+        RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        builder.addFormDataPart("file1", file.getName(), imageBody);//"shareImg"+i 后台接收图片流的参数名
+        List<MultipartBody.Part> parts = builder.build().parts();
+        return getApiService().uploadFiles(baseUrl,parts);
+    }
+
+
+    /*多图片上传*/
     public static Observable<ResponseBody> uploadFilesWithBodys(String url,RxHttpParams params){
         if (TextUtils.isEmpty(BaseUrl.bastUrl)) {
             throw new NullPointerException("请设置BaseUrl");

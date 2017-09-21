@@ -6,9 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Process;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
 
@@ -944,6 +946,18 @@ public class CacheUtils {
             return bitmap == null ? null : new BitmapDrawable(UIUtils.getResource(), bitmap);
         }
     }
+
+    public Bitmap getCacheVideoImage(String filePath){
+        Bitmap bitmap = CacheUtils.getInstance().getBitmap(filePath);
+        if (bitmap == null || bitmap.isRecycled()) {
+            bitmap = ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Video.Thumbnails.MINI_KIND);
+            if (bitmap != null) {
+                CacheUtils.getInstance().put(filePath, bitmap);
+            }
+        }
+        return bitmap;
+    }
+
 
     private static boolean isSpace(final String s) {
         if (s == null) return true;

@@ -95,8 +95,7 @@ public class ExceptionCrashHander implements Thread.UncaughtExceptionHandler{
         String fileName = null;
         StringBuffer sb = new StringBuffer();
 
-        for (Map.Entry<String, String> entry : obtainSimpleInfo(mContext)
-                .entrySet()) {
+        for (Map.Entry<String, String> entry : obtainSimpleInfo(mContext).entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             sb.append(key).append(" = ").append(value).append("\n");
@@ -106,7 +105,7 @@ public class ExceptionCrashHander implements Thread.UncaughtExceptionHandler{
 
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
-            File dir = new File(mContext.getFilesDir() + File.separator + "crash"
+            File dir = new File(AppCache.getInstance().mException + File.separator + "crash"
                     + File.separator);
 
             // 先删除之前的异常信息

@@ -6,9 +6,13 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import com.ymz.baselibrary.utils.FileUtils;
+import com.ymz.baselibrary.utils.L_;
 
 import java.io.File;
 import java.util.IllegalFormatCodePointException;
+import java.util.UUID;
+
+import static android.media.tv.TvTrackInfo.TYPE_VIDEO;
 
 /**
  * 创建人：$ gyymz1993
@@ -47,6 +51,17 @@ public class AppCache {
 
     //Glide
 
+    //语音存放位置
+    public static final String AUDIO_SAVE_DIR = FileUtils.getDir("audio");
+    //public static final String AUDIO_SAVE_DIR = FileUtils.createDirs("audio");
+    //视频存放位置
+    public static final String VIDEO_SAVE_DIR = FileUtils.getDir("video");
+    //照片存放位置
+    public static final String PHOTO_SAVE_DIR = FileUtils.getDir("photo");
+    //头像保存位置
+    public static final String HEADER_SAVE_DIR = FileUtils.getDir("header");
+
+
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     public boolean initCreataAppCache() {
         return true;
@@ -64,6 +79,11 @@ public class AppCache {
 
     public File getmVoicesDir() {
         return new File(mVoicesDir);
+    }
+
+
+    public boolean fileExists(String filePath,String fileName){
+        return new File(filePath+File.separator+fileName).exists();
     }
 
 
@@ -86,6 +106,45 @@ public class AppCache {
 
 
 
+    private static final int TYPE_IMAGE = 1;
+    private static final int TYPE_ADUIO = 2;
+    private static final int TYPE_VIDEO = 3;
+    /**
+     * {@link #TYPE_IMAGE}<br/>
+     * {@link #TYPE_ADUIO}<br/>
+     * {@link #TYPE_VIDEO} <br/>
+     *
+     * @param type
+     * @return
+     */
+    public static String getPublicFilePath(int type) {
+        String fileDir = null;
+        String fileSuffix = null;
+        switch (type) {
+            case TYPE_ADUIO:
+                fileDir = AppCache.getInstance().mVoicesDir;
+                fileSuffix = ".mp3";
+                break;
+            case TYPE_VIDEO:
+                fileDir = AppCache.getInstance().mVideosDir;
+                fileSuffix = ".mp4";
+                break;
+            case TYPE_IMAGE:
+                fileDir = AppCache.getInstance().mPicturesDir;
+                fileSuffix = ".jpg";
+                break;
+        }
+        if (fileDir == null) {
+            return null;
+        }
+        File file = new File(fileDir);
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
+                return null;
+            }
+        }
+        return fileDir + File.separator + UUID.randomUUID().toString().replaceAll("-", "") + fileSuffix;
+    }
 
     public File getmVideosDir() {
         return new File(mVideosDir);
@@ -112,8 +171,10 @@ public class AppCache {
     public String mVoicesDir;
     public String mVideosDir;
     public String mFilesDir;
+    public String mException;
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void initCreateAppDir() {
+        L_.e(BaseApplication.getApplication()+"initCreateAppDir-----------");
         File file = BaseApplication.getApplication().getExternalFilesDir(null);
         assert file != null;
         if (!file.exists()) {
@@ -145,5 +206,12 @@ public class AppCache {
             file.mkdirs();
         }
         mFilesDir = file.getAbsolutePath();
+
+
+        file =  BaseApplication.getApplication().getExternalFilesDir("Exception");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        mException = file.getAbsolutePath();
     }
 }

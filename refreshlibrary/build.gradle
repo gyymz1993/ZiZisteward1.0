@@ -5,12 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     resourcePrefix "XRefreshView"
-    defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0.1"
-    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,7 +27,7 @@ dependencies {
 //    userOrg ='gyymz1993'  //bintray.com用户名
 //    groupId ='com.ui'  //jcenter上的路径
 //    artifactId ='xrefresh'  //项目名称
-//    publishVersion = 'v1.0.2'  //版本号
+//    publishVersion = 'v1.0.3'  //版本号
 //    desc = 'this is for utilsview'//描述，不重要
 //    website = 'https://github.com/gyymz1993'//网站，最好有，不重要
 //    /*gradlew clean build bintrayUpload -PbintrayUser=gyymz1993 -PbintrayKey=5034d09884878366fbd444d453ff05c290684076 -PdryRun=false*/

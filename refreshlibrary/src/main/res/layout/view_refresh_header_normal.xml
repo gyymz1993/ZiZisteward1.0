@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="ResourceName">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -12,19 +14,22 @@
         android:layout_marginRight="10dip"
         android:layout_marginTop="15dp">
 
-        <ImageView
+        <com.andview.refreshview.view.GifView
             android:id="@+id/iv_normal_refresh_header_arrow"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_gravity="center"
-            android:src="@mipmap/refresh_head_arrow" />
+            android:src="@mipmap/xrefresh_view_refresh_head_arrow" />
 
-        <ImageView
+        <ProgressBar
             android:id="@+id/iv_normal_refresh_header_chrysanthemum"
-            android:visibility="invisible"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:src="@drawable/bga_refresh_loding"/>
+            android:visibility="visible"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:background="@drawable/xrefresh_view_pro_bg"
+            android:progressDrawable="@drawable/progress_bg"
+            />
     </FrameLayout>
 
     <TextView

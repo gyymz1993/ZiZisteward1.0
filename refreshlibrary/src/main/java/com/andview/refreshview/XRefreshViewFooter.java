@@ -112,13 +112,13 @@ public class XRefreshViewFooter extends LinearLayout implements IFooterCallBack 
 
     private void initView(Context context) {
         mContext = context;
-        ViewGroup moreView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.xrefreshview_footer, this);
+        ViewGroup moreView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.xrefresh_view_xrefreshview_footer, this);
         moreView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         mContentView = moreView.findViewById(R.id.xrefreshview_footer_content);
         mProgressBar = (GifView)moreView
                 .findViewById(R.id.xrefreshview_footer_progressbar);
-        mProgressBar.setMovieResource(R.raw.horizontal);
+        mProgressBar.setMovieResource(R.raw.xrefresh_view_horizontal);
         mHintView = (TextView) moreView
                 .findViewById(R.id.xrefreshview_footer_hint_textview);
         mClickView = (TextView) moreView

@@ -14,7 +14,6 @@ public class Result {
 	public final static int CODE_INTERNAL_ERROR = 1020101;// 接口内部异常
 	public final static int CODE_NO_TOKEN = 1030101;// 缺少访问令牌
 	public final static int CODE_TOKEN_ERROR = 1030102;// 访问令牌过期或无效
-
 	/* 登陆接口的Http Result Code */
 	public final static int CODE_ACCOUNT_INEXISTENCE = 1040101;// 帐号不存在
 	public final static int CODE_ACCOUNT_ERROE = 1040102;// 帐号或密码错误

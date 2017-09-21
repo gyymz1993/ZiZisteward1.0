@@ -183,6 +183,8 @@ public class BottomTabView extends LinearLayout {
 
         public TextView tvTitle;
         public ImageView ivIcon;
+        public LinearLayout unreadLayout;
+        public TextView tvUnread;
 
         public TabItemView(Context context, String title, int colorDef, int colorPress,
                            int iconResDef, int iconResPress) {
@@ -195,6 +197,16 @@ public class BottomTabView extends LinearLayout {
             init();
         }
 
+        public void setPromptNum(int num) {
+            if (num>0){
+                unreadLayout.setVisibility(VISIBLE);
+                tvUnread.setText(num+"");
+            }else {
+                unreadLayout.setVisibility(GONE);
+            }
+        }
+
+
         /**
          * 初始化
          */
@@ -202,7 +214,8 @@ public class BottomTabView extends LinearLayout {
             View view = LayoutInflater.from(super.getContext()).inflate(R.layout.view_tab_item, this);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-
+            unreadLayout = (LinearLayout) view.findViewById(R.id.unread_layout);
+            tvUnread = (TextView) view.findViewById(R.id.tv_unread);
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
             view.setLayoutParams(layoutParams);

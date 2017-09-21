@@ -193,13 +193,13 @@ public class XRefreshView extends LinearLayout {
                     R.styleable.XRefreshView, 0, 0);
             try {
                 isHeightMatchParent = a.getBoolean(
-                        R.styleable.XRefreshView_isHeightMatchParent, true);
+                        R.styleable.XRefreshView_XRefreshViewIsHeightMatchParent, true);
                 isWidthMatchParent = a.getBoolean(
-                        R.styleable.XRefreshView_isHeightMatchParent, true);
+                        R.styleable.XRefreshView_XRefreshViewIsWidthMatchParent, true);
                 autoRefresh = a.getBoolean(
-                        R.styleable.XRefreshView_autoRefresh, false);
+                        R.styleable.XRefreshView_XRefreshViewAutoRefresh, false);
                 autoLoadMore = a.getBoolean(
-                        R.styleable.XRefreshView_autoLoadMore, true);
+                        R.styleable.XRefreshView_XRefreshViewAutoLoadMore, true);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

@@ -120,6 +120,10 @@ dependencies {
         exclude(module: 'alicloud-android-utdid')
     }
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+
+
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //compile 'com.ui:xrefresh:v1.0.2'
     //compile 'com.ui:utilsview:v1.1.1'
     //compile 'org.ui:baselibrary:v1.1.1'

@@ -24,4 +24,11 @@
         <attr name="topBarheight" format="integer" />
     </declare-styleable>
 
+    <attr name="iconfont" format="string"/>
+    <attr name="textImg" format="string"/>
+
+    <declare-styleable name="IconFontTextView">
+        <attr name="iconfont"/>
+        <attr name="textImg"/>
+    </declare-styleable>
 </resources>

@@ -44,14 +44,17 @@ public abstract class ChatObjectCallBack<T> extends BaseCallBack<String> {
                        }
                    }
                }
+               onSuccess(result);
            } else {
-               result.setResultMsg(jsonObject.getString("detailMsg"));
-               Log.e("HSubscriberCallBack", "网络请求失败" + response);
+             //  result.setResultMsg(jsonObject.getString("resultMsg"));
+               //String resultMsg=result.setResultMsg(jsonObject.getString("resultMsg"));
+               Log.e("HSubscriberCallBack", "网络请求失败" + result.getResultMsg());
+               onXError(result.getResultMsg());
            }
-            onSuccess(result);
+
         } catch (Exception e) {
             e.printStackTrace();
-            onXError(e.getMessage());
+            onXError(result.getResultMsg());
         }
     }
 

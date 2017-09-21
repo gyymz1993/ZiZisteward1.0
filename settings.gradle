@@ -1,2 +1,4 @@
-include ':app', ':uilibrary', ':refreshlibrary', ':baselibrary', ':netlibrary', ':tablirbry', ':zizichat', ':adapterlibrary', ':audiolibrary'
-//':ZIZICircle', ':ChatUi', ':qupai',':zizichat', ':tablirbry'
+include ':uilibrary', ':refreshlibrary', ':baselibrary', ':netlibrary', ':toemaillibrary',
+        ':tablirbry',  ':adapterlibrary', ':audiolibrary', ':contactlibrary',
+        ':cameralibrary', ':imagepickerlibrary', ':compresslibrary', ':syslibrary',':zizichat'
+//':ZIZICircle', ':ChatUi', ':qupai',':zizichat', ':tablirbry' ':app', ':xmpplibrary', ':zizichat',

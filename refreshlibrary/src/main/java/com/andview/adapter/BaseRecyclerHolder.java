@@ -9,11 +9,19 @@ import android.widget.TextView;
 
 public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
     private final SparseArray<View> mViews;
+    public View itemView;
 
     public BaseRecyclerHolder(View itemView) {
         super(itemView);
         this.mViews = new SparseArray<>();
+        if (itemView == null) {
+            throw new IllegalArgumentException("itemView may not be null");
+        }
+        this.itemView = itemView;
+
     }
+
+
 
     /**
      * 通过控件的Id获取对于的控件，如果没有则加入views

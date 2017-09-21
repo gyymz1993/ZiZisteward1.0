@@ -4,7 +4,6 @@ import com.lsjr.callback.ChatArrayCallBack;
 import com.lsjr.callback.ChatObjectCallBack;
 import com.lsjr.callback.DownloadSubscriber;
 import com.lsjr.callback.HttpSubscriber;
-import com.lsjr.callback.OnTimeOutListener;
 import com.lsjr.callback.StringCallBack;
 import com.lsjr.net.DcodeService;
 import com.lsjr.param.RxHttpParams;
@@ -13,10 +12,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -67,15 +64,37 @@ public class HttpUtils {
 
 
 
+    public void postServiceData(String baseUrl,final Map map, final StringCallBack stringCallBack) {
+        loadDataForNet(DcodeService.postServiceData(baseUrl,map), stringCallBack);
+    }
+
+
+
+
     public void postServiceData(String baseUrl,final Map map, final ChatArrayCallBack httpSubscriber) {
         loadDataForNet(DcodeService.postServiceData(baseUrl,map), httpSubscriber);
     }
+
+    public void uploadFileWithParts(String baseUrl,final Map map, File file,final ChatObjectCallBack httpSubscriber) {
+        loadDataForNet(DcodeService.uploadFilesWithParts(baseUrl,map,file), httpSubscriber);
+    }
+
 
 
     public void uploadFileWithParts(String baseUrl,final Map map, List<File> files,final HttpSubscriber httpSubscriber) {
         loadDataForNet(DcodeService.uploadFilesWithParts(baseUrl,map,files), httpSubscriber);
     }
 
+
+
+    public void uploadFileWithParts(String baseUrl,final Map map,File file, final StringCallBack httpSubscriber) {
+        loadDataForNet(DcodeService.uploadFilesWithParts(baseUrl,map,file), httpSubscriber);
+    }
+
+
+    public void uploadFileWithParts(String baseUrl,final Map map, File file,final HttpSubscriber httpSubscriber) {
+        loadDataForNet(DcodeService.uploadFilesWithParts(baseUrl,map,file), httpSubscriber);
+    }
 
     public void uploadFileWithBodys(String baseUrl, RxHttpParams params, final HttpSubscriber httpSubscriber) {
         loadDataForNet(DcodeService.uploadFilesWithBodys(baseUrl,params), httpSubscriber);
@@ -103,6 +122,12 @@ public class HttpUtils {
     public void ziziLoadDataForCache(final Map map, final HttpSubscriber httpSubscriber) {
         loadDataForNet(DcodeService.getCacheServiceData(map), httpSubscriber);
     }
+
+
+    public void uploadFileWithParts(String baseUrl,final Map map, List<File> files,final StringCallBack httpSubscriber) {
+        loadDataForNet1(DcodeService.uploadFilesWithParts(baseUrl,map,files), httpSubscriber);
+    }
+
 
 }
 

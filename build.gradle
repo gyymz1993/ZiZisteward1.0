@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         jcenter()
@@ -8,11 +7,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.3'
         /*butterknife使用*/
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
-
         classpath 'com.novoda:bintray-release:0.5.0'
-
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
-
     }
 
 
@@ -22,8 +18,8 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://jitpack.io"
-            //url "https://dl.bintray.com/gyymz1993/maven/"
+           // url "https://jitpack.io"
+            url "https://dl.bintray.com/gyymz1993/maven/"
            // maven { url "https://jitpack.io" }
            // url 'https://dl.bintray.com/cjt/maven'
         }
@@ -38,5 +34,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-

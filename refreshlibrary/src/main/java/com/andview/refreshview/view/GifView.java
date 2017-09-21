@@ -34,7 +34,7 @@ public class GifView extends View {
     }
 
     public GifView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.styleable.CustomTheme_gifViewStyle);
+        this(context, attrs, R.styleable.XRefreshViewCustomTheme_XRefreshViewGifViewStyle);
     }
 
     public GifView(Context context, AttributeSet attrs, int defStyle) {
@@ -48,10 +48,10 @@ public class GifView extends View {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
         // 从描述文件中读出gif的值，创建出Movie实例
-        final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.GifView, defStyle,
+        final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.XRefreshViewGifView, defStyle,
                 R.style.Widget_GifView);
-        mMovieResourceId = array.getResourceId(R.styleable.GifView_gif, -1);
-        mPaused = array.getBoolean(R.styleable.GifView_paused, false);
+        mMovieResourceId = array.getResourceId(R.styleable.XRefreshViewGifView_XRefreshViewGif, -1);
+        mPaused = array.getBoolean(R.styleable.XRefreshViewGifView_XRefreshViewPaused, false);
         array.recycle();
         if (mMovieResourceId != -1) {
             mMovie = Movie.decodeStream(getResources().openRawResource(mMovieResourceId));

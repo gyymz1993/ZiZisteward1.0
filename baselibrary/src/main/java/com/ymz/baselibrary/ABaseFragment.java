@@ -86,6 +86,7 @@ public abstract class ABaseFragment extends Fragment implements NetworkStateView
     private void addChildView(LayoutInflater inflater) {
         networkStateView = (NetworkStateView) mView.findViewById(R.id.nsv_state_view);
         FrameLayout container = (FrameLayout) mView.findViewById(R.id.fl_fragment_child_container);
+        if (getLayoutId()==0)return;
         View child = inflater.inflate(getLayoutId(), null);
         container.addView(child, 0);
     }

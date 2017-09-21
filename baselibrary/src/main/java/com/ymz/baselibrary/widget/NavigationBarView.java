@@ -54,8 +54,8 @@ public class NavigationBarView extends RelativeLayout {
             rightText = ta.getString(R.styleable.TopBarItem_rightText);
             height = ta.getInteger(R.styleable.TopBarItem_topBarheight,UIUtils.dip2px(50));
             bgColor = ta.getColor(R.styleable.TopBarItem_backgrounds, Color.parseColor("#FFFFFFFF"));
-            letfTextColor = ta.getColor(R.styleable.TopBarItem_leftColor, Color.parseColor("#ffffff"));
-            rightTextColor = ta.getColor(R.styleable.TopBarItem_rightColor, Color.parseColor("#ffffff"));
+            letfTextColor = ta.getColor(R.styleable.TopBarItem_leftColor, Color.parseColor("#FF212121"));
+            rightTextColor = ta.getColor(R.styleable.TopBarItem_rightColor, Color.parseColor("#FF212121"));
             ta.recycle();
         }
         mView = View.inflate(context, R.layout.navigation_default, this);// 将view添加。
@@ -89,6 +89,8 @@ public class NavigationBarView extends RelativeLayout {
         setBackgroundColor(bgColor);
         setLeftTextColor(letfTextColor);
         setRightTextColor(rightTextColor);
+        getRightImageView().setVisibility(GONE);
+        getRightTextView().setVisibility(GONE);
     }
 
     public ImageView getLeftimageView() {
@@ -171,6 +173,8 @@ public class NavigationBarView extends RelativeLayout {
         return this;
     }
 
+
+
     public NavigationBarView setLetfIocnOnClickListener(View.OnClickListener listener) {
         View view = viewFindById(R.id.iv_left);
         if (view != null) {
@@ -189,7 +193,7 @@ public class NavigationBarView extends RelativeLayout {
     }
 
     public NavigationBarView setRightTextOnClickListener(View.OnClickListener listener) {
-        View view = viewFindById(R.id.tv_left);
+        View view = viewFindById(R.id.tv_right);
         if (view != null) {
             view.setOnClickListener(listener);
         }
@@ -224,6 +228,14 @@ public class NavigationBarView extends RelativeLayout {
 
     public ImageView getRightImageView() {
         return viewFindById(R.id.iv_right);
+    }
+
+    public TextView getRightTextView() {
+        return viewFindById(R.id.tv_right);
+    }
+
+    public TextView getLeftTextView() {
+        return viewFindById(R.id.tv_left);
     }
 
 

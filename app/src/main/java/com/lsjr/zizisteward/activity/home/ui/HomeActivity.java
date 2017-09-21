@@ -91,7 +91,9 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements IHomeVie
     }
 
     protected List<BottomTabView.TabItemView> getTabViews() {
-        tabItemViews.add(new BottomTabView.TabItemView(this, "首页", R.color.tab_normal, R.color.tab_selected, R.drawable.home_page_off, R.drawable.home_page_on));
+        BottomTabView.TabItemView bottomTabView =  new BottomTabView.TabItemView(this, "首页", R.color.tab_normal, R.color.tab_selected, R.drawable.home_page_off, R.drawable.home_page_on);
+        bottomTabView.setPromptNum(10);
+        tabItemViews.add(bottomTabView);
         tabItemViews.add(new BottomTabView.TabItemView(this, "视界", R.color.tab_normal, R.color.tab_selected, R.drawable.data_off, R.drawable.data_on));
         tabItemViews.add(new BottomTabView.TabItemView(this, "圈子", R.color.tab_normal, R.color.tab_selected, R.drawable.recommend_off, R.drawable.recommend_on));
         tabItemViews.add(new BottomTabView.TabItemView(this, "个人", R.color.tab_normal, R.color.tab_selected, R.drawable.tribe_off, R.drawable.tribe_on));

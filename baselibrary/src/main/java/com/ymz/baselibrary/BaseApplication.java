@@ -4,6 +4,8 @@ import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.ymz.baselibrary.utils.ScreenAdaptation;
 import com.ymz.baselibrary.utils.SpUtils;
 
 import java.io.File;
@@ -37,9 +39,17 @@ public  class BaseApplication {
             mMainThread = Thread.currentThread();
             initException();
             initSputils();
-            initLeakCanary();
+            //initLeakCanary();
             initImageLoader();
+
+            // 初始化网络监听
+            mNetWorkObservable = new NetWorkObservable(application);
         }
+    }
+
+    public void registerUiScreen(int width,int height){
+        //需要传入ui设计给的大小
+        new ScreenAdaptation(mApplication, width,height).register();
     }
 
     private void initImageLoader() {
@@ -47,8 +57,8 @@ public  class BaseApplication {
     }
 
     /*检测内存泄露*/
-    private void initLeakCanary(){
-        //LeakCanary.install(mApplication);
+    public void initLeakCanary(){
+        LeakCanary.install(mApplication);
     }
 
 
@@ -71,6 +81,30 @@ public  class BaseApplication {
         if (mApplication==null)
             throw new NullPointerException("mApplication 为空");
             return mApplication;
+    }
+
+
+
+    /********************* 提供网络全局监听 ************************/
+    private NetWorkObservable mNetWorkObservable;
+
+    public boolean isNetworkActive() {
+        if (mNetWorkObservable != null) {
+            return mNetWorkObservable.isNetworkActive();
+        }
+        return true;
+    }
+
+    public void registerNetWorkObserver(NetWorkObservable.NetWorkObserver observer) {
+        if (mNetWorkObservable != null) {
+            mNetWorkObservable.registerObserver(observer);
+        }
+    }
+
+    public void unregisterNetWorkObserver(NetWorkObservable.NetWorkObserver observer) {
+        if (mNetWorkObservable != null) {
+            mNetWorkObservable.unregisterObserver(observer);
+        }
     }
 
     public static Looper getMainThreadLooper() {

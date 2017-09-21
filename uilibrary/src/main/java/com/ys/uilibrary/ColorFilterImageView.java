@@ -20,8 +20,6 @@ import com.ys.uilibrary.utils.DisplayUtils;
  *
  * @ClassName: ColorFilterImageView
  * @Description: 实现图像根据按下抬起动作变化颜色
- * @author hnclca
- * @date 2016-02-26
  *
  */
 @SuppressLint("AppCompatCustomView")

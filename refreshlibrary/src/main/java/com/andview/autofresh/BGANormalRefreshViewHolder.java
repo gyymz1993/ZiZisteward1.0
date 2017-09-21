@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andview.refreshview.R;
+import com.andview.refreshview.view.GifView;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
@@ -33,9 +34,9 @@ import com.andview.refreshview.R;
  */
 public class BGANormalRefreshViewHolder extends BGARefreshViewHolder {
     private TextView mHeaderStatusTv;
-    private ImageView mHeaderArrowIv;
-    private ImageView mHeaderChrysanthemumIv;
-    private AnimationDrawable mHeaderChrysanthemumAd;
+    private GifView mHeaderArrowIv;
+   // private ImageView mHeaderChrysanthemumIv;
+    //private AnimationDrawable mHeaderChrysanthemumAd;
     private RotateAnimation mUpAnim;
     private RotateAnimation mDownAnim;
 
@@ -100,9 +101,10 @@ public class BGANormalRefreshViewHolder extends BGARefreshViewHolder {
                 mRefreshHeaderView.setBackgroundResource(mRefreshViewBackgroundDrawableRes);
             }
             mHeaderStatusTv = (TextView) mRefreshHeaderView.findViewById(R.id.tv_normal_refresh_header_status);
-            mHeaderArrowIv = (ImageView) mRefreshHeaderView.findViewById(R.id.iv_normal_refresh_header_arrow);
-            mHeaderChrysanthemumIv = (ImageView) mRefreshHeaderView.findViewById(R.id.iv_normal_refresh_header_chrysanthemum);
-            mHeaderChrysanthemumAd = (AnimationDrawable) mHeaderChrysanthemumIv.getDrawable();
+            mHeaderArrowIv = (GifView) mRefreshHeaderView.findViewById(R.id.iv_normal_refresh_header_arrow);
+            //mHeaderArrowIv.setMovieResource(R.raw.xrefresh_view_horizontal);
+           // mHeaderChrysanthemumIv = (ImageView) mRefreshHeaderView.findViewById(R.id.iv_normal_refresh_header_chrysanthemum);
+           // mHeaderChrysanthemumAd = (AnimationDrawable) mHeaderChrysanthemumIv.getDrawable();
             mHeaderStatusTv.setText(mPullDownRefreshText);
         }
         return mRefreshHeaderView;
@@ -119,8 +121,8 @@ public class BGANormalRefreshViewHolder extends BGARefreshViewHolder {
     @Override
     public void changeToPullDown() {
         mHeaderStatusTv.setText(mPullDownRefreshText);
-        mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
-        mHeaderChrysanthemumAd.stop();
+        //mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
+        //mHeaderChrysanthemumAd.stop();
         mHeaderArrowIv.setVisibility(View.VISIBLE);
         mDownAnim.setDuration(150);
         mHeaderArrowIv.startAnimation(mDownAnim);
@@ -129,8 +131,8 @@ public class BGANormalRefreshViewHolder extends BGARefreshViewHolder {
     @Override
     public void changeToReleaseRefresh() {
         mHeaderStatusTv.setText(mReleaseRefreshText);
-        mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
-        mHeaderChrysanthemumAd.stop();
+        //mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
+        //mHeaderChrysanthemumAd.stop();
         mHeaderArrowIv.setVisibility(View.VISIBLE);
         mHeaderArrowIv.startAnimation(mUpAnim);
     }
@@ -141,15 +143,15 @@ public class BGANormalRefreshViewHolder extends BGARefreshViewHolder {
         // 必须把动画清空才能隐藏成功
         mHeaderArrowIv.clearAnimation();
         mHeaderArrowIv.setVisibility(View.INVISIBLE);
-        mHeaderChrysanthemumIv.setVisibility(View.VISIBLE);
-        mHeaderChrysanthemumAd.start();
+       // mHeaderChrysanthemumIv.setVisibility(View.VISIBLE);
+       // mHeaderChrysanthemumAd.start();
     }
 
     @Override
     public void onEndRefreshing() {
         mHeaderStatusTv.setText(mPullDownRefreshText);
-        mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
-        mHeaderChrysanthemumAd.stop();
+       // mHeaderChrysanthemumIv.setVisibility(View.INVISIBLE);
+        //mHeaderChrysanthemumAd.stop();
         mHeaderArrowIv.setVisibility(View.VISIBLE);
         mDownAnim.setDuration(0);
         mHeaderArrowIv.startAnimation(mDownAnim);

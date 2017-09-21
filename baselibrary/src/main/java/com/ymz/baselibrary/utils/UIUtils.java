@@ -14,14 +14,18 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -434,6 +438,57 @@ public class UIUtils {
 		}
 		return 0;
 	}
+
+
+
+	/**
+	 * 设置EditText的字数限制
+	 *
+	 * @param mTextEdit
+	 * @param maxTextNum
+	 *            最大字符数
+	 */
+	public static void addEditTextNumChanged(final EditText mTextEdit, final int maxTextNum) {
+
+		mTextEdit.addTextChangedListener(new TextWatcher() {
+			private CharSequence temp;
+			private boolean isEdit = true;
+			private int selectionStart;
+			private int selectionEnd;
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				temp = s;
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				selectionStart = mTextEdit.getSelectionStart();
+				selectionEnd = mTextEdit.getSelectionEnd();
+				Log.i("gongbiao1", "" + selectionStart);
+				if (temp.length() > maxTextNum) {
+					Toast toast = Toast.makeText(getContext(), "只能输入"+maxTextNum+"个字符哦", Toast.LENGTH_LONG);
+					//T_.showToastReal("只能输入"+maxTextNum+"个字符哦");
+					toast.setGravity(Gravity.CENTER,0,0);
+					TextView tv=new TextView(getContext());
+					tv.setText("只能输入"+maxTextNum+"个字符哦");
+					tv.setTextColor(Color.RED);
+					toast.setView(tv);
+					toast.show();
+					s.delete(selectionStart - 1, selectionEnd);
+					int tempSelection = selectionStart;
+					mTextEdit.setText(s);
+					mTextEdit.setSelection(tempSelection);
+				}
+			}
+		});
+	}
+
 
 
 }

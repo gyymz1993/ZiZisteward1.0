@@ -178,6 +178,11 @@ public abstract class ABaseActivity extends AppCompatActivity implements Network
         return toolbar;
     }
 
+    protected NavigationBarView setTopRightButtonGone() {
+        toolbar.getRightImageView().setVisibility(View.GONE);
+        return toolbar;
+    }
+
     protected NavigationBarView setTopRightButton(View.OnClickListener onTopBarRightListener) {
         toolbar.setRightIocnOnClickListener(onTopBarRightListener);
         return toolbar;

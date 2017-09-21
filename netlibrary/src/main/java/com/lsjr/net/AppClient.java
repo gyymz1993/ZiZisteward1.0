@@ -14,6 +14,7 @@ import com.lsjr.utils.NetUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -79,10 +80,10 @@ class AppClient {
     }
 
 
-    private static class NetworkInterceptor implements Interceptor {
+    private static class NetworkInterceptor implements Interceptor  {
         @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(Chain chain) {
             //通过 CacheControl 控制缓存数据
             CacheControl.Builder cacheBuilder = new CacheControl.Builder();
             cacheBuilder.maxAge(0, TimeUnit.MINUTES);//这个是控制缓存的最大生命时间
@@ -93,10 +94,17 @@ class AppClient {
             Request.Builder builder = request.newBuilder();
             //header配置
             //builder.addHeader("Content-Type", "application/json");
-            Response originalResponse = chain.proceed(request);
+            Response originalResponse = null;
+            try {
+                originalResponse = chain.proceed(request);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (!NetUtils.isConnected(mContext)) {
                 builder.cacheControl(cacheControl);
             }
+
+
             Response.Builder responsibility = originalResponse.newBuilder();
             responsibility.removeHeader("Pragma");
             if (NetUtils.isConnected(mContext)) {
