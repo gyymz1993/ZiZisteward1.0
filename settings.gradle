@@ -1,4 +1,4 @@
 include ':uilibrary', ':refreshlibrary', ':baselibrary', ':netlibrary', ':toemaillibrary',
         ':tablirbry',  ':adapterlibrary', ':audiolibrary', ':contactlibrary',
-        ':cameralibrary', ':imagepickerlibrary', ':compresslibrary', ':syslibrary',':zizichat'
+        ':cameralibrary', ':imagepickerlibrary', ':compresslibrary', ':syslibrary'
 //':ZIZICircle', ':ChatUi', ':qupai',':zizichat', ':tablirbry' ':app', ':xmpplibrary', ':zizichat',
