@@ -99,6 +99,7 @@ public class ChatMessage extends XmppMessage implements Parcelable {
 	private String objectId;// 用于商务圈推送，代表哪一条公共消息
 
 
+
 	private MessageContent messageContent;
 
 	public int get_id() {
@@ -117,7 +118,30 @@ public class ChatMessage extends XmppMessage implements Parcelable {
 		this.fromUserId = fromUserId;
 	}
 
-	// public String getToUserId() {
+
+	private int width;
+	private int height;
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+
+
+// public String getToUserId() {
 	// return toUserId;
 	// }
 	//
@@ -463,6 +487,8 @@ public class ChatMessage extends XmppMessage implements Parcelable {
 				", sipDuration=" + sipDuration +
 				", objectId='" + objectId + '\'' +
 				", messageContent=" + messageContent +
+				", width=" + width +
+				", height=" + height +
 				'}';
 	}
 }

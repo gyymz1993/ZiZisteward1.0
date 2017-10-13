@@ -4,19 +4,24 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZiZisteward1.0.iml" filepath="$PROJECT_DIR$/ZiZisteward1.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapterlibrary/adapterlibrary.iml" filepath="$PROJECT_DIR$/adapterlibrary/adapterlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/audiolibrary/audiolibrary.iml" filepath="$PROJECT_DIR$/audiolibrary/audiolibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basiclib/basiclib.iml" filepath="$PROJECT_DIR$/basiclib/basiclib.iml" />
       <module fileurl="file://$PROJECT_DIR$/cameralibrary/cameralibrary.iml" filepath="$PROJECT_DIR$/cameralibrary/cameralibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/citypickerlibrary/citypickerlibrary.iml" filepath="$PROJECT_DIR$/citypickerlibrary/citypickerlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/compresslibrary/compresslibrary.iml" filepath="$PROJECT_DIR$/compresslibrary/compresslibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/contactlibrary/contactlibrary.iml" filepath="$PROJECT_DIR$/contactlibrary/contactlibrary.iml" />
       <module fileurl="file://D:\Porject\ZiZisteward1.0\contactlibrary\contaslibrary.iml" filepath="D:\Porject\ZiZisteward1.0\contactlibrary\contaslibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/imagepickerlibrary/imagepickerlibrary.iml" filepath="$PROJECT_DIR$/imagepickerlibrary/imagepickerlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/netlibrary/netlibrary.iml" filepath="$PROJECT_DIR$/netlibrary/netlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pinglibrary/pinglibrary.iml" filepath="$PROJECT_DIR$/pinglibrary/pinglibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/refreshlibrary/refreshlibrary.iml" filepath="$PROJECT_DIR$/refreshlibrary/refreshlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/syslibrary/syslibrary.iml" filepath="$PROJECT_DIR$/syslibrary/syslibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablirbry/tablirbry.iml" filepath="$PROJECT_DIR$/tablirbry/tablirbry.iml" />
       <module fileurl="file://$PROJECT_DIR$/toemaillibrary/toemaillibrary.iml" filepath="$PROJECT_DIR$/toemaillibrary/toemaillibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/uilibrary/uilibrary.iml" filepath="$PROJECT_DIR$/uilibrary/uilibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xmpplibrary/xmpplibrary.iml" filepath="$PROJECT_DIR$/xmpplibrary/xmpplibrary.iml" />
     </modules>
   </component>
 </project>

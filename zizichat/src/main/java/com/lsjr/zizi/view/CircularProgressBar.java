@@ -10,7 +10,6 @@ import android.view.View;
 /**
  * 环形的进度条
  * 
- * @author lwz <lwz0316@gmail.com>
  */
 public class CircularProgressBar extends View {
 	

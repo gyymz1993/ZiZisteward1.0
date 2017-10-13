@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.lsjr.zizi.chat.ConfigApplication;
 import com.lsjr.zizi.chat.dao.AreasDao;
 
 @DatabaseTable(tableName = "tb_areas")

@@ -1,7 +1,6 @@
 package com.lsjr.zizi.chat.utils;
 
 
-import com.lsjr.zizi.chat.ConfigApplication;
 import com.ymz.baselibrary.BaseApplication;
 
 /**

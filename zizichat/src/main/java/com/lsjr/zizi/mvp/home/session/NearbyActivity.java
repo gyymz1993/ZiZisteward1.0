@@ -18,14 +18,14 @@ import com.andview.adapter.ABaseRefreshAdapter;
 import com.andview.adapter.BaseRecyclerHolder;
 import com.lsjr.bean.ArrayResult;
 import com.lsjr.callback.ChatArrayCallBack;
+import com.lsjr.utils.HttpUtils;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
-import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.bean.ResultCode;
 import com.lsjr.zizi.chat.db.User;
-import com.lsjr.zizi.chat.helper.AvatarHelper;
+import com.lsjr.zizi.loader.AvatarHelper;
 import com.tencent.mapsdk.raster.model.LatLng;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.UIUtils;
@@ -63,7 +63,7 @@ public class NearbyActivity extends MvpActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_contacte;
+        return R.layout.activity_nearby;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class NearbyActivity extends MvpActivity {
         mUsers = new ArrayList<>();
         mHandler = new Handler();
         mAdapter = new UserAdapter(this,mUsers,R.layout.item_nearby);
-        setTitleText("附件的人");
+        setTitleText("附近的人");
         setTopLeftButton(R.drawable.ic_back).
                 setTitleTextColor(UIUtils.getColor(R.color.white)).
                 setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
@@ -213,7 +213,7 @@ public class NearbyActivity extends MvpActivity {
             TextView nick_name_tv = holder.getView(R.id.nick_name_tv);
             TextView des_tv = holder.getView(R.id.des_tv);
             // 设置头像
-            AvatarHelper.getInstance().displayAvatar(user.getUserId(), avatar_img, true);
+            AvatarHelper.getInstance().displayAvatar(user, avatar_img, true);
             double latitude = 0;
             double longitude = 0;
             double latitude_end = 0;

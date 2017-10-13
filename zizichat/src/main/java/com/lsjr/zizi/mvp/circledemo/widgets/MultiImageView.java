@@ -10,8 +10,11 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lsjr.zizi.R;
+import com.lsjr.zizi.loader.ImageLoader;
 import com.lsjr.zizi.mvp.circledemo.bean.PhotoInfo;
 import com.lsjr.zizi.mvp.circledemo.utils.DensityUtil;
+import com.ymz.baselibrary.utils.L_;
+import com.ymz.baselibrary.utils.UIUtils;
 
 
 import java.util.List;
@@ -54,6 +57,7 @@ public class MultiImageView extends LinearLayout {
 	}
 
 	public void setList(List<PhotoInfo> lists) throws IllegalArgumentException{
+		L_.e("显示图片"+lists.size());
 		if(lists==null){
 			throw new IllegalArgumentException("imageList is null...");
 		}
@@ -213,7 +217,10 @@ public class MultiImageView extends LinearLayout {
 		imageView.setId(photoInfo.url.hashCode());
 		imageView.setOnClickListener(new ImageOnClickListener(position));
 		imageView.setBackgroundColor(getResources().getColor(R.color.im_font_color_text_hint));
+		L_.e("Glide  显示图片"+photoInfo.url);
 		Glide.with(getContext()).load(photoInfo.url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+        //ImageLoader.getInstance().showMultiImageView(photoInfo.url,imageView,R.drawable.defaultpic);
+
 		//ImageLoader.getInstance().showfriendImage(photoInfo.url,imageView);
 		return imageView;
 	}

@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303135</color>
     <color name="colorAccent">#7e7e7e</color>
 
+    <color name="theme_btn">#FF169AD4</color>
+
+
     <color name="white">#ffffff</color>
     <color name="line">#D2D2D2</color>
 
@@ -88,5 +91,29 @@
 
     <color name="default_clickable_color">#cccccc</color>
     <color name="basic_color_primary">#373b3e</color>
+
+    <color name="tab_selected">#212121</color>
+    <color name="tab_normal">#9b9b9b</color>
+    <color name="color_btm_gray">#FFDCDCDC</color>
+
+
+
+    <color name="tab_text_normal">#FF666666</color>
+    <color name="tab_text_select">#FF212121</color>
+
+    <color name="top_theme_color">#ffFFFFFF</color>
+    <color name="top_text_color">#FF212121</color>
+
+    <color name="line_color">#FFEBEBEB</color>
+    <color name="theme_bg">#FFF5F5F5</color>
+
+    <color name="chat_time_hint">#FF999999</color>
+    <color name="status_color">#FFFFFFFF</color>
+
+    <color name="black_text">#FF0062FF</color>
+    <color name="chat_name_color">#FF666666</color>
+
+    <color name="button_bg">#0080FF</color>
+
 
 </resources>

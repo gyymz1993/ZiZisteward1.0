@@ -88,27 +88,6 @@ public class FriendDao {
 
 			Friend friend = new Friend();
 			friend.setOwnerId(ownerId);
-
-			// 新朋友消息10001号
-			friend.setUserId(Friend.ID_NEW_FRIEND_MESSAGE);
-			friend.setNickName(Friend.NICKNAME_NEW_FRIEND_MESSAGE);
-			friend.setStatus(Friend.STATUS_SYSTEM);
-			friendsList = friendDao.queryForMatching(friend);
-			if (friendsList == null || friendsList.size() <= 0) {// 添加这个新朋友消息10001号
-				friendDao.create(friend);
-				// 添加一条新朋友提示，更新到好友表中
-				ChatMessage chatMessage = new ChatMessage();
-				chatMessage.setType(XmppMessage.TYPE_TIP);
-				chatMessage.setPacketId(UUID.randomUUID().toString().replaceAll("-", ""));// 随机产生一个PacketId
-				chatMessage.setFromUserId(Friend.ID_NEW_FRIEND_MESSAGE);
-				chatMessage.setMessageState(ChatMessageListener.MESSAGE_SEND_SUCCESS);
-				chatMessage.setTimeSend(TimeUtils.sk_time_current_time());
-				chatMessage.setContent("");
-				chatMessage.setMySend(false);// 表示不是自己发的
-				// 更新消息记录
-				updateLastChatMessage(ownerId, Friend.ID_NEW_FRIEND_MESSAGE, chatMessage);
-			}
-
 			// 系统消息10000号
 			friend.setUserId(Friend.ID_SYSTEM_MESSAGE);
 			friend.setNickName(Friend.NICKNAME_SYSTEM_MESSAGE);
@@ -134,23 +113,25 @@ public class FriendDao {
 				updateLastChatMessage(ownerId, Friend.ID_SYSTEM_MESSAGE, chatMessage);
 			}
 
-			// 商务圈消息10002
-			// friend.setUserId(Friend.ID_BLOG_MESSAGE);
-			// friend.setNickName(Friend.NICKNAME_BLOG_MESSAGE);
-			// friend.setStatus(Friend.STATUS_NO_SHOW_SYSTEM);// 不显示
-			// friendsList = friendDao.queryForMatching(friend);
-			// if (friendsList == null || friendsList.size() <= 0) {// 添加这个商务圈消息10002
-			// friendDao.create(friend);
-			// }
-
-			// 面试中心10003
-			// friend.setUserId(Friend.ID_INTERVIEW_MESSAGE);
-			// friend.setNickName(Friend.NICKNAME_INTERVIEW_MESSAGE);
-			// friend.setStatus(Friend.STATUS_NO_SHOW_SYSTEM);// 不显示
-			// friendsList = friendDao.queryForMatching(friend);
-			// if (friendsList == null || friendsList.size() <= 0) {// 添加这个面试中心10003
-			// friendDao.create(friend);
-			// }
+//			// 新朋友消息10001号
+//			friend.setUserId(Friend.ID_NEW_FRIEND_MESSAGE);
+//			friend.setNickName(Friend.NICKNAME_NEW_FRIEND_MESSAGE);
+//			friend.setStatus(Friend.STATUS_SYSTEM);
+//			friendsList = friendDao.queryForMatching(friend);
+//			if (friendsList == null || friendsList.size() <= 0) {// 添加这个新朋友消息10001号
+//				friendDao.create(friend);
+//				// 添加一条新朋友提示，更新到好友表中
+//				ChatMessage chatMessage = new ChatMessage();
+//				chatMessage.setType(XmppMessage.TYPE_TIP);
+//				chatMessage.setPacketId(UUID.randomUUID().toString().replaceAll("-", ""));// 随机产生一个PacketId
+//				chatMessage.setFromUserId(Friend.ID_NEW_FRIEND_MESSAGE);
+//				chatMessage.setMessageState(ChatMessageListener.MESSAGE_SEND_SUCCESS);
+//				chatMessage.setTimeSend(TimeUtils.sk_time_current_time());
+//				chatMessage.setContent("");
+//				chatMessage.setMySend(false);// 表示不是自己发的
+//				// 更新消息记录
+//				updateLastChatMessage(ownerId, Friend.ID_NEW_FRIEND_MESSAGE, chatMessage);
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

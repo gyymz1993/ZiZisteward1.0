@@ -2,14 +2,12 @@ package com.lsjr.zizi.mvp.home;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,18 +15,19 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.PopupWindow;
 
-import com.lsjr.utils.NetUtils;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
-import com.lsjr.zizi.mvp.adapter.HomeAadapter;
-import com.lsjr.zizi.chat.ConfigApplication;
-import com.lsjr.zizi.chat.Constants;
-import com.lsjr.zizi.chat.LoginStatusActivity;
+import com.lsjr.zizi.mvp.home.session.ScanActivity;
+import com.lsjr.zizi.mvp.home.session.SeachFriendActivity;
+import com.lsjr.zizi.mvp.home.zichat.CreatNewGroupActivity;
+import com.lsjr.zizi.mvp.home.session.DataDownloadActivity;
+import com.lsjr.zizi.mvp.home.session.LoginActivity;
+import com.lsjr.zizi.mvp.home.session.LoginStatusActivity;
 import com.lsjr.zizi.chat.broad.CardcastUiUpdateUtil;
 import com.lsjr.zizi.chat.broad.MsgBroadcast;
 import com.lsjr.zizi.chat.dao.FriendDao;
@@ -36,195 +35,68 @@ import com.lsjr.zizi.chat.dao.UserDao;
 import com.lsjr.zizi.chat.db.NewFriendMessage;
 import com.lsjr.zizi.chat.db.User;
 import com.lsjr.zizi.chat.helper.LoginHelper;
+import com.lsjr.zizi.chat.helper.UserSp;
 import com.lsjr.zizi.chat.xmpp.CoreService;
 import com.lsjr.zizi.chat.xmpp.ListenerManager;
 import com.lsjr.zizi.chat.xmpp.listener.AuthStateListener;
+import com.lsjr.zizi.mvp.adapter.HomeAadapter;
 import com.lsjr.zizi.mvp.contrl.FragmentController;
+import com.lsjr.zizi.util.PopupWindowUtils;
+import com.ymz.baselibrary.BaseApplication;
+import com.ymz.baselibrary.NetWorkObservable;
 import com.ymz.baselibrary.mvp.BasePresenter;
+import com.ymz.baselibrary.utils.ActivityUtils;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.SpUtils;
 import com.ymz.baselibrary.utils.T_;
 import com.ymz.baselibrary.utils.UIUtils;
 import com.ymz.baselibrary.view.PermissionListener;
+import com.ys.uilibrary.tab.BottomTabView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import april.yun.ISlidingTabStrip;
-import april.yun.JPagerSlidingTabStrip2;
-import april.yun.other.JTabStyleDelegate;
 import butterknife.BindView;
-
-import static april.yun.other.JTabStyleBuilder.STYLE_DEFAULT;
 
 /**
  * 创建人：gyymz1993
  * 创建时间：2017/5/29/3:12
  **/
-public class HomeActivity extends MvpActivity implements AuthStateListener {
-
-    @BindView(R.id.tab_buttom)
-    JPagerSlidingTabStrip2 tabBtn;
+public class HomeActivity extends MvpActivity implements AuthStateListener ,NetWorkObservable.NetWorkObserver {
 
     @BindView(R.id.pager)
     ViewPager mViewPager;
     private boolean mBind;
-    private CoreService mXmppService;
-    private ActivityManager mActivityManager;
+    public CoreService mXmppService;
 
-
-    @Override
-    protected void initView() {
-        //initPermissions();
-        setTitleText("消息列表");
-        getToolBarView().getLeftimageView().setVisibility(View.GONE);
-        getToolBarView().setTitleTextColor(UIUtils.getColor(R.color.white));
-        getToolBarView().setBackgroundColor(UIUtils.getColor(R.color.colorPrimary));
-        setupTabStrips();
-        setupViewpager();
-
-    }
-
-    private void initPermissions() {
-        requestPermissions(new String[]{
-                Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
-                ,  Manifest.permission.MODIFY_AUDIO_SETTINGS
-        }, new PermissionListener() {
-            @Override
-            public void onGranted() {
-               T_.showToastReal("授权");
-            }
-
-            @Override
-            public void onDenied(List<String> deniedPermissions) {
-            }
-        });
-    }
-
-
-
+    @BindView(R.id.bottomTabView)
+    public BottomTabView bottomTabView;
+    boolean isFristcreate=true;
+    DataDownloadActivity dataDownloadActivity;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.chat_activity_home;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        // 注册用户登录状态广播
+        registerReceiver(mUserLogInOutReceiver, LoginHelper.getLogInOutActionFilter());
+        //LoginHelper.broadcastLogin(UIUtils.getContext());
 
-    private void setupTabStrips() {
-        setupStrip(tabBtn.getTabStyleDelegate(), STYLE_DEFAULT);
-        tabBtn.getTabStyleDelegate()
-                .setIndicatorHeight(0)
-                .setDividerColor(Color.TRANSPARENT);
-        tabBtn.getTabStyleDelegate()
-                .setFrameColor(Color.TRANSPARENT)
-                .setIndicatorColor(Color.TRANSPARENT)
-                .setTabIconGravity(Gravity.TOP)//图标显示在top
-                .setIndicatorHeight(-8)//设置的高小于0 会显示在tab顶部 否则底部
-                .setDividerColor(Color.TRANSPARENT);
-    }
-
-    private void setupStrip(JTabStyleDelegate tabStyleDelegate, int type) {
-        tabStyleDelegate.setJTabStyle(type)
-                .setShouldExpand(true)
-                .setFrameColor(Color.parseColor("#45C01A"))
-                .setTabTextSize(/*UIUtils.getDimen(13)*/30)
-                .setTextColor(Color.parseColor("#45C01A"), Color.GRAY)
-                //.setTextColor(R.drawable.tabstripbg)
-                .setDividerColor(Color.parseColor("#45C01A"))
-                .setDividerPadding(0)
-                .setUnderlineColor(Color.parseColor("#3045C01A"))
-                .setUnderlineHeight(0)
-                .setIndicatorColor(Color.parseColor("#7045C01A"))
-                .setIndicatorHeight(/*UIUtils.getDimen(28)*/50);
-
-
-    }
-
-    private void setupViewpager() {
-        int[] mSelectors = new int[]{R.drawable.hy_tab1,
-                R.drawable.hy_tab2,
-                R.drawable.hy_tab3, R.drawable.hy_tab4};
-        HomeAadapter adapter = new HomeAadapter(getSupportFragmentManager(), mSelectors);
-
-        mViewPager.setAdapter(adapter);
-        mViewPager.setOffscreenPageLimit(mSelectors.length);
-        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4,
-                getResources().getDisplayMetrics());
-        mViewPager.setPageMargin(pageMargin);
-        tabBtn.bindViewPager(mViewPager);
-        showPromptMsg(tabBtn);
-
-        tabBtn.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                L_.e("------->当前选择"+position);
-                if (position==0){
-                    setTitleText("消息列表");
-
-                }if (position==1){
-                    setTitleText("我的朋友");
-                    // getToolBarView().setVisibility(View.GONE);
-                }if (position==2){
-                    setTitleText("朋友圈");
-                }if (position==3){
-                    setTitleText("个人资料");
-                }
-                getToolBarView().getLeftimageView().setVisibility(View.GONE);
-                getToolBarView().setTitleTextColor(UIUtils.getColor(R.color.white));
-            }
-
-        });
-
-    }
-
-    public void clearPromptMsg(ISlidingTabStrip slidingTabStrip) {
-        for (int i = 0; i < mViewPager.getAdapter().getCount(); i++) {
-            slidingTabStrip.setPromptNum(i, 0);
-        }
-    }
-
-
-    public void showPromptMsg(ISlidingTabStrip slidingTabStrip) {
-//        slidingTabStrip.setPromptNum(1, 9).
-//                setPromptNum(0, 10).
-//                setPromptNum(2, -9).
-//                setPromptNum(3, 100);
-    }
-
-
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-
-    @Override
-    public void onAuthStateChange(int authState) {
-
-    }
-
-    @Override
-    protected void afterCreate(Bundle savedInstanceState) {
-        //百度推送
-       // PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"8h0GOjOlgP8dXRzp9nG1dGBT");
-        mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-
-        // 注册网络改变回调
-        // ConfigApplication.instance().registerNetWorkObserver(this);
-        // 绑定监听
+        BaseApplication.instance().registerNetWorkObserver(this);
         ListenerManager.getInstance().addAuthStateChangeListener(this);
         // 注册消息更新广播
         IntentFilter msgIntentFilter = new IntentFilter();
         msgIntentFilter.addAction(MsgBroadcast.ACTION_MSG_NUM_UPDATE);
         msgIntentFilter.addAction(MsgBroadcast.ACTION_MSG_NUM_RESET);
         registerReceiver(mUpdateUnReadReceiver, msgIntentFilter);
-        // 注册用户登录状态广播
-        registerReceiver(mUserLogInOutReceiver, LoginHelper.getLogInOutActionFilter());
+
+        //百度推送
+        //PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"8h0GOjOlgP8dXRzp9nG1dGBT");
+        registerReceiver(mUpdateReceiver, CardcastUiUpdateUtil.getUpdateActionFilter());
+        mBind = bindService(CoreService.getIntent(), mServiceConnection, BIND_AUTO_CREATE);
         // 绑定服务
         mXmppBind = bindService(CoreService.getIntent(), mXmppServiceConnection, BIND_AUTO_CREATE);
+
 
         // 检查用户的状态，做不同的初始化工作
         User loginUser = ConfigApplication.instance().mLoginUser;
@@ -242,8 +114,227 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
                 mUserCheckHander.sendEmptyMessageDelayed(MSG_USER_CHECK, mRetryCheckDelay);
             }
         }
-         registerReceiver(mUpdateReceiver, CardcastUiUpdateUtil.getUpdateActionFilter());
-        mBind = bindService(CoreService.getIntent(), mServiceConnection, BIND_AUTO_CREATE);
+        super.onCreate(savedInstanceState);
+    }
+
+
+    public CoreService getmXmppService() {
+        return mXmppService;
+    }
+
+    @Override
+    protected void afterCreate(Bundle savedInstanceState) {
+        //百度推送
+        // PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"8h0GOjOlgP8dXRzp9nG1dGBT");
+        //mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+
+        // 注册网络改变回调
+        // ConfigApplication.instance().registerNetWorkObserver(this);
+        // 绑定监听
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null&&extras.getBoolean("isLoginJump")){
+            SpUtils.getInstance().saveBoolean("isFirstCreate",true);
+            showProgressDialogWithText("开始下载数据");
+            showLoadingView();
+            dataDownloadActivity=new DataDownloadActivity() {
+
+                @Override
+                protected void downloadOver() {
+                    dismissProgressDialog();
+                    showContentView();
+                    UserSp.getInstance().setUpdate(true);
+                    LoginHelper.broadcastLogin(UIUtils.getContext());
+                    //jumpToActivityAndClearTask(HomeActivity.class);
+                }
+
+                @Override
+                protected void resetLogin() {
+                    openActivity(LoginActivity.class);
+                }
+            };
+            //T_.showToastReal("正在执行下载方法"+ dataDownloadActivity.circle_msg_download_status);
+            L_.e("正在执行下载方法"+ dataDownloadActivity.circle_msg_download_status);
+            dataDownloadActivity.onStartDown();
+        }
+
+    }
+
+
+    @Override
+    protected void initTitle() {
+        super.initTitle();
+        setTitleText("消息");
+        getToolBarView().getLeftimageView().setVisibility(View.GONE);
+        getToolBarView().getRightImageView().setVisibility(View.VISIBLE);
+        getToolBarView().getRightImageView().setImageResource(R.drawable.icon_add);
+        getToolBarView().getRightImageView().setOnClickListener(v -> {
+            initMenuListener();
+        });
+    }
+
+
+    public void initMenuListener() {
+        //显示或隐藏popupwindow
+        View menuView = View.inflate(this, R.layout.dialog_menu, null);
+        PopupWindow popupWindow = PopupWindowUtils.getPopupWindowAtLocation(menuView,
+                getWindow().getDecorView(), Gravity.TOP | Gravity.RIGHT,
+                UIUtils.dip2px(10), UIUtils.getNavBarHeight(UIUtils.getContext())+getToolBarView().getHeight()/2);
+        menuView.findViewById(R.id.tvCreateGroup).setOnClickListener(v1 -> {
+            jumpToActivity(CreatNewGroupActivity.class);
+            popupWindow.dismiss();
+        });
+        menuView.findViewById(R.id.tvAddFriend).setOnClickListener(v1 -> {
+            jumpToActivity(SeachFriendActivity.class);
+            popupWindow.dismiss();
+        });
+        menuView.findViewById(R.id.tvScan).setOnClickListener(v1 -> {
+            jumpToActivity(ScanActivity.class);
+            popupWindow.dismiss();
+        });
+    }
+
+    @Override
+    protected void initView() {
+        initParams();
+        initPermissions();
+    }
+
+
+    private void initPermissions() {
+        requestPermissions(new String[]{
+                Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO
+                ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,Manifest.permission.RECEIVE_SMS,
+                Manifest.permission.READ_SMS
+        }, new PermissionListener() {
+            @Override
+            public void onGranted() {
+               //T_.showToastReal("授权");
+//                Intent intentService = new Intent(HomeActivity.this, SmsService.class);
+//                startService(intentService);
+//
+//                registerReceiver(senMessage, SendMesReceiver.getSendMsgFilter());
+//                SendMesReceiver.broadcastSendMsg(UIUtils.getContext());
+               // Intent intent = new Intent(HomeActivity.this, SMSBroadcastReceiver.class);
+               // sendBroadcast(intent);
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermissions) {
+            }
+        });
+    }
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.chat_activity_home;
+    }
+
+
+    BottomTabView.TabItemView tabItemView;
+    protected List<BottomTabView.TabItemView> getTabViews() {
+        int[] mSelectors = new int[]{R.drawable.hy_tab1, R.drawable.hy_tab2, R.drawable.hy_tab3, R.drawable.hy_tab4};
+        tabItemView =  new BottomTabView.TabItemView(this, "消息", R.color.tab_text_normal, R.color.tab_text_select, R.drawable.tab_job, R.drawable.tab_job_press);
+       // tabItemView.setPromptNum(10);
+        tabItemViews.add(tabItemView);
+        tabItemViews.add(new BottomTabView.TabItemView(this, "通讯录", R.color.tab_text_normal, R.color.tab_text_select, R.drawable.tab_found, R.drawable.tab_found_press));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "发现", R.color.tab_text_normal, R.color.tab_text_select, R.drawable.tab_smile, R.drawable.tab_smile_press));
+        tabItemViews.add(new BottomTabView.TabItemView(this, "我", R.color.tab_text_normal, R.color.tab_text_select, R.drawable.tab_me, R.drawable.tab_me_press));
+        return tabItemViews;
+    }
+
+
+
+    public void initParams() {
+        mViewPager.setOffscreenPageLimit(4);//设置ViewPager的缓存界面数,默认缓存为2
+        int[] mSelectors = new int[]{R.drawable.hy_tab1, R.drawable.hy_tab2, R.drawable.hy_tab3, R.drawable.hy_tab4};
+        HomeAadapter adapter = new HomeAadapter(getSupportFragmentManager(), mSelectors);
+        mViewPager.setAdapter(adapter);
+        bottomTabView.setTabItemViews(getTabViews());
+        if (getOnTabItemSelectListener() != null) {
+            bottomTabView.setOnTabItemSelectListener(getOnTabItemSelectListener());
+        }
+        bottomTabView.setOnSecondSelectListener(new BottomTabView.OnSecondSelectListener() {
+            @Override
+            public void onSecondSelect(int position) {
+
+            }
+        });
+        if (getOnPageChangeListener() != null) {
+            mViewPager.addOnPageChangeListener(getOnPageChangeListener());
+        }
+
+    }
+
+    ArrayList<BottomTabView.TabItemView> tabItemViews = new ArrayList<>();
+    protected BottomTabView.OnTabItemSelectListener getOnTabItemSelectListener() {
+        return new BottomTabView.OnTabItemSelectListener() {
+            @Override
+            public void onTabItemSelect(int position) {
+                //naView.setTitleText(titles[position]);
+                mViewPager.setCurrentItem(position, true);
+                setTitleChange(position);
+
+            }
+        };
+    }
+
+    protected ViewPager.OnPageChangeListener getOnPageChangeListener() {
+        return new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomTabView.updatePosition(position);
+                setTitleChange(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
+    }
+
+
+    private  void  setTitleChange(int position){
+        if (position==0){
+            setTitleText("消息");
+            getToolBarView().getRightImageView().setImageResource(R.drawable.icon_add);
+            getToolBarView().getRightImageView().setVisibility(View.VISIBLE);
+
+        }if (position==1){
+            setTitleText("通讯录");
+            getToolBarView().getRightImageView().setVisibility(View.VISIBLE);
+           // getToolBarView().getRightImageView().setImageResource(R.drawable.icon_add_contact);
+            getToolBarView().getRightImageView().setImageResource(R.drawable.icon_add);
+            // getToolBarView().setVisibility(View.GONE);
+        }if (position==2){
+            setTitleText("发现");
+            getToolBarView().getRightImageView().setVisibility(View.GONE);
+        }if (position==3){
+            setTitleText("个人信息");
+            getToolBarView().getRightImageView().setVisibility(View.GONE);
+        }
+    }
+
+
+
+
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+
+    @Override
+    public void onAuthStateChange(int authState) {
+        mImStatus = authState;
     }
 
 
@@ -254,7 +345,7 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
             if (intent.getAction().equals(CardcastUiUpdateUtil.ACTION_UPDATE_UI)) {
                  ContactsFragment contactsFragment= (ContactsFragment) FragmentController.getInstance().getFragment(1);
                 if (contactsFragment != null) {
-                    contactsFragment.update();
+                    contactsFragment.loadData();
                 }
             }
         }
@@ -279,7 +370,7 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
     };
 
     private void doUserCheck() {
-        if (!NetUtils.isConnected(this)) {
+        if (!BaseApplication.instance().isNetworkActive()) {
             return;
         }
         if (ConfigApplication.instance().mUserStatusChecked) {
@@ -307,6 +398,7 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
             String action = intent.getAction();
             if (action.equals(LoginHelper.ACTION_LOGIN)) {
                 User user = ConfigApplication.instance().mLoginUser;
+                L_.e("登陆成功---------------》启动服务"+user.toString());
                 Intent startIntent = CoreService.getIntent(HomeActivity.this, user.getUserId(), user.getPassword(), user.getNickName());
                 startService(startIntent);
                 // ToastUtil.showNormalToast(MainActivity.this, "开始Xmpp登陆");
@@ -314,19 +406,31 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
 
             } else if (action.equals(LoginHelper.ACTION_LOGOUT)) {
                 ConfigApplication.instance().mUserStatus = LoginHelper.STATUS_USER_SIMPLE_TELPHONE;
-                mCoreService.logout();
-
+                if (mCoreService!=null){
+                    mCoreService.logout();
+                }
                 cancelUserCheckIfExist();
+                if (dataDownloadActivity!=null){
+                    dataDownloadActivity.cleanAllStatus();
+                }
+                UserSp.getInstance().clearUserInfo();
+                removeNeedUserFragment();
+                jumpToActivityAndClearTask(LoginActivity.class);
+                ActivityUtils.removeAllActivity();
+               // UserSp.getInstance().clearUserInfo();
                 //startActivity(new Intent(HomeActivity.this, LoginHistoryActivity.class));
                 // mFindRb.setChecked(true);
-               // removeNeedUserFragment(false);
+
 
             } else if (action.equals(LoginHelper.ACTION_CONFLICT)) {
                 // 改变用户状态
                 ConfigApplication.instance().mUserStatus = LoginHelper.STATUS_USER_TOKEN_CHANGE;
-                mCoreService.logout();
+                if (mCoreService!=null){
+                    mCoreService.logout();
+                }
                 // mFindRb.setChecked(true);
-                //removeNeedUserFragment(true);
+                removeNeedUserFragment();
+                 UserSp.getInstance().clearUserInfo();
                 cancelUserCheckIfExist();
                 T_.showToastReal("异地登录");
                 // 弹出对话框
@@ -345,13 +449,21 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
             } else if (action.equals(LoginHelper.ACTION_LOGIN_GIVE_UP)) {
                 cancelUserCheckIfExist();
                 ConfigApplication.instance().mUserStatus = LoginHelper.STATUS_USER_NO_UPDATE;
-                mCoreService.logout();
+                if (mCoreService!=null){
+                    mCoreService.logout();
+                }
             }
 
         }
 
     };
 
+
+
+    /* 当注销当前用户时，将那些需要当前用户的Fragment销毁，以后重新登陆后，重新加载为初始状态 */
+    private void removeNeedUserFragment() {
+        FragmentController.getInstance().clean();
+    }
 
 
     private int mImStatus = AuthStateListener.AUTH_STATE_NOT;
@@ -365,6 +477,7 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
         public void onServiceConnected(ComponentName name, IBinder service) {
             mCoreService = ((CoreService.CoreServiceBinder) service).getService();
             mImStatus = mCoreService.isAuthenticated() ? AuthStateListener.AUTH_STATE_SUCCESS : AuthStateListener.AUTH_STATE_NOT;
+          //  T_.showToastReal(mImStatus==3?"成功上线":"登陆中");
         }
     };
 
@@ -418,10 +531,17 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
 
     private void updateMsgUnReadTv() {
         L_.e("消息列表"+mMsgUnReadNum);
+        if (tabItemView==null)return;
         if (mMsgUnReadNum > 0) {
+//            if (isFristcreate){
+//                MsgBroadcast.broadcastMsgUiUpdate(UIUtils.getContext());
+//                isFristcreate=false;
+//            }
            // mMsgUnReadTv.setVisibility(View.VISIBLE);
             String numStr = mMsgUnReadNum >= 99 ? "99" : mMsgUnReadNum + "";
-            tabBtn.setPromptNum(0,Integer.valueOf(numStr));
+            tabItemView.setPromptNum(Integer.valueOf(numStr));
+        }else {
+            tabItemView.setPromptNum(0);
         }
     }
 
@@ -435,6 +555,22 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
         if (mBind && mXmppService != null) {
             mXmppService.sendNewFriendMessage(toUserId, message);
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isPause = false;
+        if (mMsgNumNeedUpdate) {
+            initMsgUnReadTips(ConfigApplication.instance().mLoginUser.getUserId());
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isPause = true;
     }
 
 
@@ -465,12 +601,17 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
     @Override
     protected void onDestroy() {
         saveOfflineTime();
+        BaseApplication.instance().unregisterNetWorkObserver(this);
         ListenerManager.getInstance().removeAuthStateChangeListener(this);
         if (mXmppBind) {
             unbindService(mXmppServiceConnection);
         }
+        if (mBind) {
+            unbindService(mServiceConnection);
+        }
         unregisterReceiver(mUpdateUnReadReceiver);
         unregisterReceiver(mUserLogInOutReceiver);
+        unregisterReceiver(mUpdateReceiver);
         super.onDestroy();
     }
 
@@ -502,4 +643,23 @@ public class HomeActivity extends MvpActivity implements AuthStateListener {
         }
     }
 
+
+    //    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentController.getInstance().getFragment(3).onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onNetWorkStatusChange(boolean connected) {
+        // 当网络状态改变时，判断当前用户的状态，是否需要更新
+        L_.e("--------------网络改变+connected"+connected);
+        if (connected) {
+            if (!ConfigApplication.instance().mUserStatusChecked) {
+                mRetryCheckDelay = 0;
+                mUserCheckHander.sendEmptyMessageDelayed(MSG_USER_CHECK, mRetryCheckDelay);
+            }
+        }
+    }
 }

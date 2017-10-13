@@ -1,7 +1,7 @@
 package com.lsjr.zizi.mvp.home.photo.view;
 
 
-import com.lqr.recyclerview.LQRRecyclerView;
+import com.andview.myrvview.LQRRecyclerView;
 
 public interface IMyLocationAtView {
     LQRRecyclerView getRvPOI();

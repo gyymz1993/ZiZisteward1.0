@@ -1,11 +1,11 @@
 package com.lsjr.zizi.mvp.circledemo.widgets;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.text.TextUtils;
+import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.lsjr.zizi.R;
+import com.lsjr.zizi.loader.ImageLoader;
 import com.lsjr.zizi.mvp.circledemo.widgets.videolist.VideoListGlideModule;
 import com.lsjr.zizi.mvp.circledemo.widgets.videolist.model.VideoLoadMvpView;
 import com.lsjr.zizi.mvp.circledemo.widgets.videolist.target.VideoLoadTarget;
@@ -23,6 +24,7 @@ import com.lsjr.zizi.mvp.circledemo.widgets.videolist.target.VideoProgressTarget
 import com.lsjr.zizi.mvp.circledemo.widgets.videolist.visibility.items.ListItem;
 import com.lsjr.zizi.mvp.circledemo.widgets.videolist.widget.TextureVideoView;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.ymz.baselibrary.utils.L_;
 
 import java.io.File;
 import java.io.InputStream;
@@ -76,12 +78,12 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
 
     public void setVideoImgUrl(String imgUrl){
 
-        Glide.with(getContext())
-                .load(imgUrl)
-                .placeholder(new ColorDrawable(0xffdcdcdc))
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(videoFrame);
+//        Glide.with(getContext()).load(imgUrl)
+//                .placeholder(new ColorDrawable(0xffdcdcdc))
+//                .centerCrop()
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                .into(videoFrame);
+        ImageLoader.getInstance().showRealSizeImage(imgUrl,videoFrame);
 
         if(videoState == STATE_IDLE){
             videoButton.setVisibility(View.VISIBLE);
@@ -95,7 +97,9 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
         }
     }
 
+
     private void init() {
+        requestLayout();  //只加了这一行代码。7.0上必须要调用这段代码，否则view不会被测量、排版、绘制。
         inflate(getContext(), R.layout.layout_video, this);
         videoPlayer = (TextureVideoView) findViewById(R.id.video_player);
         videoFrame = (ImageView) findViewById(R.id.iv_video_frame);
@@ -104,8 +108,6 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
 
         videoTarget = new VideoLoadTarget(this);
         progressTarget = new VideoProgressTarget(videoTarget, videoProgress);
-
-
         videoPlayer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,11 +131,13 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
                         .using(VideoListGlideModule.getOkHttpUrlLoader(), InputStream.class)
                         .load(new GlideUrl(videoUrl))
                         .as(File.class)
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(progressTarget);
-
+              //  ImageLoader.getInstance().showVideo(videoUrl,videoFrame);
                 videoButton.setVisibility(View.INVISIBLE);
+
                 if(onPlayClickListener!=null){
+                    L_.e("onPlayClickListener --->"+onPlayClickListener);
                     onPlayClickListener.onPlayClick(postion);
                 }
             }
@@ -148,6 +152,10 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
     @Override
     public void setActive(View newActiveView, int newActiveViewPosition) {
 
+    }
+
+    public ImageView getVideoButton() {
+        return videoButton;
     }
 
     @Override
@@ -199,7 +207,7 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
         }
     }
 
-    public static interface OnPlayClickListener{
+    public  interface OnPlayClickListener{
         void onPlayClick(int pos);
     }
 
@@ -234,4 +242,12 @@ public class CircleVideoView extends LinearLayout implements VideoLoadMvpView, L
             }
         }).alpha(0f);
     }
+
+//
+//    protected MovementMethod getDefaultMovementMethod(){
+//        return null;
+//    }
+//    public boolean getDefaultEditable(){
+//        return false;
+//    }
 }

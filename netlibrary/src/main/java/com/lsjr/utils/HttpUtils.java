@@ -1,6 +1,7 @@
 package com.lsjr.utils;
 
 import com.lsjr.callback.ChatArrayCallBack;
+import com.lsjr.callback.ChatDownCallBack;
 import com.lsjr.callback.ChatObjectCallBack;
 import com.lsjr.callback.DownloadSubscriber;
 import com.lsjr.callback.HttpSubscriber;
@@ -68,6 +69,10 @@ public class HttpUtils {
         loadDataForNet(DcodeService.postServiceData(baseUrl,map), stringCallBack);
     }
 
+
+    public void postServiceData(String baseUrl,final Map map, final ChatDownCallBack httpSubscriber) {
+        loadDataForNet(DcodeService.postServiceData(baseUrl,map), httpSubscriber);
+    }
 
 
 

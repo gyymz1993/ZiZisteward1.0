@@ -3,7 +3,7 @@ package com.lsjr.zizi.util;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.db.User;
 import com.ymz.baselibrary.AppCache;
 

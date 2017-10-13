@@ -3,11 +3,10 @@ package com.lsjr.zizi.mvp.contrl;
 import android.support.v4.app.Fragment;
 
 
-import com.lsjr.zizi.mvp.frag.FindFragment;
 import com.lsjr.zizi.mvp.home.ContactsFragment;
-import com.lsjr.zizi.mvp.home.FriendCircleFragment;
 import com.lsjr.zizi.mvp.home.MeFragment;
 import com.lsjr.zizi.mvp.home.MessageFragment;
+import com.lsjr.zizi.mvp.home.WordFragment;
 
 import java.util.ArrayList;
 
@@ -18,11 +17,11 @@ import java.util.ArrayList;
 public class FragmentController {
 
 
-    private ArrayList<Fragment> fragments;
+    public ArrayList<Fragment> fragments;
     private static FragmentController controller;
-    private MessageFragment mAddressListFragment;
+    private MessageFragment mAddressListFragment=null;
     //private FindFragment mMessageFragment;
-    private FriendCircleFragment mMessageFragment;
+    private WordFragment wordFragment;
     private MeFragment meFragment;
     private ContactsFragment contactsFragment;
 
@@ -48,8 +47,8 @@ public class FragmentController {
         if (mAddressListFragment == null) {
             mAddressListFragment = new MessageFragment();
         }
-        if (mMessageFragment == null) {
-            mMessageFragment = new FriendCircleFragment();
+        if (wordFragment == null) {
+            wordFragment = new WordFragment();
         }
         if (meFragment == null) {
             meFragment = new MeFragment();
@@ -59,15 +58,42 @@ public class FragmentController {
         }
         fragments.add(mAddressListFragment);
         fragments.add(contactsFragment);
-        fragments.add(mMessageFragment);
+        fragments.add(wordFragment);
         fragments.add(meFragment);
-
-
-
     }
 
 
     public Fragment getFragment(int position) {
         return fragments.get(position);
+    }
+
+    public void clean(){
+        for (int i=0;i<fragments.size();i++){
+
+            fragments.remove(i);
+            if (fragments.get(i) instanceof MessageFragment) {
+                if (mAddressListFragment == null) {
+                    mAddressListFragment = null;
+                }
+            }
+            if (fragments.get(i) instanceof WordFragment) {
+                if (wordFragment == null) {
+                    wordFragment = null;
+                }
+            }
+
+            if (fragments.get(i) instanceof MeFragment) {
+                if (meFragment == null) {
+                    meFragment = null;
+                }
+            }
+
+            if (fragments.get(i) instanceof ContactsFragment) {
+                if (contactsFragment == null) {
+                    contactsFragment = null;
+                }
+            }
+            controller=null;
+        }
     }
 }

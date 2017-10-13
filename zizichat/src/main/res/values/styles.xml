@@ -3,11 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
         <!-- 设置activity切换动画 -->
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+
+    <style name="Theme.AppStartLoadTranslucent" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Splash" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@mipmap/splash</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <!-- animation 样式 -->
@@ -30,7 +43,7 @@
     <style name="Line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/line</item>
+        <item name="android:background">@color/line_color</item>
     </style>
 
     <style name="IMEditText">
@@ -106,7 +119,7 @@
     <!--选项条目样式-->
     <style name="OptionItem">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">102px</item>
+        <item name="android:layout_height">55dp</item>
         <item name="android:background">@color/white</item>
     </style>
 
@@ -172,4 +185,55 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+
+    <style name="IMButton.Green" parent="@style/IMButton">
+        <item name="android:background">@drawable/button_orange_press</item>
+    </style>
+
+
+    <style name="Buttom.Popwindow" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/input_method_enter</item>
+        <item name="android:windowExitAnimation">@anim/input_method_exit</item>
+    </style>
+
+
+    <!--自定义CheckBox样式-->
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+
+
+    <!--选项条目样式-->
+    <style name="AvHeaderStyle">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+
+    <!--选项条目样式-->
+    <style name="ChatNameStype">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@string/app_name</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:textColor">@color/chat_name_color</item>
+    </style>
+
+
+
+
+    <style name="TableItme">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">55dip</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
+
 </resources>

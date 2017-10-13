@@ -4,9 +4,9 @@ package com.lsjr.zizi.chat.xmpp;
 import org.jivesoftware.smack.XMPPConnection;
 
 public interface NotifyConnectionListener{
-	public void notifyConnectting();
-	public void notifyAuthenticated(XMPPConnection arg0);
-	public void notifyConnected(XMPPConnection arg0);
-	public void notifyConnectionClosed();
-	public void notifyConnectionClosedOnError(Exception arg0);
+	 void notifyConnectting();
+	 void notifyAuthenticated(XMPPConnection arg0);
+	 void notifyConnected(XMPPConnection arg0);
+	 void notifyConnectionClosed();
+	 void notifyConnectionClosedOnError(Exception arg0);
 }

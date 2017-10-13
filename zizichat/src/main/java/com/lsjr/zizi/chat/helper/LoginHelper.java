@@ -12,10 +12,10 @@ import android.util.Log;
 import com.lsjr.bean.ObjectResult;
 import com.lsjr.bean.Result;
 import com.lsjr.callback.ChatObjectCallBack;
+import com.lsjr.utils.HttpUtils;
 import com.lsjr.zizi.AppConfig;
-import com.lsjr.zizi.http.HttpUtils;
 import com.lsjr.zizi.mvp.home.HomeActivity;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 
 import com.lsjr.zizi.chat.bean.LoginAuto;
 import com.lsjr.zizi.chat.bean.LoginRegisterResult;

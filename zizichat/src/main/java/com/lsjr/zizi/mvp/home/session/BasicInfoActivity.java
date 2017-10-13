@@ -14,15 +14,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lsjr.bean.ObjectResult;
+import com.lsjr.bean.Result;
 import com.lsjr.callback.ChatObjectCallBack;
+import com.lsjr.utils.HttpUtils;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
-import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.bean.AddAttentionResult;
 import com.lsjr.zizi.chat.bean.AttentionUser;
 import com.lsjr.zizi.chat.bean.ResultCode;
@@ -33,13 +35,17 @@ import com.lsjr.zizi.chat.dao.NewFriendDao;
 import com.lsjr.zizi.chat.db.Friend;
 import com.lsjr.zizi.chat.db.NewFriendMessage;
 import com.lsjr.zizi.chat.db.User;
-import com.lsjr.zizi.chat.helper.AvatarHelper;
+import com.lsjr.zizi.loader.AvatarHelper;
 import com.lsjr.zizi.chat.helper.FriendHelper;
+import com.lsjr.zizi.chat.utils.StringUtils;
 import com.lsjr.zizi.chat.xmpp.CoreService;
 import com.lsjr.zizi.chat.xmpp.ListenerManager;
 import com.lsjr.zizi.chat.xmpp.XmppMessage;
 import com.lsjr.zizi.chat.xmpp.listener.NewFriendListener;
+import com.lsjr.zizi.mvp.home.zichat.GroupInfoActivity;
+import com.lsjr.zizi.mvp.home.zichat.UpdateSourceActivity;
 import com.lsjr.zizi.util.TimeUtils;
+import com.lsjr.zizi.view.OptionItemView;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.T_;
@@ -68,13 +74,14 @@ public class BasicInfoActivity extends MvpActivity implements NewFriendListener 
     @BindView(R.id.tvNickName)
     TextView mTvNickName;
 
-
     /*发送  消息     TODO */
     @BindView(R.id.btnCheat)
     Button mNextStepBtn;
     @BindView(R.id.btnAddToContact)
     Button mBtnAddToContact;
-
+    //标签
+    @BindView(R.id.oivAliasAndTag)
+    OptionItemView oivAliasAndTag;
 
     private String mLoginUserId;
     private boolean isMyInfo = false;// 快捷判断
@@ -97,6 +104,10 @@ public class BasicInfoActivity extends MvpActivity implements NewFriendListener 
 
     @Override
     protected void initView() {
+
+        ListenerManager.getInstance().addNewFriendListener(this);
+        mBind = bindService(CoreService.getIntent(), mServiceConnection, BIND_AUTO_CREATE);
+
         if (getIntent() != null) {
             mUserId = getIntent().getStringExtra(AppConfig.EXTRA_USER_ID);
         }
@@ -113,62 +124,156 @@ public class BasicInfoActivity extends MvpActivity implements NewFriendListener 
             loadOthersInfoFromNet();
         }
 
-
-        ListenerManager.getInstance().addNewFriendListener(this);
-        mBind = bindService(CoreService.getIntent(), mServiceConnection, BIND_AUTO_CREATE);
+        oivAliasAndTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // showRemarkDialog();
+                Intent intent = new Intent(BasicInfoActivity.this, UpdateSourceActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("updateContent","修改昵称");
+                bundle.putSerializable("Friend",mFriend);
+                bundle.putInt("key",4);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 2);
+            }
+        });
 
     }
 
+
+
+    private void showRemarkDialog() {
+        final EditText editText = new EditText(this);
+        editText.setMaxLines(2);
+        editText.setLines(2);
+        editText.setText("");
+        editText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(20) });
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.leftMargin=UIUtils.dip2px(10);
+        editText.setLayoutParams(layoutParams);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.set_remark_name).setView(editText)
+                .setPositiveButton(getString(R.string.sure), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String input = editText.getText().toString();
+                        if (input.equals(mUser.getNickName())||!StringUtils.isNickName(input)) {// 备注名没变
+                            T_.showToastReal("备注名没变");
+                            L_.e("不符合昵称"+input);
+                            return;
+                        }
+                        L_.e("修改备注名字"+input);
+                        remarkFriend(input);
+                    }
+                }).setNegativeButton(getString(R.string.cancel), null);
+        builder.create().show();
+    }
+
+
+
+
+    private void remarkFriend(final String remarkName) {
+        if(mFriend==null){
+            return;
+        }
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("access_token", ConfigApplication.instance().mAccessToken);
+        params.put("toUserId", mFriend.getUserId());
+        params.put("remarkName", remarkName);
+        showProgressDialogWithText("请稍等");
+        HttpUtils.getInstance().postServiceData(AppConfig.CONFIG_URL, params, new ChatObjectCallBack<Result>(Result.class) {
+            @Override
+            protected void onXError(String exception) {
+                dismissProgressDialog();
+                L_.e(exception);
+            }
+
+            @Override
+            protected void onSuccess(ObjectResult<Result> result) {
+                dismissProgressDialog();
+                boolean success = ResultCode.defaultParser( result, true);
+                if (success) {
+                    // 更新到数据库
+                    L_.e("设置好友备注-----------》"+mFriend.toString()+"---->"+remarkName);
+                    FriendDao.getInstance().setRemarkName(mLoginUserId, mFriend.getUserId(), remarkName);
+                    mTvName.setText(remarkName);
+                    mFriend.setRemarkName(remarkName);
+                    // 更新消息界面（因为昵称变了，所有要更新）
+                    L_.e("发送广播-----》");
+                    MsgBroadcast.broadcastMsgUiUpdate(BasicInfoActivity.this);
+                    CardcastUiUpdateUtil.broadcastUpdateUi(UIUtils.getContext());
+
+                }
+            }
+
+        });
+
+    }
+
+
     private void loadOthersInfoFromNet() {
-        showProgressDialogWithText("获取资料");
+        //showProgressDialogWithText("获取资料");
+        //showProgressDialog();
+        showLoadingView();
         Map<String, String> params = new HashMap<String, String>();
         params.put("access_token", ConfigApplication.instance().mAccessToken);
         params.put("userId", mUserId);
+        L_.e("获取用户信息"+mUserId);
         HttpUtils.getInstance().postServiceData(AppConfig.USER_GET_URL, params, new ChatObjectCallBack<User>(User.class) {
 
             @Override
             protected void onXError(String exception) {
                 T_.showToastWhendebug(exception);
-                dismissProgressDialog();
+                //dismissProgressDialog();
             }
 
             @Override
             protected void onSuccess(ObjectResult<User> result) {
                 boolean success = ResultCode.defaultParser(result, true);
+                //dismissProgressDialog();
+                showContentView();
                 if (success && result.getData() != null) {
                     mUser = result.getData();
                     // 如果本地的好友状态不正确，那么就更新本地好友状态
                     AttentionUser attentionUser = mUser.getFriends();// 服务器的状态
-                    L_.e("onSuccess"+mUser.getFriends().getStatus());
+                        //  L_.e("onSuccess"+mUser.getFriends().getStatus());
                     boolean changed = FriendHelper.updateFriendRelationship(mLoginUserId, mUser.getUserId(),
                             attentionUser);
                     if (changed) {
                         updateAllCardcastUi();
                     }
-                    dismissProgressDialog();
                     updateUI();
-                } else {
-                    dismissProgressDialog();
                 }
             }
         });
     }
 
 
+
+
     private void updateUI() {
         if (mUser == null) {
             return;
         }
+        if (isMyInfo) {
+            setTitleText("我的资料");
+        } else {
+            setTitleText("基本资料");
+            // 在这里查询出本地好友的状态
+            initFriendMoreAction();
+        }
+
         // 设置头像
-        AvatarHelper.getInstance().displayAvatar(mUser.getUserId(), mIvHeader, false);
+        AvatarHelper.getInstance().displayAvatar(mUser, mIvHeader, false);
         // 判断是否有备注名,有就显示
         if(mFriend!=null){
             if(mFriend.getRemarkName()!=null){
                 mTvName.setText(mFriend.getRemarkName());
+            }else {
+                mTvName.setText(mUser.getNickName());
             }
         }else{
             mTvName.setText(mUser.getNickName());
-
         }
         mTvAccount.setText(mUser.getSex() == 0 ? "男" : "女");
         mTvNickName.setText(TimeUtils.sk_time_s_long_2_str(mUser.getBirthday()));
@@ -184,12 +289,12 @@ public class BasicInfoActivity extends MvpActivity implements NewFriendListener 
         } else {
             initFriendMoreAction();
             mNextStepBtn.setVisibility(View.VISIBLE);
-            L_.e("onSuccess  updateUI"+mFriend.getStatus());
+           // L_.e("onSuccess  updateUI"+mFriend.getStatus());
             if (mFriend == null) {
                 mNextStepBtn.setText(R.string.add_attention);
                 mNextStepBtn.setOnClickListener(new AddAttentionListener());
             } else {
-                L_.e("mFriend.getStatus()"+mFriend.getStatus());
+              //  L_.e("mFriend.getStatus()"+mFriend.getStatus());
                 switch (mFriend.getStatus()) {
                     case Friend.STATUS_BLACKLIST:// 在黑名单中，显示移除黑名单
                         mNextStepBtn.setText(R.string.remove_blacklist);
@@ -466,6 +571,34 @@ public class BasicInfoActivity extends MvpActivity implements NewFriendListener 
         });
 
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            //T_.showToastReal("修改成功");
+            if (data==null)return;
+            String updateStr= data.getStringExtra("udaptes");
+            if (TextUtils.isEmpty(updateStr))return;
+            int key = data.getIntExtra("key", 0);
+            if (key==4){
+                // 更新到数据库
+                L_.e("设置好友备注-----------》"+mFriend.toString()+"---->"+updateStr);
+                FriendDao.getInstance().setRemarkName(mLoginUserId, mFriend.getUserId(), updateStr);
+                mTvName.setText(updateStr);
+                mFriend.setRemarkName(updateStr);
+                // 更新消息界面（因为昵称变了，所有要更新）
+                L_.e("发送广播-----》");
+                MsgBroadcast.broadcastMsgUiUpdate(BasicInfoActivity.this);
+                CardcastUiUpdateUtil.broadcastUpdateUi(UIUtils.getContext());
+            }
+        }
+    }
+
+
 
     @Override
     public boolean onNewFriend(NewFriendMessage message) {

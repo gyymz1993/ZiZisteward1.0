@@ -2,6 +2,7 @@ package com.lsjr.zizi;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.support.multidex.MultiDexApplication;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -11,14 +12,18 @@ import com.lqr.emoji.LQREmotionKit;
 import com.lqr.imagepicker.ImagePicker;
 import com.lqr.imagepicker.loader.ImageLoader;
 import com.lqr.imagepicker.view.CropImageView;
+import com.lsjr.bean.ArrayResult;
+import com.lsjr.callback.ChatArrayCallBack;
 import com.lsjr.callback.HttpSubscriber;
-import com.lsjr.zizi.base.BaseApp;
-import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.utils.HttpUtils;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
+import com.lsjr.zizi.chat.bean.PublicMessage;
+import com.lsjr.zizi.chat.bean.ResultCode;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.ymz.baselibrary.AppCache;
 import com.ymz.baselibrary.BaseApplication;
+import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.T_;
 
 import java.security.MessageDigest;
@@ -50,30 +55,70 @@ import java.util.Map;
  *
  * @描述 BaseApp的拓展，用于设置其他第三方的初始化
  */
-public class MyApp extends BaseApp {
+public class MyApp extends MultiDexApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Fresco.initialize(this);
+       // initImagePicker();
         BaseApplication.instance().initialize(this);
         ConfigApplication.instance().initialize(this);
-        if ( AppCache.getInstance().initCreataAppCache()){
-            T_.showToastReal("创建文件夹缓存成功");
-        }else {
-            T_.showToastReal("创建文件夹缓存失败");
-        }
+        //DcodeService.initialize(this);
+       // ConfigApplication.instance().initialize(this);
+        Fresco.initialize(this);
+        BaseApplication.instance().registerUiScreen(750,1334);
+        //BaseApplication.instance().initLeakCanary();
         AppCache.getInstance().initCreateAppDir();
-        //初始化表情控件
-        LQREmotionKit.init(this, (context, path, imageView) -> Glide.with(context).load(path).centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView));
         initImagePicker();
+        //初始化表情控件
+        LQREmotionKit.init(this, (context, path, imageView) -> Glide.with(context).load(path).centerCrop()
+                .skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView));
 
-        test();
+        // test();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-           .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .threadPriority(Thread.NORM_PRIORITY - 2).threadPoolSize(4).build();
         // Initialize ImageLoader with configuration.
         com.nostra13.universalimageloader.core.ImageLoader.getInstance().init(config);
+
+
+
+        //AppService.startService(this);
+
+       // downOnlineMsg();
+    }
+
+
+
+    /**
+     * 离线消息
+     */
+    private void downOnlineMsg() {
+        L_.e("downOnlineMsg");
+        HashMap<String, String> params = new HashMap<>();
+       // params.put("access_token", ConfigApplication.instance().mAccessToken);
+        params.put("from", "3");
+        params.put("to", "4");
+        //direction=1（receiver=发送方，sender=接收方）
+//        params.put("startTime",(System.currentTimeMillis()-60 * 60 * 24 )+"");
+//        params.put("endTime", System.currentTimeMillis()+"");
+//        params.put("pageIndex", "1");
+//        params.put("pageSize", "50");
+        HttpUtils.getInstance().postServiceData(AppConfig.ONLINE_MSG, params, new ChatArrayCallBack<PublicMessage>(PublicMessage.class) {
+
+            @Override
+            protected void onXError(String exception) {
+                T_.showToastReal(exception);
+            }
+
+            @Override
+            protected void onSuccess(ArrayResult<PublicMessage> result) {
+                L_.e(result.toString());
+                boolean success = ResultCode.defaultParser( result, true);
+                //mPullToRefreshListView.onRefreshComplete();
+            }
+        });
+
     }
 
 
@@ -88,7 +133,7 @@ public class MyApp extends BaseApp {
         imagePicker.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
-                Glide.with(getContext()).load(Uri.parse("file://" + path).toString()).centerCrop().into(imageView);
+                Glide.with(getApplicationContext()).load(Uri.parse("file://" + path).toString()).centerCrop().into(imageView);
             }
 
             @Override

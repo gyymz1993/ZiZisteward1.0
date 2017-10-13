@@ -18,6 +18,7 @@ import com.ymz.baselibrary.utils.L_;
 import org.apache.harmony.javax.security.sasl.SaslException;
 import org.jivesoftware.smack.AbstractConnectionListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
@@ -132,8 +133,9 @@ public class XmppConnectionManager {
 			}
 			final boolean isConnected = isGprsOrWifiConnected();
 			if (mIsNetWorkActive != isConnected) {// 和之前的状态不同
-				Log.d("roamer", "网络状态改变了");
+
 				mIsNetWorkActive = isConnected;
+				L_.e( "XmppConnectionManager  ---------------网络状态改变了"+mIsNetWorkActive);
 				// 网络状态改变了
 				if (!mIsNetWorkActive) {// 由有网变为没网
 					if (mLoginThread != null && mLoginThread.isAlive()) {
@@ -155,7 +157,7 @@ public class XmppConnectionManager {
 		// 在连接成功时回调一次，在登陆成功时，也回调一次。
 		@Override
 		public void connected(XMPPConnection arg0) {
-			Log.e(TAG, "Xmpp connected");
+			L_.e(" AbstractConnectionListener  Xmpp connected");
 			Message msg = mNotifyConnectionHandler.obtainMessage(MSG_CONNECTED);
 			msg.obj = arg0;
 			msg.sendToTarget();
@@ -166,7 +168,7 @@ public class XmppConnectionManager {
 		 */
 		@Override
 		public void authenticated(XMPPConnection arg0) {
-			Log.e(TAG, "Xmpp authenticated");
+			L_.e(" AbstractConnectionListener  Xmpp authenticated");
 			Message msg = mNotifyConnectionHandler.obtainMessage(MSG_AUTHENTICATED);
 			msg.obj = arg0;
 			msg.sendToTarget();
@@ -174,13 +176,13 @@ public class XmppConnectionManager {
 
 		@Override
 		public void connectionClosed() {
-			Log.e(TAG, "Xmpp connectionClosed");
+			L_.e(" AbstractConnectionListener Xmpp connectionClosed");
 			mNotifyConnectionHandler.sendEmptyMessage(MSG_CONNECTION_CLOSED);
 		}
 
 		@Override
 		public void connectionClosedOnError(Exception arg0) {
-			Log.e(TAG, "Xmpp connectionClosedOnError");
+			L_.e(" AbstractConnectionListener Xmpp connectionClosedOnError");
 			Message msg = mNotifyConnectionHandler.obtainMessage(MSG_CONNECTION_CLOSED_ON_ERROR);
 			msg.obj = arg0;
 			msg.sendToTarget();

@@ -15,11 +15,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.lsjr.bean.ObjectResult;
+import com.lsjr.callback.ChatObjectCallBack;
+import com.lsjr.utils.HttpUtils;
+import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpFragment;
-import com.lsjr.zizi.chat.helper.AvatarHelper;
+import com.lsjr.zizi.chat.bean.MucRoom;
+import com.lsjr.zizi.chat.bean.ResultCode;
+import com.lsjr.zizi.loader.AvatarHelper;
 import com.lsjr.zizi.mvp.home.session.ChatActivity;
-import com.lsjr.zizi.chat.ConfigApplication;
 import com.lsjr.zizi.chat.bean.BaseSortModel;
 import com.lsjr.zizi.chat.broad.MsgBroadcast;
 import com.lsjr.zizi.chat.broad.MucgroupUpdateUtil;
@@ -29,18 +35,24 @@ import com.lsjr.zizi.chat.utils.HtmlUtils;
 import com.lsjr.zizi.chat.utils.StringUtils;
 import com.lsjr.zizi.chat.utils.TimeUtils;
 import com.lsjr.zizi.chat.xmpp.XmppMessage;
+import com.lsjr.zizi.mvp.home.session.NewFriendActivity;
+import com.lsjr.zizi.mvp.home.session.adapter.NineGridImageViewAdapter;
 import com.lsjr.zizi.util.PinyinUtils;
 import com.lsjr.zizi.view.ClearEditText;
+import com.lsjr.zizi.view.NineGridImageView;
 import com.ymz.baselibrary.mvp.BasePresenter;
 import com.ymz.baselibrary.utils.L_;
 import com.ymz.baselibrary.utils.T_;
+import com.ymz.baselibrary.utils.UIUtils;
 import com.ys.uilibrary.base.BaseRecyclerAdapter;
 import com.ys.uilibrary.base.BaseRecyclerHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 创建人：$ gyymz1993
@@ -49,33 +61,28 @@ import butterknife.BindView;
 
 public class MessageFragment extends MvpFragment {
 
-  //  @BindView(R.id.search_edit)
     ClearEditText mClearEditText;
     @BindView(R.id.id_ms_rv)
     RecyclerView idMsRv;
-    private boolean mNeedUpdate = true;
+    private boolean mNeedUpdate = false;
     private List<BaseSortModel<Friend>> mFriendList;// 筛选后的朋友数据
     private List<BaseSortModel<Friend>> mOriginalFriendList;// 原始的朋友数据，也就是从数据库查询出来，没有筛选的
     private Handler mHandler = new Handler();
-    private NearlyMessageAdapter mAdapter;
+    private MessageAdapter mAdapter;
 
     public MessageFragment() {
         mOriginalFriendList = new ArrayList<>();
         mFriendList = new ArrayList<>();
     }
 
-
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        loadData();
     }
-
 
 
     @Override
     protected void initView() {
-
         mClearEditText = (ClearEditText) mView.findViewById(R.id.search_edit);
         mClearEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,7 +111,7 @@ public class MessageFragment extends MvpFragment {
             }
         });
 
-        mAdapter = new NearlyMessageAdapter(getActivity(),mFriendList,R.layout.item_message);
+        mAdapter = new MessageAdapter(getActivity(),mFriendList,R.layout.item_message);
         idMsRv.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
@@ -115,40 +122,39 @@ public class MessageFragment extends MvpFragment {
             @Override
             public void onItemSelect(BaseSortModel < Friend >  friendBaseSortModel) {
                 Friend friend=friendBaseSortModel.getBean();
-                /*将消息设置为0*/
-                if (friend.getUnReadNum() > 0) {
-                    MsgBroadcast.broadcastMsgNumUpdate(getActivity(), false, friend.getUnReadNum());
-                    friend.setUnReadNum(0);
-                    mAdapter.notifyDataSetChanged();
-                }
+                UIUtils.getHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (friend.getUnReadNum() > 0) {
+                            MsgBroadcast.broadcastMsgNumUpdate(getActivity(), false, friend.getUnReadNum());
+                            friend.setUnReadNum(0);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }
+                },1000);
 
+                /*将消息设置为0*/
                 if (friend.getRoomFlag() == 0) {
                     if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {// 新朋友消息
-                        T_.showToastReal("新朋友列表");
-                        //startActivity(new Intent(getActivity(), NewFriendActivity.class));
+                        openActivity( NewFriendActivity.class);
                     } else {
                         Intent intent = new Intent(getActivity(), ChatActivity.class);
                         intent.putExtra(ChatActivity.FRIEND,friend);
                         startActivity(intent);
                     }
                 } else {
-                    T_.showToastReal("群聊");
-//                    Intent intent = new Intent(getActivity(), MucChatActivity.class);
-//                    intent.putExtra(AppConstant.EXTRA_USER_ID, friend.getUserId());
-//                    intent.putExtra(AppConstant.EXTRA_NICK_NAME, friend.getNickName());
-//                    intent.putExtra(AppConstant.EXTRA_IS_GROUP_CHAT, true);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    intent.putExtra(Constants.EXTRA_USER_ID, friend.getUserId());
+                    intent.putExtra(Constants.EXTRA_NICK_NAME, friend.getNickName());
+                    intent.putExtra(Constants.EXTRA_IS_GROUP_CHAT, true);
+                    startActivity(intent);
                 }
-
-
-
-
             }
         });
-
         idMsRv.setAdapter(mAdapter);
 
     }
+
 
     @Override
     public void onResume() {
@@ -157,6 +163,7 @@ public class MessageFragment extends MvpFragment {
             mNeedUpdate = false;
             loadData();
         }
+
     }
 
     @Override
@@ -171,6 +178,7 @@ public class MessageFragment extends MvpFragment {
 
     @Override
     protected void afterCreate(Bundle savedInstanceState) {
+        loadData();
         getActivity().registerReceiver(mUpdateReceiver, new IntentFilter(MsgBroadcast.ACTION_MSG_UI_UPDATE));
     }
 
@@ -187,9 +195,13 @@ public class MessageFragment extends MvpFragment {
         }
     };
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mUpdateReceiver);
+    }
+
     /**
-     * 请求加载新的筛选条件的数据
-     * <p>
      * 是下拉刷新，还是上拉加载
      */
 
@@ -198,6 +210,17 @@ public class MessageFragment extends MvpFragment {
             String mLoginUserId = ConfigApplication.instance().mLoginUser.getUserId();
             long startTime = System.currentTimeMillis();
             final List<Friend> friends = FriendDao.getInstance().getNearlyFriendMsg(mLoginUserId);
+            if (friends != null && friends.size() < 1){
+                loadData();
+                return;
+            }
+            if (friends.size()==1){
+                // 通知界面更新
+                HomeActivity homeActivity= (HomeActivity) getActivity();
+                if (homeActivity!=null&&homeActivity.getmXmppService()!=null){
+                    MsgBroadcast.broadcastMsgNumReset(homeActivity.getmXmppService());
+                }
+            }
             long delayTime = 200 - (startTime - System.currentTimeMillis());// 保证至少200ms的刷新过程
             if (delayTime < 0) {
                 delayTime = 0;
@@ -217,10 +240,8 @@ public class MessageFragment extends MvpFragment {
                                 || mode.getBean().getShowName().startsWith(filter)) {
                             mFriendList.add(mode);
                         }
+                        L_.e("当前消息界面数据---->"+friends.size()+":"+friends.get(i).toString());
                     }
-                }
-                for (int i = 0; i < mFriendList.size(); i++) {
-                    L_.e(mFriendList.get(i).getFirstLetter()+":"+mFriendList.get(i).getBean().toString());
                 }
                 mAdapter.notifyDataSetChanged();
             }, delayTime);
@@ -249,13 +270,14 @@ public class MessageFragment extends MvpFragment {
     }
 
 
+
     public void sendBroadcast() {
         Intent mIntent = new Intent(MucgroupUpdateUtil.ACTION_UPDATE);
         getActivity().sendBroadcast(mIntent);
     }
 
-    public class NearlyMessageAdapter extends BaseRecyclerAdapter<BaseSortModel<Friend>> {
-        public NearlyMessageAdapter(Context context, List<BaseSortModel<Friend>> datas, int itemLayoutId) {
+    public class MessageAdapter extends BaseRecyclerAdapter<BaseSortModel<Friend>> {
+        public MessageAdapter(Context context, List<BaseSortModel<Friend>> datas, int itemLayoutId) {
             super(context, datas, itemLayoutId);
         }
 
@@ -267,24 +289,57 @@ public class MessageFragment extends MvpFragment {
                     onItemSelectListener.onItemSelect(item);
                 }
             });
-            ImageView avatar_img = holder.getView(R.id.avatar_img);
+            CircleImageView avatar_img = holder.getView(R.id.avatar_img);
             TextView num_tv = holder.getView(R.id.num_tv);
             TextView nick_name_tv = holder.getView(R.id.nick_name_tv);
             TextView content_tv = holder.getView( R.id.content_tv);
             TextView time_tv = holder.getView(R.id.time_tv);
-
+            NineGridImageView ngiv = holder.getView(R.id.ngiv);
             final Friend friend = mFriendList.get(position).getBean();
-
             if (friend.getRoomFlag() == 0) {// 这是单个人
-                if (friend.getUserId().equals(Friend.ID_SYSTEM_MESSAGE)) {// 系统消息的头像
-                    avatar_img.setImageResource(R.drawable.im_notice);
-                } else if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {// 新朋友的头像
-                    avatar_img.setImageResource(R.drawable.im_new_friends);
-                } else {// 其他
-                    AvatarHelper.getInstance().displayAvatar(friend.getUserId(), avatar_img, true);
+                switch (friend.getUserId()) {
+                    case Friend.ID_SYSTEM_MESSAGE: // 系统消息的头像
+                       // avatar_img.setImageResource(R.drawable.im_notice);
+                        friend.setNickName("孜孜管家服务");
+                        break;
+                    case Friend.ID_NEW_FRIEND_MESSAGE: // 新朋友的头像
+                        friend.setNickName("新的朋友");
+                        break;
+                    default: // 其他
+                        break;
                 }
-            }
+                AvatarHelper.getInstance().displayAvatar(friend, avatar_img, true);
+                avatar_img.setVisibility(View.VISIBLE);
+                ngiv.setVisibility(View.GONE);
+            }else {
+                avatar_img.setVisibility(View.VISIBLE);
+                ngiv.setVisibility(View.GONE);
+                avatar_img.setImageResource(R.drawable.head_group);
+               // AvatarHelper.getInstance().displayAvatar(ConfigApplication.instance().mLoginUser, avatar_img, true);
+//                NineGridImageViewAdapter mNgivAdapter = new NineGridImageViewAdapter<String>() {
+//                    @Override
+//                    public void onDisplayImage(Context context, ImageView imageView, String groupMember) {
+//                        // Glide.with(context).load(groupMember).centerCrop().into(imageView);
+//                        final String url = AvatarHelper.getInstance().getAvatarUrl(ConfigApplication.instance().getLoginUserId(), true);
+//                        //AvatarHelper.getInstance().displayAvatar(groupMember, imageView, true);
+//                        Glide.with(context).load(url).centerCrop().error(R.drawable.ic_default).into(imageView);
+//                    }
+//
+//                    @Override
+//                    public ImageView generateImageView(Context context) {
+//                        return super.generateImageView(context);
+//                    }
+//                };
+//
+//                //九宫格头像
+//                ngiv.setAdapter(mNgivAdapter);
+//                List<String> ids=new ArrayList<>();
+//                for (int i=0;i<4;i++){
+//                    ids.add(ConfigApplication.instance().mLoginUser.getUserId());
+//                }
+//                ngiv.setImagesData(ids);
 
+            }
             nick_name_tv.setText(friend.getShowName());
             time_tv.setText(TimeUtils.getFriendlyTimeDesc(getActivity(), friend.getTimeSend()));
             CharSequence content ;
@@ -296,8 +351,11 @@ public class MessageFragment extends MvpFragment {
             }else {
                 content = friend.getContent();
             }
-            L_.e(content.toString());
-            content_tv.setText(content);
+            if (Friend.ID_SYSTEM_MESSAGE.equals(friend.getUserId())&&content.toString().contains("面试")){
+                content_tv.setText("欢迎使用孜孜管家聊天系统");
+            }else {
+                content_tv.setText(content);
+            }
             if (friend.getUnReadNum() > 0) {
                 String numStr = friend.getUnReadNum() >= 99 ? "99+" : friend.getUnReadNum() + "";
                 num_tv.setText(numStr);
@@ -317,5 +375,32 @@ public class MessageFragment extends MvpFragment {
     public  interface  OnItemSelectListener<T>{
         void onItemSelect(T t);
     }
+
+    MucRoom mucRoom;
+    private void loadMembers(String roomId) {
+       // showProgressDialogWithText("获取数据");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("access_token", ConfigApplication.instance().mAccessToken);
+        params.put("roomId", roomId);
+        HttpUtils.getInstance().postServiceData(AppConfig.ROOM_GET, params, new ChatObjectCallBack<MucRoom>(MucRoom.class) {
+
+            @Override
+            protected void onXError(String exception) {
+                dismissProgressDialog();
+                T_.showToastReal(exception);
+            }
+
+            @Override
+            protected void onSuccess(ObjectResult<MucRoom> result) {
+                dismissProgressDialog();
+                boolean success = ResultCode.defaultParser(result, true);
+                if (success && result.getData() != null) {
+                    mucRoom = result.getData();
+
+                }
+            }
+        });
+    }
+
 
 }

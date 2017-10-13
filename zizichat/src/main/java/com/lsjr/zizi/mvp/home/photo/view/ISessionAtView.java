@@ -4,7 +4,7 @@ package com.lsjr.zizi.mvp.home.photo.view;
 import android.widget.EditText;
 
 import com.andview.autofresh.BGARefreshLayout;
-import com.lqr.recyclerview.LQRRecyclerView;
+import com.andview.myrvview.LQRRecyclerView;
 
 
 public interface ISessionAtView {

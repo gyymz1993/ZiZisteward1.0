@@ -44,8 +44,23 @@ public class MucRoomMember {
 	public int getSub() {
 		return sub;
 	}
+
+	@Override
+	public String toString() {
+		return "MucRoomMember{" +
+				"userId='" + userId + '\'' +
+				", nickName='" + nickName + '\'' +
+				", role=" + role +
+				", talkTime=" + talkTime +
+				", active=" + active +
+				", sub=" + sub +
+				'}';
+	}
+
 	public void setSub(int sub) {
 		this.sub = sub;
 	}
+
+
 	
 }

@@ -23,6 +23,12 @@ public class DivItemDecoration extends RecyclerView.ItemDecoration {
         if(hasHead && position == 0){
             return;
         }
-        outRect.bottom = divHeight;
+        if (parent.getChildLayoutPosition(view) == state.getItemCount()-1) {
+            outRect.bottom = 50;
+        }else {
+            outRect.bottom = divHeight;
+        }
+
+        //outRect.bottom = divHeight;
     }
 }

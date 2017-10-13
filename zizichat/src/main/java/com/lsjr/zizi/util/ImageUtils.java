@@ -104,9 +104,17 @@ public class ImageUtils {
 
     public static Bitmap getLoacalBitmap(String url) {
         try {
+            BitmapFactory.Options opts = new BitmapFactory.Options();
+            opts.inSampleSize = 2;
+            // 设置inJustDecodeBounds为true
+            //opts.inJustDecodeBounds = true;
+            // 使用decodeFile方法得到图片的宽和高
             FileInputStream fis = new FileInputStream(url);
-            return BitmapFactory.decodeStream(fis); // /把流转化为Bitmap图片
+            return BitmapFactory.decodeStream(fis,null,opts); // /把流转化为Bitmap图片
 
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+            return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;

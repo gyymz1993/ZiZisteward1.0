@@ -116,17 +116,13 @@ public class CoreService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (CoreService.DEBUG) {
-			L_.e(CoreService.TAG, "CoreService onStartCommand:" + flags);
-		}
+		L_.e( "CoreService onStartCommand:" + flags);
 		if (intent != null) {
 			mLoginUserId = intent.getStringExtra(EXTRA_LOGIN_USER_ID);
 			mLoginPassword = intent.getStringExtra(EXTRA_LOGIN_PASSWORD);
 			mLoginNickName = intent.getStringExtra(EXTRA_LOGIN_NICK_NAME);
 		}
-		if (CoreService.DEBUG) {
-			L_.e(CoreService.TAG, "登陆Xmpp账户为   mLoginUserId：" + mLoginUserId + "   mPassword：" + mLoginPassword);
-		}
+		L_.e( "登陆Xmpp账户为   mLoginUserId：" + mLoginUserId + "   mPassword：" + mLoginPassword);
 
 		if (mConnectionManager != null) {
 			// 因为Xmpp可能在后台重启，重启时读取的是保存在SharePreference中的Host和Port。 如果程序启动的时候，从服务器获取的Host和Port和本地不一致，那么就需要重新创建一个新的XmppConnection，并且重置使用前一个XmppConnection的所有对象
@@ -135,9 +131,7 @@ public class CoreService extends Service {
 			if (mConnectionManager.getHost() == null || mConnectionManager.getPort() == 0 || !mConnectionManager.getHost().equals(xmppHost)
 					|| mConnectionManager.getPort() != xmppPort) {
 				release();
-				if (CoreService.DEBUG) {
-					Log.e(CoreService.TAG, "重新创建ConnectionManager");
-				}
+				L_.e("重新创建ConnectionManager");
 			}
 		}
 
@@ -155,38 +149,34 @@ public class CoreService extends Service {
 	private NotifyConnectionListener mNotifyConnectionListener = new NotifyConnectionListener() {
 		@Override
 		public void notifyConnectionClosedOnError(Exception arg0) {
-			if (CoreService.DEBUG)
-				L_.e(CoreService.TAG, "连接异常断开");
+			L_.e("Xmpp连接异常断开");
 			ListenerManager.getInstance().notifyAuthStateChange(AuthStateListener.AUTH_STATE_NOT);
 		}
 
 		@Override
 		public void notifyConnectionClosed() {
-			if (CoreService.DEBUG)
-				L_.e(CoreService.TAG, "连接断开");
+			L_.e("Xmpp连接断开");
 			ListenerManager.getInstance().notifyAuthStateChange(AuthStateListener.AUTH_STATE_NOT);
 		}
 
 		@Override
 		public void notifyConnected(XMPPConnection arg0) {
-			if (CoreService.DEBUG)
-				L_.e(CoreService.TAG, "Xmpp已经连接");
+			L_.e("Xmpp已经连接  notifyConnected"+arg0.getServiceName()+arg0.getUser());
+			//init();
 			ListenerManager.getInstance().notifyAuthStateChange(AuthStateListener.AUTH_STATE_SUCCESS);
+
 		}
 
 		@Override
 		public void notifyAuthenticated(XMPPConnection arg0) {
-			if (CoreService.DEBUG)
-				L_.e(CoreService.TAG, "Xmpp已经认证");
+			L_.e("Xmpp  Xmpp已经认证  notifyAuthenticated"+arg0.getUser());
 			String connectionUserName = StringUtils.parseName(arg0.getUser());
 			if (!connectionUserName.equals(mLoginUserId)) {
-				if (CoreService.DEBUG) {
-					L_.e(CoreService.TAG, "Xmpp登陆账号不匹配，重新登陆");
-				}
+				L_.e( "Xmpp登陆账号不匹配，重新登陆");
 				mConnectionManager.login(mLoginUserId, mLoginPassword);// 重新登陆
 			} else {
 				init();
-				L_.e("roamer", "初始化");
+				L_.e( "Xmpp  初始化");
 				ListenerManager.getInstance().notifyAuthStateChange(AuthStateListener.AUTH_STATE_SUCCESS);// 通知登陆成功
 			}
 		}
@@ -204,27 +194,10 @@ public class CoreService extends Service {
 		return false;
 	}
 
-	// PacketListener packetListener = new PacketListener() {
-	// @Override
-	// public void processPacket(Packet arg0) throws NotConnectedException {
-	// Log.d("roamer", "PacketListener");
-	// }
-	// };
-	//
-	// PacketFilter packetFilter = new PacketFilter() {
-	// @Override
-	// public boolean accept(Packet arg0) {
-	// if (arg0 instanceof Message) {
-	// return false;
-	// } else {
-	// return true;
-	// }
-	// }
-	// };
 
 	public void logout() {
 		if (CoreService.DEBUG)
-			L_.e(CoreService.TAG, "Xmpp登出");
+			L_.e( "Xmpp登出");
 		if (mConnectionManager != null) {
 			mConnectionManager.logout();
 		}
@@ -232,7 +205,7 @@ public class CoreService extends Service {
 	}
 
 	private void init() {
-		L_.e("roamer","这里会初始化消息各种");
+		L_.e("XMPPInit","这里会初始化消息各种");
 		if (!isAuthenticated()) {
 			return;
 		}
@@ -251,6 +224,7 @@ public class CoreService extends Service {
 			mXChatManager.reset();
 		}
 
+		L_.e("初始化  mXChatManager---------》"+mXChatManager);
 		/**
 		 * TODO 群聊的暂时不加 做的时候要考虑<br/>
 		 * 1、每次连接被断开，加入的房间是不是就退出了，如果是，那么每次都需要在这里new一个新的对象。 <br/>
@@ -264,6 +238,7 @@ public class CoreService extends Service {
 			// if(mXMucChatManager.getMucNickName(roomJid))
 			mXMucChatManager.reset();
 		}
+		L_.e("初始化mXMucChatManager---------》"+mXMucChatManager);
 		//mConnectionManager.presenceOnline();
 		/* 获取离线消息 */
 		L_.e("roamer", "获取离线消息去了");
@@ -284,25 +259,25 @@ public class CoreService extends Service {
 	public void sendChatMessage(String toUserId, ChatMessage chatMessage) {
 
 		if (mXChatManager == null) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "mXChatManager==null");
+			L_.e(CoreService.TAG, "mXChatManager==null");
+
 		}
 		if (!isAuthenticated()) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "isAuthenticated==false");
+			L_.e(CoreService.TAG, "isAuthenticated==false");
 		}
 
 		if (mReceiptManager == null) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "mReceiptManager==null");
+			L_.e(CoreService.TAG, "mReceiptManager==null");
 		}
 
 		if (mXChatManager == null || !isAuthenticated() || mReceiptManager == null) {
 			ListenerManager.getInstance().notifyMessageSendStateChange(mLoginUserId, toUserId, chatMessage.get_id(),
 					ChatMessageListener.MESSAGE_SEND_FAILED);
+			L_.e("MESSAGE_SEND_FAILED");
 		} else {
 			mReceiptManager.addWillSendMessage(toUserId, chatMessage, ReceiptManager.SendType.NORMAL);
 			mXChatManager.sendMessage(toUserId, chatMessage);
+			L_.e( "sendMessage");
 		}
 	}
 
@@ -313,6 +288,7 @@ public class CoreService extends Service {
 	 * @return
 	 */
 	public void sendNewFriendMessage(String toUserId, NewFriendMessage message) {
+		L_.e("发送一条新消息");
 		if (mXChatManager == null || !isAuthenticated() || mReceiptManager == null) {
 			ListenerManager.getInstance().notifyNewFriendSendStateChange(toUserId, message, ChatMessageListener.MESSAGE_SEND_FAILED);
 		} else {
@@ -348,18 +324,17 @@ public class CoreService extends Service {
 	}
 
 	public void sendMucChatMessage(String toUserId, ChatMessage chatMessage) {
+		L_.e("Xmpp-------------------》开始发送消息");
 		if (mXMucChatManager == null) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "mXMucChatManager==null");
+			L_.e("mXMucChatManager==null");
 		}
 		if (!isAuthenticated()) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "isAuthenticated==false");
+			L_.e( "isAuthenticated==false");
+
 		}
 
 		if (mReceiptManager == null) {
-			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "mReceiptManager==null");
+			L_.e("mReceiptManager==null");
 		}
 
 		if (mXMucChatManager == null || !isAuthenticated() || mReceiptManager == null) {

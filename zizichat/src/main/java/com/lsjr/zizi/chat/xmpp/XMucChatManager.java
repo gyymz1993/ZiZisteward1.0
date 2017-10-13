@@ -5,8 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
-import com.lsjr.zizi.chat.ConfigApplication;
-import com.lsjr.zizi.chat.Constants;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
+import com.lsjr.zizi.mvp.home.Constants;
 import com.lsjr.zizi.chat.bean.MucRoomSimple;
 import com.lsjr.zizi.chat.broad.CardcastUiUpdateUtil;
 import com.lsjr.zizi.chat.dao.ChatMessageDao;

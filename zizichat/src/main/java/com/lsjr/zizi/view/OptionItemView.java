@@ -17,7 +17,6 @@ import android.view.View;
 import com.lsjr.zizi.R;
 
 /**
- * CSDN_LQR
  * 自定义的顶部标题
  */
 public class OptionItemView extends View {
@@ -259,9 +258,9 @@ public class OptionItemView extends View {
         if (rightImage != null && isShowRightImg) {
             // 计算右图范围
             rect.right = mWidth - (rightImageMarginRight >= 0 ? rightImageMarginRight : mWidth / 32);
-            rect.left = rect.right - mHeight * 1 / 2;
-            rect.top = mHeight / 4;
-            rect.bottom = mHeight * 3 / 4;
+            rect.left = rect.right - mHeight / 5;
+            rect.top = mHeight / 2 - mHeight / 6;
+            rect.bottom = mHeight / 2 + mHeight / 6;
             canvas.drawBitmap(rightImage, null, rect, mPaint);
         }
         if (leftText != null && !leftText.equals("") && isShowLeftText) {

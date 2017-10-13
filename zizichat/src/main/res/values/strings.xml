@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">孜信</string>
+    <string name="app_name">知信</string>
 
     <string name="error_code">异常码：</string>
     <string name="please_check_net">请检查网络</string>
@@ -106,7 +106,7 @@
     <string name="agree_friend_fail">同意添加好友失败</string>
 
     <string name="create_group">发起群聊</string>
-    <string name="scan_one_scan">扫一扫</string>
+    <string name="scan_one_scan">扫一扫呦</string>
     <string name="payment_received">收付款</string>
     <string name="help_feedback">帮助与反馈</string>
 
@@ -369,5 +369,15 @@
     <string name="deficiency_data_des">本地数据已过期，是否立即重新登陆？</string>
     <string name="logout_title">下线通知</string>
     <string name="logout_des">您的账号在另外一台设备上登录，是否立即重新登陆？</string>
+
+    <string name="delete_prompt">确定要删除吗？</string>
+    <string name="prompt_title">提示</string>
+
+
+    <!-- RegisterPasswordActivity -->
+    <string name="register_step_two">2、填写密码</string>
+    <string name="password_empty_error">密码不允许为空，且长度大于6个字符</string>
+    <string name="confirm_password_empty_error">确认密码不允许为空，且长度大于6个字符</string>
+    <string name="password_confirm_password_not_match">密码和确认密码不一致</string>
 
 </resources>

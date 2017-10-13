@@ -9,18 +9,23 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/adapterlibrary" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/audiolibrary" />
             <option value="$PROJECT_DIR$/baselibrary" />
+            <option value="$PROJECT_DIR$/basiclib" />
             <option value="$PROJECT_DIR$/cameralibrary" />
+            <option value="$PROJECT_DIR$/citypickerlibrary" />
             <option value="$PROJECT_DIR$/compresslibrary" />
             <option value="$PROJECT_DIR$/contactlibrary" />
             <option value="$PROJECT_DIR$/imagepickerlibrary" />
             <option value="$PROJECT_DIR$/netlibrary" />
+            <option value="$PROJECT_DIR$/pinglibrary" />
             <option value="$PROJECT_DIR$/refreshlibrary" />
             <option value="$PROJECT_DIR$/syslibrary" />
             <option value="$PROJECT_DIR$/tablirbry" />
             <option value="$PROJECT_DIR$/toemaillibrary" />
             <option value="$PROJECT_DIR$/uilibrary" />
+            <option value="$PROJECT_DIR$/xmpplibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

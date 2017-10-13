@@ -2,13 +2,12 @@ package com.lsjr.zizi.chat.xmpp;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lsjr.bean.Result;
 import com.lsjr.zizi.AppConfig;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.bean.LoginAuto;
 import com.lsjr.zizi.chat.helper.LoginHelper;
 import com.lsjr.zizi.chat.helper.UserSp;
@@ -188,8 +187,7 @@ public class XReconnectionManager extends AbstractConnectionListener {
 	 * @return
 	 */
 	private int syncCheckToken() {// 同步网络请求Token
-		if (CoreService.DEBUG)
-			Log.d(CoreService.TAG, "开始重新登陆前的 Token 状态检查");
+		L_.e(CoreService.TAG, "开始重新登陆前的 Token 状态检查");
 		String requestUrl = AppConfig.USER_LOGIN_AUTO;
 		HttpURLConnection httpConn = null;
 		DataOutputStream out = null;
@@ -210,6 +208,7 @@ public class XReconnectionManager extends AbstractConnectionListener {
 				access_token = UserSp.getInstance().getAccessToken(null);
 			}
 
+			L_.e("access_token----->"+access_token);
 			if (TextUtils.isEmpty(access_token)) {
 				return 1;
 			}
@@ -219,9 +218,9 @@ public class XReconnectionManager extends AbstractConnectionListener {
 				return 1;
 			}
 			if (CoreService.DEBUG) {
-				Log.d(CoreService.TAG, "requestUrl:" + requestUrl);
-				Log.d(CoreService.TAG, "access_token:" + access_token);
-				Log.d(CoreService.TAG, "serial:" + serial);
+				L_.e(CoreService.TAG, "requestUrl:" + requestUrl);
+				L_.e(CoreService.TAG, "access_token:" + access_token);
+				L_.e(CoreService.TAG, "serial:" + serial);
 			}
 
 			StringBuilder sb = new StringBuilder();
@@ -255,7 +254,7 @@ public class XReconnectionManager extends AbstractConnectionListener {
 			}
 			String result = buffer.toString();
 			if (CoreService.DEBUG) {
-				Log.d(CoreService.TAG, "检查状态result:" + result);
+				L_.e(CoreService.TAG, "检查状态result:" + result);
 			}
 
 			if (TextUtils.isEmpty(result)) {
@@ -346,7 +345,7 @@ public class XReconnectionManager extends AbstractConnectionListener {
 
 			if ("conflict".equals(reason)) {// 发出下线通知
 				if (CoreService.DEBUG)
-					Log.d(CoreService.TAG, "异常断开，有另外设备登陆啦");
+					L_.e(CoreService.TAG, "异常断开，有另外设备登陆啦");
 				conflict();
 				doReconnecting = false;
 				return;
@@ -356,7 +355,7 @@ public class XReconnectionManager extends AbstractConnectionListener {
 		// 因为其他原因导致下线，那么就开始重连
 		if (this.isReconnectionAllowed()) {
 			if (CoreService.DEBUG)
-				Log.d(CoreService.TAG, "异常断开，开始重连");
+				L_.e(CoreService.TAG, "异常断开，开始重连");
 			this.reconnect();
 		}
 	}

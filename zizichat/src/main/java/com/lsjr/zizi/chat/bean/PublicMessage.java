@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import org.w3c.dom.Comment;
 
 /**
  * 
@@ -561,4 +560,29 @@ public class PublicMessage implements Serializable {
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "PublicMessage{" +
+				"messageId='" + messageId + '\'' +
+				", userId='" + userId + '\'' +
+				", nickName='" + nickName + '\'' +
+				", flag=" + flag +
+				", visible=" + visible +
+				", body=" + body +
+				", count=" + count +
+				", time=" + time +
+				", model='" + model + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				", location='" + location + '\'' +
+				", isPraise=" + isPraise +
+				", comments=" + comments +
+				", praises=" + praises +
+				", gifts=" + gifts +
+				", source=" + source +
+				", fowardText='" + fowardText + '\'' +
+				", fowardUserId='" + fowardUserId + '\'' +
+				", fowardNickname='" + fowardNickname + '\'' +
+				'}';
+	}
 }

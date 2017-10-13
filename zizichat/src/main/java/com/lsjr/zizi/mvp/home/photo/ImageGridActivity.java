@@ -1,6 +1,7 @@
 package com.lsjr.zizi.mvp.home.photo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -52,6 +53,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         setContentView(R.layout.activity_image_grid);
 
         imagePicker = ImagePicker.getInstance();
+        imagePicker.setShowCamera(false);
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
 
@@ -207,6 +209,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     @Override
     public void onImageSelected(int position, ImageItem item, boolean isAdd) {
         if (imagePicker.getSelectImageCount() > 0) {

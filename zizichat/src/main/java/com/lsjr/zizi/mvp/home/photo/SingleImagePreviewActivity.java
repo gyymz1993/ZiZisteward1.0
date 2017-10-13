@@ -1,6 +1,5 @@
 package com.lsjr.zizi.mvp.home.photo;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,10 +11,9 @@ import android.widget.TextView;
 import com.lsjr.zizi.AppConfig;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
-import com.lsjr.zizi.loader.ImageLoader;
 import com.lsjr.zizi.chat.utils.Scheme;
+import com.lsjr.zizi.loader.ImageLoader;
 import com.ymz.baselibrary.mvp.BasePresenter;
-import com.ymz.baselibrary.utils.L_;
 
 import java.io.File;
 
@@ -61,21 +59,7 @@ public class SingleImagePreviewActivity extends MvpActivity {
 		}
 
 		mProgressBar.setVisibility(View.VISIBLE);
-		ImageLoader.getInstance().showRealWHImage(mImageUri, new ImageLoader.OnShowBitmapListener() {
-			@Override
-			public void onShow(Bitmap bitmap) {
-				L_.e(bitmap.getWidth()+"------>"+bitmap.getHeight());
-				mProgressBar.setVisibility(View.GONE);
-				mImageView.setImageBitmap(bitmap);
-			}
-		});
-
-		mImageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		ImageLoader.getInstance().showRealWHImage(mImageUri, mImageView,mProgressBar);
 	}
 
 	@Override
@@ -83,11 +67,18 @@ public class SingleImagePreviewActivity extends MvpActivity {
 		return R.layout.activity_imageshow;
 	}
 
+
 	@Override
-	protected void afterCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		if (getIntent() != null) {
 			mImageUri = getIntent().getStringExtra(AppConfig.EXTRA_IMAGE_URI);
 		}
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void afterCreate(Bundle savedInstanceState) {
+
 	}
 
 }

@@ -32,10 +32,6 @@ public class MucRoom {
 
     private List<Notice> notices;
 
-    public String toString() {
-        return createTime+"";
-    }
-
     public static class Notice {
         private String id;
         private String text;
@@ -253,4 +249,30 @@ public class MucRoom {
         this.member = member;
     }
 
+    @Override
+    public String toString() {
+        return "MucRoom{" +
+                "id='" + id + '\'' +
+                ", jid='" + jid + '\'' +
+                ", name='" + name + '\'' +
+                ", subject='" + subject + '\'' +
+                ", desc='" + desc + '\'' +
+                ", createTime=" + createTime +
+                ", maxUserSize=" + maxUserSize +
+                ", userSize=" + userSize +
+                ", userId='" + userId + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", areaId=" + areaId +
+                ", cityId=" + cityId +
+                ", provinceId=" + provinceId +
+                ", countryId=" + countryId +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", s=" + s +
+                ", category=" + category +
+                ", members=" + members +
+                ", member=" + member +
+                ", notices=" + notices +
+                '}';
+    }
 }

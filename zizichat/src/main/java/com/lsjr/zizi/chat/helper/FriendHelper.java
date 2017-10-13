@@ -2,9 +2,9 @@ package com.lsjr.zizi.chat.helper;
 
 import com.lsjr.bean.ArrayResult;
 import com.lsjr.callback.ChatArrayCallBack;
+import com.lsjr.utils.HttpUtils;
 import com.lsjr.zizi.AppConfig;
-import com.lsjr.zizi.http.HttpUtils;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.bean.AttentionUser;
 import com.lsjr.zizi.chat.bean.ResultCode;
 import com.lsjr.zizi.chat.broad.CardcastUiUpdateUtil;

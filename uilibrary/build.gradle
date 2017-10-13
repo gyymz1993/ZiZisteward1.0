@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
+//apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 25
@@ -25,14 +25,14 @@ dependencies {
 }
 
 //添加
-publish {
-    userOrg = 'gyymz1993'  //bintray.com用户名
-    groupId = 'com.ui'  //jcenter上的路径
-    artifactId = 'utilsview'  //项目名称
-    publishVersion = 'v1.1.4'  //版本号
-    desc = 'this is for utilsview'//描述，不重要
-    website = 'https://github.com/gyymz1993'//网站，最好有，不重要
-    /*gradlew clean build bintrayUpload -PbintrayUser=gyymz1993 -PbintrayKey=5034d09884878366fbd444d453ff05c290684076 -PdryRun=false*/
-}
+//publish {
+//    userOrg = 'gyymz1993'  //bintray.com用户名
+//    groupId = 'com.ui'  //jcenter上的路径
+//    artifactId = 'utilsview'  //项目名称
+//    publishVersion = 'v1.1.4'  //版本号
+//    desc = 'this is for utilsview'//描述，不重要
+//    website = 'https://github.com/gyymz1993'//网站，最好有，不重要
+//    /*gradlew clean build bintrayUpload -PbintrayUser=gyymz1993 -PbintrayKey=5034d09884878366fbd444d453ff05c290684076 -PdryRun=false*/
+//}
 
 

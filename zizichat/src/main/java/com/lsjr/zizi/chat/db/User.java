@@ -479,5 +479,38 @@ public class User implements Serializable, Cloneable {
 			return friends.getBlacklist();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"userId='" + userId + '\'' +
+				", userType=" + userType +
+				", nickName='" + nickName + '\'' +
+				", telephone='" + telephone + '\'' +
+				", password='" + password + '\'' +
+				", description='" + description + '\'' +
+				", birthday=" + birthday +
+				", sex=" + sex +
+				", countryId=" + countryId +
+				", provinceId=" + provinceId +
+				", cityId=" + cityId +
+				", areaId=" + areaId +
+				", integral=" + integral +
+				", integralTotal=" + integralTotal +
+				", level=" + level +
+				", money=" + money +
+				", moneyTotal=" + moneyTotal +
+				", vip=" + vip +
+				", friendsCount=" + friendsCount +
+				", fansCount=" + fansCount +
+				", attCount=" + attCount +
+				", isAuth=" + isAuth +
+				", status=" + status +
+				", offlineTime=" + offlineTime +
+				", company=" + company +
+				", friends=" + friends +
+				", loginLog=" + loginLog +
+				'}';
+	}
 }
 

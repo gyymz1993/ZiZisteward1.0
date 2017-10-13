@@ -14,8 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 
-import com.lqr.recyclerview.LQRRecyclerView;
-
+import com.andview.myrvview.LQRRecyclerView;
 import com.lsjr.zizi.R;
 import com.lsjr.zizi.base.MvpActivity;
 import com.lsjr.zizi.mvp.home.photo.presenter.MyLocationAtPresenter;
@@ -40,7 +39,6 @@ import com.tencent.mapsdk.raster.model.Marker;
 import com.tencent.mapsdk.raster.model.MarkerOptions;
 import com.tencent.tencentmap.mapsdk.map.MapView;
 import com.tencent.tencentmap.mapsdk.map.TencentMap;
-import com.ymz.baselibrary.utils.T_;
 import com.ymz.baselibrary.utils.UIUtils;
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -48,8 +46,6 @@ import butterknife.BindView;
 
 
 /**
- * @创建者 CSDN_LQR
- * @描述
  */
 public class MyLocationActivity extends MvpActivity<MyLocationAtPresenter> implements IMyLocationAtView, TencentLocationListener, SensorEventListener {
 
@@ -66,8 +62,8 @@ public class MyLocationActivity extends MvpActivity<MyLocationAtPresenter> imple
     private TencentSearch mTencentSearch;
 
 
-    @BindView(R.id.btnToolbarSend)
-    Button mBtnToolbarSend;
+   // @BindView(R.id.btnToolbarSend)
+   // Button mBtnToolbarSend;
     @BindView(R.id.rlMap)
     RelativeLayout mRlMap;
     @BindView(R.id.map)
@@ -81,7 +77,7 @@ public class MyLocationActivity extends MvpActivity<MyLocationAtPresenter> imple
 
     @Override
     public void initView() {
-        mBtnToolbarSend.setVisibility(View.VISIBLE);
+        //mBtnToolbarSend.setVisibility(View.VISIBLE);
         setRlMapHeight(maxHeight);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mOritationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
@@ -103,6 +99,20 @@ public class MyLocationActivity extends MvpActivity<MyLocationAtPresenter> imple
     }
 
     @Override
+    protected void initTitle() {
+        super.initTitle();
+        setTitleText("当前位置");
+        getToolBarView().getRightTextView().setVisibility(View.VISIBLE);
+        getToolBarView().getRightTextView().setText("发送");
+        getToolBarView().getRightTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mvpPresenter.sendLocation();
+            }
+        });
+    }
+
+    @Override
     public void initData() {
         requestLocationUpdate();
         initListener();
@@ -110,10 +120,10 @@ public class MyLocationActivity extends MvpActivity<MyLocationAtPresenter> imple
 
 
     public void initListener() {
-        mBtnToolbarSend.setOnClickListener(v -> {
-            T_.showToastReal("点击发送");
-            mvpPresenter.sendLocation();
-        });
+//        mBtnToolbarSend.setOnClickListener(v -> {
+//            T_.showToastReal("点击发送");
+//            mvpPresenter.sendLocation();
+//        });
 
 
         mRvPOI.addOnScrollListener(new RecyclerView.OnScrollListener() {

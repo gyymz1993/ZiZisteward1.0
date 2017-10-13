@@ -113,7 +113,7 @@ public class ListenerManager {
 		mHandler.post(new Runnable() {
 			public void run() {
 				if (message != null) {
-					L_.e("roamer","新消息到来");
+					L_.e("roamer","新消息到来  loginUserId"+loginUserId+"--->"+fromUserId);
 					boolean hasRead = false;
 					for (int i = mChatMessageListeners.size() - 1; i >= 0; i--) {
 						hasRead = mChatMessageListeners.get(i).onNewMessage(fromUserId, message, isGroupMsg);

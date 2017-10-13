@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -463,5 +464,14 @@ public class TextureVideoView extends ScalableTextureView
             });
         }
         return true;
+    }
+
+
+
+    protected MovementMethod getDefaultMovementMethod(){
+        return null;
+    }
+    public boolean getDefaultEditable(){
+        return false;
     }
 }

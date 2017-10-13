@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lsjr.zizi.chat.ConfigApplication;
+import com.lsjr.zizi.mvp.home.ConfigApplication;
 import com.lsjr.zizi.chat.broad.CardcastUiUpdateUtil;
 import com.lsjr.zizi.chat.broad.MsgBroadcast;
 import com.lsjr.zizi.chat.broad.MucgroupUpdateUtil;
@@ -20,6 +20,7 @@ import com.lsjr.zizi.chat.thread.ThreadManager;
 import com.lsjr.zizi.chat.utils.TimeUtils;
 import com.lsjr.zizi.chat.xmpp.listener.ChatMessageListener;
 import com.lsjr.zizi.chat.xmpp.util.XmppStringUtil;
+import com.ymz.baselibrary.utils.L_;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
@@ -104,7 +105,7 @@ public class XChatManager {
 		public void processMessage(Chat arg0, Message message) {
 			String from = message.getFrom();
 			String to = message.getTo();
-			Log.d("roamer","from:"+from+"to:"+to);
+
 			if (TextUtils.isEmpty(from) || TextUtils.isEmpty(to)) {
 				return;
 			}
@@ -114,8 +115,8 @@ public class XChatManager {
 			if (!StringUtils.parseName(to).equals(mLoginUserId)) {// 不是发给我的，基本上是不可能的情况，还是麻痹的判断下
 				return;
 			}
-			saveSingleMessage(message, false);//将消息保存到本地
-			Log.d("roamer","将消息保存到本地");
+			saveSingleMessage(message);//将消息保存到本地
+			L_.e("将消息保存到本地","from:"+from+"to:"+to+"---->"+message.toXML());
 		}
 	};
 
@@ -194,13 +195,9 @@ public class XChatManager {
 	/**
 	 * 保存接收到的聊天信息(单聊)
 	 * 
-	 * @param packetId
-	 * @param fromUserId
-	 * @param messageBody
-	 * @param isRead
 	 * @return
 	 */
-	private void saveSingleMessage(Message message, boolean isRead) {
+	private void saveSingleMessage(Message message) {
 		String fromUserId = StringUtils.parseName(message.getFrom());
 		String messageBody = message.getBody();
 		String packetId = message.getPacketID();
@@ -228,7 +225,7 @@ public class XChatManager {
 			// 根据消息的不同类型，做不同的存储操作
 			if (type <=10) {// 普通的聊天消息，没有带fromUserId，所以要自己加上
 				saveChatMessage(messageBody, fromUserId, packetId);
-				Log.d("roamer", "普通的聊天消息，没有带fromUserId，所以要自己加上");
+				L_.e("roamer", "普通的聊天消息，没有带fromUserId，所以要自己加上");
 			} else {// 广播消息
 				if (type == XmppMessage.TYPE_ENTERING) {// 正在输入
 					// TODO 暂时不处理
@@ -320,6 +317,7 @@ public class XChatManager {
 		}
 			break;
 		case XmppMessage.TYPE_DELETE_ROOM: {// 删除房间
+			L_.e("删除房间--------》"+toUserId);
 			// 删除这个房间
 			FriendDao.getInstance().deleteFriend(mLoginUserId, friend.getUserId());
 			// 消息表中删除
@@ -333,6 +331,7 @@ public class XChatManager {
 		}
 			break;
 		case XmppMessage.TYPE_DELETE_MEMBER: {// 删除成员
+			L_.e("删除成员消息---------》"+toUserId);
 			if (TextUtils.isEmpty(toUserId)) {
 				return;
 			}

@@ -22,8 +22,6 @@ import android.util.TypedValue;
 import com.lsjr.zizi.R;
 
 /**
- * @创建者 CSDN_LQR
- * @描述 气泡型ImageView
  */
 public class BubbleImageView extends android.support.v7.widget.AppCompatImageView {
 
@@ -31,10 +29,16 @@ public class BubbleImageView extends android.support.v7.widget.AppCompatImageVie
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
     private static final int COLORDRAWABLE_DIMENSION = 1;
 
-    private int mAngle = dp2px(10);
-    private int mArrowTop = dp2px(40);
-    private int mArrowWidth = dp2px(20);
-    private int mArrowHeight = dp2px(20);
+//    private int mAngle = dp2px(10);
+//    private int mArrowTop = dp2px(40);
+//    private int mArrowWidth = dp2px(20);
+//    private int mArrowHeight = dp2px(20);
+//
+
+    private int mAngle = dp2px(0);
+    private int mArrowTop = dp2px(0);
+    private int mArrowWidth = dp2px(0);
+    private int mArrowHeight = dp2px(0);
     private int mArrowOffset = 0;
     private int mArrowLocation = LOCATION_LEFT;
 

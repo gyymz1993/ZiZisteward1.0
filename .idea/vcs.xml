@@ -2,6 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/zizichat" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/app" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/basiclib" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/citypickerlibrary" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/pinglibrary" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/xmpplibrary" vcs="svn" />
   </component>
 </project>

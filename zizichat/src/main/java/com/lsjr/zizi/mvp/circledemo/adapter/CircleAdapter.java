@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lsjr.zizi.R;
-import com.lsjr.zizi.mvp.circledemo.activity.ImagePagerActivity;
+import com.lsjr.zizi.mvp.home.photo.ImagePagerActivity;
 import com.lsjr.zizi.mvp.circledemo.activity.MainActivity;
 import com.lsjr.zizi.mvp.circledemo.adapter.viewholder.CircleViewHolder;
 import com.lsjr.zizi.mvp.circledemo.adapter.viewholder.ImageViewHolder;
